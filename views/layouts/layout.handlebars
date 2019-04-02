@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>IIITDM PHC</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
+    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/bower_components/font-awesome/css/font-awesome.min.css">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
+     
+    <link rel="stylesheet" href="/dist/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="/css/home.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.33.1/sweetalert2.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.33.1/sweetalert2.all.min.js"></script>
+<script src="/js/jquery-1.11.1.min.js"></script>
+    <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/bower_components/jquery/dist/jquery.min.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+</head>
+
+<body style="margin-top: 50px">
+    {{#if user}}
+    <header>
+        <nav class="navbar navbar-static-top navbar-fixed-top">
+            <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+                <span class="sr-only">Toggle navigation</span>
+            </a>
+            <div class="navbar-custom-menu">
+                <ul class="nav navbar-nav" style="margin-left: 2.5%;padding-top: .5%;">
+                    <li class="dropdown notifications-menu"><h4 ><a href="/usertype" style="color: white"><i class="fa fa-dashboard" ></i> DASHBOARD</a></h4>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav" style="margin-left: 4.5%;padding-top: .5%">
+                    <button type="button" id="sidebarCollapse">
+                        <div class="contain" style="margin-left: 20px" onclick="myFunction(this)">
+                            <div class="bar1" style="background-color: white"></div>
+                            <div class="bar2" style="background-color: white"></div>
+                            <div class="bar3" style="background-color: white"></div>
+                        </div>
+                    </button>
+                </ul>
+                <ul class="nav navbar-nav pull-right">
+                    <li role="presentation"><a href="/home"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
+                    <!-- {{#iff user.usertype '==' 'Dean'}}
+                         <li class="dropdown notifications-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="fa fa-bell-o"></i>
+                            <span class="label label-warning">10</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <ul class="menu">
+                                    <li>
+                                        <a href="#">
+                                            <i class="fa fa-users text-aqua"></i> 5 new members joined today
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="footer"><a href="#">View all</a></li>
+                        </ul>
+                    </li>
+                    {{/iff}} -->
+                    <!-- User Account: style can be found in dropdown.less -->
+                    <li class="dropdown user user-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                           <!--  <img src="/dist/img/user2-160x160.jpg" class="user-image" alt="User Image"> -->
+                            <i class="fa fa-user-circle" aria-hidden="true"></i> <span class="hidden-xs">{{user.name}}</span>
+                        </a>
+                        <ul class="dropdown-menu" style="background-color:#2884CE">
+                            <!-- User image -->
+                            <li class="user-header">
+                                <img src="/image/Person.ico" class="img-circle" alt="User Image">
+                                <p>
+                                    {{#iff user.usertype '==' 'Student'}}
+                                        {{user.name}} - Student
+                                    {{/iff}}
+                                    {{#iff user.usertype '==' 'Compounder'}}
+                                        {{user.name}} - Nursing Assistant
+                                        <small>Member since Nov. 2012</small>
+                                    {{/iff}}
+                                    {{#iff user.usertype '==' 'Doctor'}}
+                                        {{user.name}} - Doctor
+                                        <small>Member since Nov. 2012</small>
+                                    {{/iff}}
+                                    {{#iff user.usertype '==' 'Dean'}}
+                                        {{user.name}} - Admin
+                                        <small>Member since Nov. 2012</small>
+                                    {{/iff}}
+                                </p>
+                            </li>
+                            <li class="user-footer">
+                                <div class="pull-left">
+                                    <div id="profusertype">
+                                        <a href="#profile" data-toggle="pill" class="btn btn-success btn-flat">Profile</a>
+                                    </div>
+                                   <div id="profhome">
+                                        <a href="/usertype" class="btn btn-success btn-flat">Profile</a>
+                                    </div> 
+                                </div>
+                                <div class="pull-right">
+                                    <a href="/users/logout" class="btn btn-danger btn-flat">Sign out</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+            </div>
+        </nav>
+    </header>
+    {{else}}
+    <!--================ Start Header Menu Area =================-->
+   <nav class="navbar navbar-fixed-top" style="background-color: #5DADE2;box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);">
+     <a class="navbar-brand" href="/" ><img src="/image/beta1.png" style="margin-top:-15%"></a>
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only" >Toggle navigation</span>
+                    <span class="icon-bar" style="background-color: white"></span>
+                    <span class="icon-bar" style="background-color: white"></span>
+                    <span class="icon-bar" style="background-color: white"></span>
+                </button>
+                 <a class="navbar-brand" href="/" ><img src="/image/collage1.png" style="margin-top: -20%"></a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right" id="changeco">
+                   
+                   <li role="presentation"><a href="/" class="btn btn-primary"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
+                   <li role="presentation"><a href="/users/login/" class="btn btn-warning" ><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                    <li role="presentation"><a href="/users/register" class="btn btn-success"><i class="fa fa-user-plus" aria-hidden="true"></i> Register</a></li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+    <!--================ End Header Menu Area =================-->
+    {{/if}}
+    {{{body}}}
+  
+
+    <!-- jQuery library -->
+    <!-- Latest compiled JavaScript -->
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="/js/an.js"></script>
+    
+    <script src="/bower_components/fastclick/lib/fastclick.js"></script>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+ 
+    <script>  
+    function myFunction(x) {
+        x.classList.toggle("change");
+    }
+     
+    var loc = window.location.href;
+    if(loc == "http://localhost:3000/home"){
+        console.log("web page address is  : ");
+        var chanhref2 = document.getElementById('sidebarCollapse');
+        chanhref2.style.display = "none";
+         var chanhref = document.getElementById('profusertype');
+        chanhref.style.display = "none";
+        var chanhref1 = document.getElementById('profhome');
+        chanhref1.style.display = "block";
+    }
+    </script>
+</body>
+
+</html>

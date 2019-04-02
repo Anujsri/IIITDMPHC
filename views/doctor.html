@@ -1,0 +1,700 @@
+<div class="wrapper">
+    <!-- Sidebar Holder -->
+    <div id="here">
+        <nav id="sidebar" style="background-color: #343E54">
+            <div class="sidebar-header" style="background-color: #343E54;">
+                </br>
+                <h3 style="color: white;margin-top: 20px;font-family: 'Poppins', sans-serif;"><i class="fa fa-user-circle-o" aria-hidden="true"></i> DOCTOR</h3>
+                <strong><i class="fa fa-user-circle-o" aria-hidden="true"></i></strong>
+            </div>
+            <ul class="list-unstyled components" style="margin-top: -20px">
+                <li class="active">
+                    <a data-toggle="pill" href="#profile" onclick="myProfile();"><i class="fa fa-address-card" aria-hidden="true"></i>My Profile</a>
+                </li>
+                <li>
+                    <a data-toggle="pill" href="#showanalytics" onclick="showAnalytics();"><i class="fa fa-bar-chart" aria-hidden="true"></i>Analytics</a>
+                </li>
+                <li>
+                    <a data-toggle="pill" href="#allMedicines" onclick="getAllMedicines();"><i class="fa fa-medkit" aria-hidden="true"></i>All Medicine</a>
+                </li>
+                <li data-toggle="pill">
+                    <a data-toggle="collapse" href="#patients" aria-expanded="false"><i class="fa fa-user" aria-hidden="true"></i>Patients
+                    </a>
+                    <ul class="collapse list-unstyled" id="patients">
+                        <li style="border-bottom: 1px #5499C7 solid">
+                            <a data-toggle="pill" href="#studentinfo" style="color: black" onclick="allPatientstu();"><i class="fa fa-users" aria-hidden="true"></i>Student</a>
+                        </li>
+                        <li>
+                            <a data-toggle="pill" href="#employeeinfo" style="color: black" onclick="allPatientemp();"><i class="fa fa-users" aria-hidden="true"></i>Employee</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+        <!-- Page Content Holder -->
+        <div id="content" style="background-image: url('/image/about-bg2.png');background-color: lightblue;height:auto">
+            <div  id="flashMessages">
+                {{#if error_msg}}
+                <div class="alert alert-danger alert-dismissible fade in" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <center>{{error_msg}}</center>
+                </div>
+                {{/if}}
+                {{#if error}}
+                <div class="alert alert-danger alert-dismissible fade in" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <center>error</center>
+                </div>
+                {{/if}}
+                {{#if errors}}
+                {{#each errors}}
+                <div class="alert alert-danger alert-dismissible fade in" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <center>{{msg}}</center>
+                </div>
+                {{/each}}
+                {{/if}}
+                {{#if success_msg}}
+                <div class="alert alert-success alert-dismissible fade in" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <center>{{success_msg}}</center>
+                </div>
+                {{/if}}
+            </div>
+            <div class="tab-content" style="margin-top: 3%;">
+                <div id="profile" class="tab-pane fade in active">
+                    <div class="row">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-10">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    <center>
+                                        <h3 class="panel-title"><i class="fa fa-address-card" aria-hidden="true"></i> My Profile</h3>
+                                    </center>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-md-3 col-lg-3 " align="center"> <img alt="User Pic" src="/image/profile.png" class="img-circle img-responsive" width="250px" height="250px">
+                                        </div>
+                                        <div class=" col-md-9 col-lg-9 ">
+                                            <table class="table table-user-information">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Name : </td>
+                                                        <td>{{doctor.name}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Phone : </td>
+                                                        <td>{{doctor.phone}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Email : </td>
+                                                        <td>{{doctor.email}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Address : </td>
+                                                        <td>{{doctor.address}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>City : </td>
+                                                        <td>{{doctor.city}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>State : </td>
+                                                        <td> {{doctor.state}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Pin Code : </td>
+                                                        <td>{{doctor.zip}}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel-footer clearfix">
+                                    <span class="pull-left">
+                                        <a href="#changePasswordbox" type="button" class="btn btn-md btn-danger" onclick="changePassword()"><i class="glyphicon glyphicon-edit"></i> Change Password</a>
+                                    </span>
+                                    <span class="pull-right">
+                                        <a data-toggle="pill" href="#editprofile" type="button" class="btn btn-md btn-warning"><i class="glyphicon glyphicon-edit"></i> Edit</a>
+                                    </span>
+                                </div>
+                            </div>
+                            <div id="changePasswordbox">
+                                <div class="panel panel-danger">
+                                    <div class="panel-heading">
+                                        <center>
+                                            <h3 class="panel-title">Change Password</h3>
+                                        </center>
+                                    </div>
+                                    <form role="form" class="form-horizontal" method="put" id="change-Password">
+                                        <div class="panel-body">
+                                            <div class="row">
+                                                <div class="col-md-3 col-lg-3 " align="center">
+                                                    <img alt="User Pic" src="/image/password.png" class="img-circle img-responsive">
+                                                </div>
+                                                <div class=" col-md-9 col-lg-9 ">
+                                                    <table class="table table-user-information">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>Password : </td>
+                                                                <td><input type="password" id="changePass" class="form-control" placeholder="password" required></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Confirm Password : </td>
+                                                                <td><input type="password" id="changeConPass" class="form-control" placeholder="Confirm Password" required></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="panel-footer clearfix">
+                                            <span class="pull-right">
+                                                <button type="submit" class="btn btn-md btn-success"><i class="glyphicon glyphicon-ok"></i> Submit</button>
+                                            </span>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="showanalytics" class="tab-pane fade">
+                    <div class="row">
+                        <section class="col-lg-10 col-md-10 col-sm-12 col-xs-12 col-lg-offset-1 col-md-offset-1 connectedSortable">
+                            <!-- Custom tabs (Charts with tabs)-->
+                            <div class="nav-tabs-custom">
+                                <!-- Tabs within a box -->
+                                <ul class="nav nav-tabs pull-right">
+                                    <li class="active"><a href="#revenue-chart" data-toggle="tab">Medicine Availability</a></li>
+                                    <li><a href="#sales-chart" data-toggle="tab">Medicine Price</a></li>
+                                    <li class="pull-left header"><i class="fa fa-inbox"></i> Graphs</li>
+                                </ul>
+                                <div class="tab-content no-padding">
+                                    <!-- Morris chart - Sales -->
+                                    <div class="chart tab-pane active" id="revenue-chart" style="position: relative; height: 400px;">
+                                        <div id="chartContainer" style="height: 400px; width: 100%;"></div>
+                                    </div>
+                                    <div class="tab-pane" id="sales-chart" style="position: relative; height: 400px;">
+                                        <div id="chartContainer2" style="height: 400px; width: 100%;padding: 0px"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+                <div id="editprofile" class="tab-pane fade">
+                    <form role="form" class="form-horizontal" method="put">
+                        <div class="row">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-10">
+                                <div class="panel panel-primary">
+                                    <div class="panel-heading">
+                                        <center>
+                                            <h3 class="panel-title"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit Profile</h3>
+                                        </center>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-md-3 col-lg-3 " align="center">
+                                                <img alt="User Pic" src="/image/profile.png" class="img-circle img-responsive" width="250px" height="250px">
+                                            </div>
+                                            <div class=" col-md-9 col-lg-9 ">
+                                                <table class="table table-user-information">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>Name : </td>
+                                                            <td>
+                                                                <input type="text" id="ename" class="form-control" value="{{doctor.name}}" required>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Phone : </td>
+                                                            <td>
+                                                                <input type="number" id="ephone" class="form-control" value="{{doctor.phone}}">
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Address : </td>
+                                                            <td>
+                                                                <input type="text" id="eaddress" class="form-control" value="{{doctor.address}}">
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>City : </td>
+                                                            <td>
+                                                                <input type="text" id="ecity" class="form-control" value="{{doctor.city}}">
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>State : </td>
+                                                            <td>
+                                                                <input type="text" id="estate" class="form-control" value="{{doctor.state}}">
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Pin Code : </td>
+                                                            <td>
+                                                                <input type="number" id="ezip" class="form-control" value="{{doctor.zip}}">
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel-footer clearfix">
+                                        <a data-toggle="pill" href="#profile" onclick="myProfile();"><span class="glyphicon glyphicon-backward"></span> Go Back</a>
+                                        <a href="#" class="btn btn-success pull-right" onclick="editProfile()">
+                                            <span><i class="glyphicon glyphicon-edit"></i> Save </span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- Start Show All Medicines -->
+                <div id="allMedicines" class="tab-pane fade">
+                    <div class="container-fluid" style="background-color: #EAF2F8  ;margin-top:-1%">
+                        <div class="row ">
+                            <br>
+                            <div class="col-md-6 col-md-offset-3 form-group">
+                                <div class="input-group" style="box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
+                                    </span>
+                                    <input type="text" id="myInputmed" placeholder="Search Medicine" title="Type something" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div id="wrappers"></div>
+                        </div>
+                    </div>
+                </div>
+            
+                <div id="studentinfo" class="tab-pane fade">
+                    <div class="container-fluid" style="background-color: #EAF2F8  ;margin-top:-1%">
+                        <div class="row">
+                            <div class="col-md-10 col-md-offset-1">
+                                <div class="panel panel-primary filterable">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Search</h3>
+                                        <div class="pull-right">
+                                            <button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-filter"></span> Filter</button>
+                                        </div>
+                                    </div>
+                                    <table class="table">
+                                        <thead>
+                                            <tr class="filters">
+                                                <th><input type="number" class="form-control" placeholder="Roll Number" id="myInput"></th>
+                                                <th><input type="text" class="form-control" placeholder="Name" id="myInput1"></th>
+                                                <th><input type="text" class="form-control" placeholder="dd/mm/yyyy" id="myInput2"></th>
+                                                <th><input type="text" class="form-control" placeholder="Doctor Name" id="myInput3"></th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="studentInformation">
+                            {{#if patients}}
+                            {{#each patients}}
+                            {{#iff this.patientType '==' 'Student'}}
+                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                <div class="box box-primary">
+                                    <div class="box-body box-profile">
+                                        <img class="profile-user-img img-responsive img-circle" src="/image/patient.png" alt="User profile picture">
+                                        <h3 class="profile-username text-center">{{this.patientName}}</h3>
+                                        <p class="text-muted text-center">{{this.idnumber}}</p>
+                                        <ul class="list-group list-group-unbordered">
+                                            <a class="list-group-item">
+                                                <b style="color:#2C3E50">Diseases Name</b>
+                                                <div class="pull-right">{{this.diseases}}</div>
+                                            </a>
+                                            <a class="list-group-item">
+                                                <b style="color:#2C3E50">Email</b>
+                                                <div class="pull-right">{{this.patientEmail}}</div>
+                                            </a>
+                                            <a class="list-group-item">
+                                                <b style="color:#2C3E50">Mobile No.</b>
+                                                <div class="pull-right">{{this.phone}}</div>
+                                            </a>
+                                            <a class="list-group-item">
+                                                <center> <b style="color:#2C3E50">Medicine Information</b> </center>
+                                            </a>
+                                            <a class="list-group-item">
+                                                <ol>
+                                                    {{#each this.medicineName}}
+                                                    <div class="row">
+                                                        <li>
+                                                            <div class="col-sm-6 col-xs-12">
+                                                                {{this.name}}
+                                                            </div>
+                                                            <div class="col-sm-6 col-xs-12">
+                                                                qty {{this.quantity}}
+                                                            </div>
+                                                        </li>
+                                                    </div>
+                                                    {{/each}}
+                                                </ol>
+                                            </a>
+                                            <a class="list-group-item">
+                                                <b style="color:#2C3E50">Date</b>
+                                                <div class="pull-right">{{this.dateFormat.datenum}}/{{this.dateFormat.month}}/{{this.dateFormat.year}} {{this.dateFormat.dayName}}</div>
+                                            </a>
+                                            <a class="list-group-item">
+                                                <b style="color:#2C3E50">Nursing Staff : </b>{{this.givenbyname}}
+                                            </a>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            {{/iff}}
+                            {{/each}}
+                            {{else}}
+                            <center>
+                                <h4>No Data Found</h4>
+                            </center>
+                            {{/if}}
+                        </div>
+                    </div>
+                </div>
+                <div id="employeeinfo" class="tab-pane fade">
+                    <div class="container-fluid" style="background-color: #EAF2F8  ;margin-top:-1%">
+                        <div class="row">
+                            <br>
+                            <div class="col-md-10 col-md-offset-1">
+                                <div class="panel panel-primary filterableemp">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Search</h3>
+                                        <div class="pull-right">
+                                            <button class="btn btn-default btn-xs btn-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
+                                        </div>
+                                    </div>
+                                    <table class="table">
+                                        <thead>
+                                            <tr class="filtersemp">
+                                                <th><input type="number" class="form-control" placeholder="Pf Number" id="myInput4"></th>
+                                                <th><input type="text" class="form-control" placeholder="Name" id="myInput5"></th>
+                                                <th><input type="text" class="form-control" placeholder="dd/mm/yyyy" id="myInput6"></th>
+                                                <th><input type="text" class="form-control" placeholder="Doctor Name" id="myInput7"></th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="employeeInformation">
+                            {{#if patients}}
+                            {{#each patients}}
+                            {{#iff this.patientType '==' 'Employee'}}
+                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                <div class="box box-primary">
+                                    <div class="box-body box-profile">
+                                        <img class="profile-user-img img-responsive img-circle" src="/image/patient.png" alt="User profile picture">
+                                        <h3 class="profile-username text-center"> <a href="#employeeinformation">{{this.patientName}}</a></h3>
+                                        <p class="text-muted text-center">{{this.idnumber}}</p>
+                                        <ul class="list-group list-group-unbordered">
+                                            <a class="list-group-item">
+                                                <b style="color:#2C3E50">Diseases Name</b>
+                                                <div class="pull-right">{{this.diseases}}</div>
+                                            </a>
+                                            <a class="list-group-item">
+                                                <center> <b style="color:#2C3E50">Medicine Information</b> </center>
+                                            </a>
+                                            <a class="list-group-item">
+                                                <ol>
+                                                    {{#each this.medicineName}}
+                                                    <div class="row">
+                                                        <li>
+                                                            <div class="col-sm-6">
+                                                                {{this.name}}
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <center>
+                                                                    {{this.quantity}}
+                                                                </center>
+                                                            </div>
+                                                        </li>
+                                                    </div>
+                                                    {{/each}}
+                                                </ol>
+                                            </a>
+                                            <a class="list-group-item">
+                                                <b style="color:#2C3E50">Date</b>
+                                                <div class="pull-right">{{this.dateFormat.datenum}}/{{this.dateFormat.month}}/{{this.dateFormat.year}} {{this.dateFormat.dayName}}</div>
+                                            </a>
+                                            <a class="list-group-item">
+                                                <b style="color:#2C3E50">Doctor : </b>{{this.doctorName}}
+                                            </a>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            {{/iff}}
+                            {{/each}}
+                            {{else}}
+                            <center>
+                                <h4>No Data Found</h4>
+                            </center>
+                            {{/if}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer class="footer-area" style="margin-bottom: 0px">
+    <div class="footer-bottom" style="background-color: #154360;color:#B3B6B7  ">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center flex-wrap">
+                <div class="footer-social d-flex  ">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <center>
+                                Copyright &copy;<script>
+                                document.write(new Date().getFullYear());
+                                </script> IIITDM JABALPUR
+                            </center>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <center>
+                                <i class="fa fa-user"></i> Anuj Srivastava
+                                <a href="https://www.facebook.com/anuj.srivastava.71404" target="blank"><i class="fa fa-facebook"></i></a>
+                                <a href="https://github.com/Anujsri" target="blank" ><i class="fa fa-github"></i></a>
+                                <a  href="https://www.linkedin.com/in/anuj-srivastava-5ba457137/" target="blank"><i class="fa fa-linkedin"></i></a>
+                            </center>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<script >
+    window.location.href = "#doctor/#allMedicines"
+window.onload = function() {
+     axios.get('/compounder/allmedicine').then(function(response) {
+        var dataPoints1 = [];
+        var dataPoints2 = [];
+        var dataPoints3 = [];
+        var minimum = response.data[0].medicineName;
+        var len = response.data.length;
+        var maximum = response.data[len - 1].medicineName;
+        for (var i = 0; i < len; i++) {
+            var medicine1 = {};
+            var medicine2 = {};
+            var medicine3 = {};
+            medicine1.label = response.data[i].medicineName;
+            medicine1.label = response.data[i].medicineName;
+            medicine1.y = response.data[i].medicineQuantity;
+            medicine2.y = response.data[i].quantity;
+            medicine3.label = response.data[i].medicineName;
+            medicine3.y = response.data[i].price;
+            dataPoints1.push(medicine1);
+            dataPoints2.push(medicine2);
+            dataPoints3.push(medicine3);
+        }
+
+        var chart = new CanvasJS.Chart("chartContainer", {
+            exportEnabled: true,
+            animationEnabled: true,
+            title: {
+                text: "Ordered and In Stock Medicine"
+            },
+            axisY: {
+                title: "Ordered Quantity - Units",
+                titleFontColor: "#4F81BC",
+                lineColor: "#4F81BC",
+                labelFontColor: "#4F81BC",
+                tickColor: "#4F81BC",
+            },
+            axisY2: {
+                title: "In Stock - Units",
+                titleFontColor: "#C0504E",
+                lineColor: "#C0504E",
+                labelFontColor: "#C0504E",
+                tickColor: "#C0504E"
+            },
+            toolTip: {
+                shared: true
+            },
+            legend: {
+                cursor: "pointer",
+                itemclick: toggleDataSeries
+            },
+            data: [{
+                    type: "column",
+                    name: "Ordered Quantity",
+                    showInLegend: true,
+                    yValueFormatString: "#,##0.# Units",
+                    dataPoints: dataPoints1
+
+                },
+                {
+                    type: "column",
+                    name: "In Stock",
+                    axisYType: "secondary",
+                    showInLegend: true,
+                    yValueFormatString: "#,##0.# Units",
+                    dataPoints: dataPoints2
+                }
+            ]
+        });
+        chart.render();
+
+        function toggleDataSeries(e) {
+            if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+                e.dataSeries.visible = false;
+            } else {
+                e.dataSeries.visible = true;
+            }
+            e.chart.render();
+        }
+
+        var chart2 = new CanvasJS.Chart("chartContainer2", {
+            animationEnabled: true,
+            exportEnabled: true,
+            title: {
+                text: "Medicines name and its Prices"
+            },
+            data: [{
+                type: "column",
+                dataPoints: dataPoints3
+            }]
+        });
+        chart2.render();
+    });
+}
+
+function changePassword() {
+    var d = document.getElementById('changePasswordbox');
+    d.style.display = "block";
+}
+'{{#if success_msg}}'
+Swal.fire({
+    position: 'top-end',
+    type: 'success',
+    title: '{{success_msg}}',
+    showConfirmButton: false,
+    timer: 2000
+})
+'{{/if}}'
+ 
+var changepassword = document.getElementById('change-Password');
+changepassword.addEventListener('submit', changePass);
+
+function changePass(e) {
+    e.preventDefault();
+    var password = document.getElementById('changePass').value;
+    var changeConPass = document.getElementById('changeConPass').value;
+    if (password != changeConPass) {
+        Swal.fire({
+            type: 'error',
+            title: 'Error',
+            text: 'Password and Confirm Password should be same!',
+        })
+    } else {
+        axios.put('/users/changePassword/{{user._id}}', {
+            password: password
+        }).then(function(response) {
+            var d = document.getElementById('changePasswordbox');
+            d.style.display = "none";
+            Swal.fire({
+                position: 'top-end',
+                type: 'success',
+                title: 'Your password has been updated',
+                showConfirmButton: false,
+                timer: 2000
+            })
+        });
+    }
+}
+
+function editProfile() {
+    console.log("In edit profile");
+    var name = document.getElementById('ename').value;
+    var phone = document.getElementById('ephone').value;
+    var address = document.getElementById('eaddress').value;
+    var city = document.getElementById('ecity').value;
+    var state = document.getElementById('estate').value;
+    var zip = document.getElementById('ezip').value;
+    axios.put('/doctor/editprofile/{{doctor._id}}', {
+        name: name,
+        phone: phone,
+        address: address,
+        city: city,
+        state: state,
+        zip: zip
+    }).then(function(response) {
+        $("#here").load(window.location.href + " #here");
+    });
+}
+
+function getAllMedicines() {
+    window.location.href = "#doctor/#allMedicines";
+    axios.get('/compounder/allmedicines/').then(function(response) {
+        var codeBlock = '';
+        for (var i = 0; i < response.data.length; i++) {
+            codeBlock += '<div class="col-md-3 col-sm-4 col-xs-6">' +
+                '<div class="box box-primary">' +
+                '<div class="box-body box-profile">' +
+                '<img class="profile-user-img img-responsive img-circle" src="/image/medicine.png" alt="User profile picture"><br>' +
+                '<ul class="list-group list-group-unbordered">' +
+                '<a href="#" class="list-group-item">' +
+                '<b style="color : #566573">Company</b> <div class="pull-right">' + response.data[i].companyName + '</div>' +
+                '</a>' +
+                '<a href="#" class="list-group-item">' +
+                '<b style="color : #566573">Medicine</b> <div class="pull-right">' + response.data[i].medicineName + '</div>' +
+                '</a>' +
+                '<a href="#" class="list-group-item">' +
+                '<b style="color : #566573">Ordered Quantity</b> <div class="pull-right">' + response.data[i].medicineQuantity + '</div>' +
+                '</a>' +
+                '<a href="#" class="list-group-item">' +
+                '<b style="color : #566573">In hand</b> <div class="pull-right">' + response.data[i].quantity + '</div>' +
+                '</a>' +
+                '<a href="#" class="list-group-item">' +
+                '<b style="color : #566573">Price</b> <div class="pull-right">' + response.data[i].price + '</div>' +
+                '</a>' +
+                '</ul>' +
+                '</div>' +
+                '</div>' +
+                '</div>'
+        }
+        document.getElementById("wrappers").innerHTML = codeBlock;
+    })
+}
+
+function myProfile() {
+    window.location.href = "#doctor/#profile";
+}
+
+function allPatientstu() {
+    window.location.href = "#doctor/#students";
+    $("#studentInformation").load(window.location.href + " #studentInformation");
+}
+
+function allPatientemp() {
+    window.location.href = "#doctor/#employee";
+    $("#employeeInformation").load(window.location.href + " #employeeInformation");
+}
+
+
+function showAnalytics() {
+    window.location.href = "#doctor/#graphs";
+}
+</script>

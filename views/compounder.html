@@ -1,0 +1,1446 @@
+<div class="wrapper">
+    <!-- Sidebar Holder -->
+    <div id="here">
+        <nav id="sidebar" style="background-color: #343E54">
+            <div class="sidebar-header" style="background-color: #343E54;">
+                </br>
+                <h3 style="color: white;margin-top: 20px;font-family: 'Poppins', sans-serif;"><i class="fa fa-user-circle-o" aria-hidden="true"></i> COMPOUNDER</h3>
+                <strong><i class="fa fa-user-circle-o" aria-hidden="true"></i></strong>
+            </div>
+            <ul class="list-unstyled components" style="margin-top: -20px">
+                <li>
+                    <a data-toggle="pill" href="#profile" onclick="myProfile();"><i class="fa fa-address-card" aria-hidden="true"></i>My Profile</a>
+                </li>
+                <li>
+                    <a data-toggle="pill" href="#showanalytics" onclick="showAnalytics();"><i class="fa fa-bar-chart" aria-hidden="true"></i>Analytics</a>
+                </li>
+                <li class="active">
+                    <a data-toggle="pill" href="#addPatients" onclick="addPatients();"><i class="fa fa-heartbeat" aria-hidden="true"></i>Add Patient</a>
+                </li>
+                <li>
+                    <a data-toggle="pill" href="#allMedicines" onclick="getAllMedicines();"><i class="fa fa-medkit" aria-hidden="true"></i>All Medicine</a>
+                </li>
+                <li data-toggle="pill">
+                    <a data-toggle="collapse" href="#patients" onclick="allPatient();" aria-expanded="false"><i class="fa fa-user" aria-hidden="true"></i>Patients
+                    </a>
+                    <ul class="collapse list-unstyled" id="patients">
+                        <li style="border-bottom: 1px #5499C7 solid">
+                            <a data-toggle="pill" href="#studentinfo" style="color: black"><i class="fa fa-users" aria-hidden="true"></i>Student</a>
+                        </li>
+                        <li>
+                            <a data-toggle="pill" href="#employeeinfo" style="color: black"><i class="fa fa-users" aria-hidden="true"></i>Employee</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a data-toggle="pill" href="#addmedicine" onclick="caddMedicine();"><i class="fa fa-medkit" aria-hidden="true"></i>Add Medicine</a>
+                </li>
+            </ul>
+        </nav>
+        <!-- Page Content Holder -->
+        <div id="content" style="background-image: url('/image/about-bg2.png');background-color: lightblue;height:auto">
+            <div  id="flashMessages">
+                {{#if error_msg}}
+                <div class="alert alert-danger alert-dismissible fade in" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <center>{{error_msg}}</center>
+                </div>
+                {{/if}}
+                {{#if error}}
+                <div class="alert alert-danger alert-dismissible fade in" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <center>error</center>
+                </div>
+                {{/if}}
+                {{#if errors}}
+                {{#each errors}}
+                <div class="alert alert-danger alert-dismissible fade in" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <center>{{msg}}</center>
+                </div>
+                {{/each}}
+                {{/if}}
+                {{#if success_msg}}
+                <div class="alert alert-success alert-dismissible fade in" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <center>{{success_msg}}</center>
+                </div>
+                {{/if}}
+            </div>
+            <div class="tab-content" style="margin-top: 3%">
+                <div id="profile" class="tab-pane fade">
+                    <div class="row">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-10">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    <center>
+                                        <h3 class="panel-title"><i class="fa fa-address-card" aria-hidden="true"></i> My Profile</h3>
+                                    </center>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-md-3 col-lg-3 " align="center"> <img alt="User Pic" src="/image/profile.png" class="img-circle img-responsive" width="250px" height="250px">
+                                        </div>
+                                        <div class=" col-md-9 col-lg-9 ">
+                                            <table class="table table-user-information">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Name : </td>
+                                                        <td>{{compounder.name}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Phone : </td>
+                                                        <td>{{compounder.phone}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Email : </td>
+                                                        <td>{{compounder.email}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Address : </td>
+                                                        <td>{{compounder.address}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>City : </td>
+                                                        <td>{{compounder.city}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>State : </td>
+                                                        <td> {{compounder.state}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Pin Code : </td>
+                                                        <td>{{compounder.zip}}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel-footer clearfix">
+                                    <span class="pull-left">
+                                        <a href="#changePasswordbox" type="button" class="btn btn-md btn-danger" onclick="changePassword()"><i class="glyphicon glyphicon-edit"></i> Change Password</a>
+                                    </span>
+                                    <span class="pull-right">
+                <a data-toggle="pill" href="#editprofile" type="button" class="btn btn-md btn-warning"><i class="glyphicon glyphicon-edit"></i> Edit</a>
+                                    </span>
+                                </div>
+                            </div>
+                            <div id="changePasswordbox">
+                                <div class="panel panel-danger">
+                                    <div class="panel-heading">
+                                        <center>
+                                            <h3 class="panel-title">Change Password</h3>
+                                        </center>
+                                    </div>
+                                    <form role="form" class="form-horizontal" method="put" id="change-Password">
+                                        <div class="panel-body">
+                                            <div class="row">
+                                                <div class="col-md-3 col-lg-3 " align="center">
+                                                    <img alt="User Pic" src="/image/password.png" class="img-circle img-responsive">
+                                                </div>
+                                                <div class=" col-md-9 col-lg-9 ">
+                                                    <table class="table table-user-information">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>Password : </td>
+                                                                <td><input type="password" id="changePass" class="form-control" placeholder="password" required></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Confirm Password : </td>
+                                                                <td><input type="password" id="changeConPass" class="form-control" placeholder="Confirm Password" required></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="panel-footer clearfix">
+                                            <span class="pull-right">
+                                                <button type="submit" class="btn btn-md btn-success"><i class="glyphicon glyphicon-ok"></i> Submit</button>
+                                            </span>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="showanalytics" class="tab-pane fade">
+                    <div class="row">
+                        <section class="col-lg-10 col-md-10 col-sm-12 col-xs-12 col-lg-offset-1 col-md-offset-1 connectedSortable">
+                            <!-- Custom tabs (Charts with tabs)-->
+                            <div class="nav-tabs-custom">
+                                <!-- Tabs within a box -->
+                                <ul class="nav nav-tabs pull-right">
+                                    <li class="active"><a href="#revenue-chart" data-toggle="tab">Medicine Availability</a></li>
+                                    <li><a href="#sales-chart" data-toggle="tab">Medicine Price</a></li>
+                                    <li class="pull-left header"><i class="fa fa-inbox"></i> Graphs</li>
+                                </ul>
+                                <div class="tab-content no-padding">
+                                    <!-- Morris chart - Sales -->
+                                    <div class="chart tab-pane active" id="revenue-chart" style="position: relative; height: 400px;">
+                                        <div id="chartContainer" style="height: 400px; width: 100%;"></div>
+                                    </div>
+                                    <div class="tab-pane" id="sales-chart" style="position: relative; height: 400px;">
+                                        <div id="chartContainer2" style="height: 400px; width: 100%;padding: 0px"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+                <div id="editprofile" class="tab-pane fade">
+                    <form role="form" class="form-horizontal" method="put">
+                        <div class="row">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-10">
+                                <div class="panel panel-primary">
+                                    <div class="panel-heading">
+                                        <center>
+                                            <h3 class="panel-title"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit Profile</h3>
+                                        </center>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-md-3 col-lg-3 " align="center">
+                                                <img alt="User Pic" src="/image/profile.png" class="img-circle img-responsive" width="250px" height="250px">
+                                            </div>
+                                            <div class=" col-md-9 col-lg-9 ">
+                                                <table class="table table-user-information">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>Name : </td>
+                                                            <td>
+                                                                <input type="text" id="ename" class="form-control" value="{{compounder.name}}" required>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Phone : </td>
+                                                            <td>
+                                                                <input type="number" id="ephone" class="form-control" value="{{compounder.phone}}">
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Address : </td>
+                                                            <td>
+                                                                <input type="text" id="eaddress" class="form-control" value="{{compounder.address}}">
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>City : </td>
+                                                            <td>
+                                                                <input type="text" id="ecity" class="form-control" value="{{compounder.city}}">
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>State : </td>
+                                                            <td>
+                                                                <input type="text" id="estate" class="form-control" value="{{compounder.state}}">
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Pin Code : </td>
+                                                            <td>
+                                                                <input type="number" id="ezip" class="form-control" value="{{compounder.zip}}">
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel-footer clearfix">
+                                        <a data-toggle="pill" href="#profile" onclick="myProfile();"><span class="glyphicon glyphicon-backward"></span> Go Back</a>
+                                        <a href="#" class="btn btn-success pull-right" onclick="editProfile()">
+                                            <span><i class="glyphicon glyphicon-edit"></i> Save </span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- Start Show All Medicines -->
+                <div id="allMedicines" class="tab-pane fade">
+                    <div class="container-fluid" style="background-color: #EAF2F8  ;margin-top:-1%">
+                        <div class="row ">
+                            <br>
+                            <div class="col-md-6 col-md-offset-3 form-group">
+                                <div class="input-group" style="box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
+                                    </span>
+                                    <input type="text" id="myInputmed" placeholder="Search Medicine" title="Type something" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div id="wrappers"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Show All Medicines -->
+                <div id="addPatients" class="tab-pane fade in active">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+                                <!-- Add Patient -->
+                                <div class="box box-primary" style="padding: 0px;background-color: #56baed;">
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                            <div class="single_member" style="padding-left: 5%;margin-top: 25%">
+                                                <div class="author">
+                                                    <img src="/image/patient.png" alt="">
+                                                </div>
+                                                <div class="author_decs">
+                                                    <h4>Add patients</h4>
+                                                    <hr>
+                                                    <p>Student/Employee</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12" style="background-color: #FDFEFE;border-top-right-radius: 10px;border-bottom-right-radius: 10px;box-shadow: 3px 0px #EAEDED  ;">
+                                            <br>
+                                            <center>
+                                                <a href="#student" data-toggle="pill" class="primary-btn text-uppercase active"><i class="fa fa-user" aria-hidden="true"></i> Student</a>
+                                                <a href="#employee" data-toggle="pill" class="primary-btn text-uppercase"><i class="fa fa-user" aria-hidden="true"></i> Employee</a>
+                                            </center>
+                                            <div class="tab-content">
+                                                <div id="student" class="tab-pane fade in active">
+                                                    <form autocomplete="off" role="form" class="form-horizontal" method="post" id="add-student">
+                                                        <div class="single_member">
+                                                            <br>
+                                                            <br>
+                                                            <div class="author_decs">
+                                                                <div class="form-group">
+                                                                    <input type="number" class="form-control" id="rollnumber" placeholder="Roll Number" min="1" required style="border-radius: 5px">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <input type="text" class="form-control" id="diseases" placeholder="Disease Name" min="1" required style="border-radius: 5px">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <select class="form-control" id="doctorName" style="border-radius: 5px">
+                                                                        <option>Select Doctor Name</option>
+                                                                        <option value="Dr. G.S. Sandhu">Dr. G.S. Sandhu</option>
+                                                                        <option value="Dr. A.N .Gupta">Dr. A.N .Gupta</option>
+                                                                        <option value="Dr. Jyoti Garg">Dr. Jyoti Garg</option>
+                                                                        <option value="Dr. Niharika Gupta">Dr. Niharika Gupta</option>
+                                                                        <option value="N/A">N/A</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <div id="more">
+                                                                        <div class="row">
+                                                                            <div class="col-md-9 col-sm- col-xs-12">
+                                                                                <input type="text" class="form-control" placeholder="Medicine Name" required id="medicineName0" style="border-radius: 5px">
+                                                                            </div>
+                                                                            <div class="col-md-3 col-sm- col-xs-12">
+                                                                                <input type="number" class="form-control" placeholder="quantity" required id="medicineQuantity0" style="border-radius: 5px" min="1">
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <br>
+                                                                    <a class="btn btn-primary pull-right" id="btn2"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add More</a>
+                                                                    <div id="count"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <hr>
+                                                        <div id="comments"></div>
+                                                        <center>
+                                                            <div id="show">
+                                                                <button class="btn text-uppercase btn-success" style="box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);" type="submit"><i class="fa fa-paper-plane" aria-hidden="true"></i> Submit</button>
+                                                            </div>
+                                                            <div id="showdisable">
+                                                                <button class="btn text-uppercase btn-success disabled" style="box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);" type="submit"><i class="fa fa-paper-plane" aria-hidden="true"></i> Submit</button>
+                                                            </div>
+                                                        </center>
+                                                        <br>
+                                                    </form>
+                                                </div>
+                                                <div id="employee" class="tab-pane fade">
+                                                    <form autocomplete="off" role="form" class="form-horizontal" method="post" id="add-employee">
+                                                        <div class="single_member">
+                                                            <br>
+                                                            <br>
+                                                            <div class="author_decs">
+                                                                <div class="form-group">
+                                                                    <input type="number" class="form-control" id="pfnumber" placeholder="Pf Number" required style="border-radius: 5px" min="1">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <input type="text" class="form-control" id="employeeName" placeholder="Employee name" required style="border-radius: 5px">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <input type="email" class="form-control" id="employeeEmail" placeholder="Email id" required style="border-radius: 5px">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <input type="number" class="form-control" id="phone" placeholder="Mobile No." required style="border-radius: 5px" min="1">
+                                                                    <div id="errorMessages">
+                                                                        <br>
+                                                                        <div class="alert alert-danger alert-dismissible fade in" role="alert">
+                                                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                                                <span aria-hidden="true">×</span>
+                                                                            </button>
+                                                                            <center>
+                                                                                <div id="errPhone"></div>
+                                                                            </center>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <input type="text" class="form-control" id="employeediseases" placeholder="Disease Name" required style="border-radius: 5px">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <select class="form-control" id="employeedoctorName">
+                                                                        <option>Select Doctor Name</option>
+                                                                        <option value="Dr. G.S. Sandhu">Dr. G.S. Sandhu</option>
+                                                                        <option value="Dr. A.N .Gupta">Dr. A.N .Gupta</option>
+                                                                        <option value="Dr. Jyoti Garg">Dr. Jyoti Garg</option>
+                                                                        <option value="Dr. Niharika Gupta">Dr. Niharika Gupta</option>
+                                                                        <option value="N/A">N/A</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <div id="employeemore">
+                                                                        <div class="row">
+                                                                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                                                                <input type="text" class="form-control" placeholder="Medicine Name" required id="employeemedicineName0" style="border-radius: 5px">
+                                                                            </div>
+                                                                            <div class="col-md-3 col-sm- col-xs-12">
+                                                                                <input type="number" class="form-control" placeholder="quantity" required id="employeemedicineQuantity0" style="border-radius: 5px" min="1">
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <br>
+                                                                    <a class="btn btn-primary pull-right" id="btn3"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add More</a>
+                                                                    <div id="employeecount"></div>
+                                                                </div>
+                                                            </div>
+                                                            <hr>
+                                                            <center>
+                                                                <div id="employeeshow">
+                                                                    <button type="submit" class="btn btn-success" style="box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);"><i class="fa fa-telegram" aria-hidden="true"></i> Submit
+                                                                    </button>
+                                                                </div>
+                                                                <div id="employeeshowdisable">
+                                                                    <button type="submit" class="btn btn-success disabled " style="box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);"><i class="fa fa-telegram" aria-hidden="true"></i> Submit
+                                                                    </button>
+                                                                </div>
+                                                            </center>
+                                                        </div>
+                                                        <br>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="addmedicine" class="tab-pane fade">
+                    <div class="row">
+                        <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-12">
+                            <!-- Add Patient -->
+                            <div class="box box-primary" style="padding: 0px;background-color: #56baed;">
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-4 col-sm-5 col-xs-12">
+                                        <div class="row">
+                                            <div class="single_member" style="padding-left: 5%;margin-top: 10%">
+                                                <div class="author">
+                                                    <img src="/image/medicine1.jpg" alt="">
+                                                </div>
+                                                <div class="author_decs">
+                                                    <h4>Enter Midicines Information</h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="single_member" style="padding-left: 5%;margin-top: 5%">
+                                                <div class="author">
+                                                    <img src="/image/upload.png" alt="">
+                                                </div>
+                                                <div class="author_decs">
+                                                    <h4>Or Upload Excel File</h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-8 col-md-8 col-sm-7 col-xs-12" style="background-color: #F2F4F4  ;border-top-right-radius: 10px;border-bottom-right-radius: 10px;box-shadow: 3px 0px #EAEDED  ;">
+                                        <form role="form" class="form-horizontal" method="post" id="add-medicine">
+                                            <div class="single_member">
+                                                <br>
+                                                <br>
+                                                <div class="author_decs">
+                                                    <div class="form-group">
+                                                        <input ttype="text" class="form-control" placeholder="Company Name" id="companyName" required style="border-radius: 5px">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control" placeholder="Enter Medicine Name" id="amedicineName" required style="border-radius: 5px">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input type="number" class="form-control" placeholder="Enter Quantity" id="amedicineQuantity" style="border-radius: 5px" min="1">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input type="number" class="form-control" placeholder="Enter Price" id="amedicinePrice" style="border-radius: 5px" min="1">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <hr>
+                                            <center>
+                                                <button class="btn text-uppercase btn-success" style="box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);" type="submit"><i class="fa fa-paper-plane" aria-hidden="true"></i> Submit</button>
+                                            </center>
+                                            <br>
+                                        </form>
+                                        <center>Or Upload Excel File</center>
+                                        <form id="uploadForm" enctype="multipart/form-data" action="/upload/{{compounder._id}}" method="post">
+                                            <p>&nbsp;</p>
+                                            <div class="box">
+                                                <div class="row">
+                                                    <div class="col-sm-9 col-xs-12">
+                                                        <span class="control-fileupload">
+                                                            <label for="file1" class="text-left">Please choose a file on your computer.
+                                                            </label>
+                                                            <input type="file" id="file1" name="file" required>
+                                                        </span>
+                                                    </div>
+                                                    <div class="col-sm-3 col-xs-12">
+                                                        <button type="submit" name="submit" class="btn btn-primary btn-block"><span class="glyphicon glyphicon-cloud-upload"></span> Upload</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="studentinfo" class="tab-pane fade">
+                    <div class="container-fluid" style="background-color: #EAF2F8  ;margin-top:-1%">
+                        <div class="row">
+                            <div class="col-md-10 col-md-offset-1">
+                                <div class="panel panel-primary filterable">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Search</h3>
+                                        <div class="pull-right">
+                                            <button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-filter"></span> Filter</button>
+                                        </div>
+                                    </div>
+                                    <table class="table">
+                                        <thead>
+                                            <tr class="filters">
+                                                <th><input type="number" class="form-control" placeholder="Roll Number" id="myInput"></th>
+                                                <th><input type="text" class="form-control" placeholder="Name" id="myInput1"></th>
+                                                <th><input type="text" class="form-control" placeholder="dd/mm/yyyy" id="myInput2"></th>
+                                                <th><input type="text" class="form-control" placeholder="Doctor Name" id="myInput3"></th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="studentInformation">
+                            {{#if patients}}
+                            {{#each patients}}
+                            {{#iff this.patientType '==' 'Student'}}
+                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                <div class="box box-primary">
+                                    <div class="box-body box-profile">
+                                        <img class="profile-user-img img-responsive img-circle" src="/image/patient.png" alt="User profile picture">
+                                        <h3 class="profile-username text-center">{{this.patientName}}</h3>
+                                        <p class="text-muted text-center">{{this.idnumber}}</p>
+                                        <ul class="list-group list-group-unbordered">
+                                            <a class="list-group-item">
+                                                <b style="color:#2C3E50">Diseases Name</b>
+                                                <div class="pull-right">{{this.diseases}}</div>
+                                            </a>
+                                            <a class="list-group-item">
+                                                <b style="color:#2C3E50">Email</b>
+                                                <div class="pull-right">{{this.patientEmail}}</div>
+                                            </a>
+                                            <a class="list-group-item">
+                                                <b style="color:#2C3E50">Mobile No.</b>
+                                                <div class="pull-right">{{this.phone}}</div>
+                                            </a>
+                                            <a class="list-group-item">
+                                                <center> <b style="color:#2C3E50">Medicine Information</b> </center>
+                                            </a>
+                                            <a class="list-group-item">
+                                                <ol>
+                                                    {{#each this.medicineName}}
+                                                    <div class="row">
+                                                        <li>
+                                                            <div class="col-sm-6 col-xs-12">
+                                                                {{this.name}}
+                                                            </div>
+                                                            <div class="col-sm-6 col-xs-12">
+                                                                qty {{this.quantity}}
+                                                            </div>
+                                                        </li>
+                                                    </div>
+                                                    {{/each}}
+                                                </ol>
+                                            </a>
+                                            <a class="list-group-item">
+                                                <b style="color:#2C3E50">Date</b>
+                                                <div class="pull-right">{{this.dateFormat.datenum}}/{{this.dateFormat.month}}/{{this.dateFormat.year}} {{this.dateFormat.dayName}}</div>
+                                            </a>
+                                            <a class="list-group-item">
+                                                <b style="color:#2C3E50">Doctor : </b>{{this.doctorName}}
+                                            </a>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            {{/iff}}
+                            {{/each}}
+                            {{else}}
+                            <center>
+                                <h4>No Data Found</h4>
+                            </center>
+                            {{/if}}
+                        </div>
+                    </div>
+                </div>
+                <div id="employeeinfo" class="tab-pane fade">
+                    <div class="container-fluid" style="background-color: #EAF2F8  ;margin-top:-1%">
+                        <div class="row">
+                            <br>
+                            <div class="col-md-10 col-md-offset-1">
+                                <div class="panel panel-primary filterableemp">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Search</h3>
+                                        <div class="pull-right">
+                                            <button class="btn btn-default btn-xs btn-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
+                                        </div>
+                                    </div>
+                                    <table class="table">
+                                        <thead>
+                                            <tr class="filtersemp">
+                                                <th><input type="number" class="form-control" placeholder="Pf Number" id="myInput4"></th>
+                                                <th><input type="text" class="form-control" placeholder="Name" id="myInput5"></th>
+                                                <th><input type="text" class="form-control" placeholder="dd/mm/yyyy" id="myInput6"></th>
+                                                <th><input type="text" class="form-control" placeholder="Doctor Name" id="myInput7"></th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="employeeInformation">
+                            {{#if patients}}
+                            {{#each patients}}
+                            {{#iff this.patientType '==' 'Employee'}}
+                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                <div class="box box-primary">
+                                    <div class="box-body box-profile">
+                                        <img class="profile-user-img img-responsive img-circle" src="/image/patient.png" alt="User profile picture">
+                                        <h3 class="profile-username text-center"> <a href="#employeeinformation">{{this.patientName}}</a></h3>
+                                        <p class="text-muted text-center">{{this.idnumber}}</p>
+                                        <ul class="list-group list-group-unbordered">
+                                            <a class="list-group-item">
+                                                <b style="color:#2C3E50">Diseases Name</b>
+                                                <div class="pull-right">{{this.diseases}}</div>
+                                            </a>
+                                            <a class="list-group-item">
+                                                <center> <b style="color:#2C3E50">Medicine Information</b> </center>
+                                            </a>
+                                            <a class="list-group-item">
+                                                <ol>
+                                                    {{#each this.medicineName}}
+                                                    <div class="row">
+                                                        <li>
+                                                            <div class="col-sm-6">
+                                                                {{this.name}}
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <center>
+                                                                    {{this.quantity}}
+                                                                </center>
+                                                            </div>
+                                                        </li>
+                                                    </div>
+                                                    {{/each}}
+                                                </ol>
+                                            </a>
+                                            <a class="list-group-item">
+                                                <b style="color:#2C3E50">Date</b>
+                                                <div class="pull-right">{{this.dateFormat.datenum}}/{{this.dateFormat.month}}/{{this.dateFormat.year}} {{this.dateFormat.dayName}}</div>
+                                            </a>
+                                            <a class="list-group-item">
+                                                <b style="color:#2C3E50">Doctor : </b>{{this.doctorName}}
+                                            </a>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            {{/iff}}
+                            {{/each}}
+                            {{else}}
+                            <center>
+                                <h4>No Data Found</h4>
+                            </center>
+                            {{/if}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer class="footer-area" style="margin-bottom: 0px">
+    <div class="footer-bottom" style="background-color: #154360;color:#B3B6B7  ">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center flex-wrap">
+                <div class="footer-social d-flex  ">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <center>
+                                Copyright &copy;<script>
+                                document.write(new Date().getFullYear());
+                                </script> IIITDM JABALPUR
+                            </center>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <center>
+                                <i class="fa fa-user"></i> Anuj Srivastava
+                                <a href="https://www.facebook.com/anuj.srivastava.71404" target="blank"><i class="fa fa-facebook"></i></a>
+                                <a href="https://github.com/Anujsri" target="blank" ><i class="fa fa-github"></i></a>
+                                <a  href="https://www.linkedin.com/in/anuj-srivastava-5ba457137/" target="blank"><i class="fa fa-linkedin"></i></a>
+                            </center>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
+<script>
+'{{#if success_msg}}'
+    Swal.fire({
+        position: 'top-end',
+        type: 'success',
+        title: '{{success_msg}}',
+        showConfirmButton: false,
+        timer: 2000
+    })
+'{{/if}}'
+</script>
+<script>
+    window.location.href = "#compounder/#addPatients"
+ 
+window.onload = function() {
+
+}
+
+function changePassword() {
+    var d = document.getElementById('changePasswordbox');
+    d.style.display = "block";
+}
+
+var automedicinename = [];
+var automediciquan = [];
+var autoroll = [];
+axios.get('/compounder/allmedicine/').then(function(response) {
+    for (var i = 0; i < response.data.length; i++) {
+        if (response.data[i].quantity > 0) {
+            automedicinename.push(response.data[i].medicineName);
+            automediciquan.push(response.data[i].quantity);
+        }
+    }
+});
+axios.get('/student/getroll/').then(function(response) {
+    for (var i = 0; i < response.data.length; i++) {
+        autoroll.push(response.data[i].rollnum);
+    }
+});
+autocomplete(document.getElementById("medicineName0"), automedicinename, automediciquan);
+autocomplete(document.getElementById("employeemedicineName0"), automedicinename, automediciquan);
+autocompleteRoll(document.getElementById("rollnumber"), autoroll);
+var changepassword = document.getElementById('change-Password');
+changepassword.addEventListener('submit', changePass);
+
+function changePass(e) {
+    e.preventDefault();
+    var password = document.getElementById('changePass').value;
+    var changeConPass = document.getElementById('changeConPass').value;
+    if (password != changeConPass) {
+        Swal.fire({
+            type: 'error',
+            title: 'Error',
+            text: 'Password and Confirm Password should be same!',
+        })
+    } else {
+        axios.put('/users/changePassword/{{user._id}}', {
+            password: password
+        }).then(function(response) {
+            var d = document.getElementById('changePasswordbox');
+            d.style.display = "none";
+            Swal.fire({
+                position: 'top-end',
+                type: 'success',
+                title: 'Your password has been updated',
+                showConfirmButton: false,
+                timer: 2000
+            })
+        });
+    }
+}
+
+function editProfile() {
+    console.log("In edit profile");
+    var name = document.getElementById('ename').value;
+    var phone = document.getElementById('ephone').value;
+    var address = document.getElementById('eaddress').value;
+    var city = document.getElementById('ecity').value;
+    var state = document.getElementById('estate').value;
+    var zip = document.getElementById('ezip').value;
+    axios.put('/compounder/editprofile/{{compounder._id}}', {
+        name: name,
+        phone: phone,
+        address: address,
+        city: city,
+        state: state,
+        zip: zip
+    }).then(function(response) {
+        $("#here").load(window.location.href + " #here");
+    });
+}
+
+var id = '{{compounder._id}}';
+var compounderName = '{{compounder.name}}';
+var addstuden = document.getElementById('add-student');
+addstuden.addEventListener('submit', addStudent);
+
+function addStudent(e) {
+    // Prevent actual submit
+    e.preventDefault();
+    var rollNumber = document.getElementById('rollnumber').value;
+    var rollnumber = Number(rollNumber);
+    var diseases = document.getElementById('diseases').value;
+    var count = document.getElementById('count').value;
+    var doctorName = document.getElementById('doctorName').value;
+    var patientType = "Student";
+    var counter = 0;
+    var medicineName = [];
+    var medicineQuantity = [];
+    if (count === undefined) {
+        var medicine = document.getElementById("medicineName0").value;
+        var quantity = document.getElementById("medicineQuantity0").value;
+        medicineName.push(medicine);
+        medicineQuantity.push(quantity);
+    } else {
+        for (var i = 0; i <= count; i++) {
+            var medicine = document.getElementById("medicineName" + i).value;
+            var quantity = document.getElementById("medicineQuantity" + i).value;
+            medicineName.push(medicine);
+            medicineQuantity.push(quantity);
+        }
+    }
+    var sts;
+    // Connect to socket.io
+    try {
+        var socket = io();
+    } catch (err) {
+        console.log(err.message)
+    }
+    // Check for connection
+    if (socket !== undefined) {
+        console.log('Connected to socket...');
+        // Clear Message    
+        axios.post('/student/getStudent', { rollnumber: rollnumber }).then(function(response) {
+            var patientName = response.data.name;
+            var patientEmail = response.data.email;
+            var phone = response.data.phone;
+            var status = document.getElementById('comments');
+            var statusDefault = status.textContent;
+            var setStatus = function(s) {
+                // Set status
+                status.textContent = s;
+                if (s !== statusDefault) {
+                    var delay = setTimeout(function() {
+                        setStatus(statusDefault);
+                    }, 4000);
+                }
+            }
+            socket.on('status', function(data) {
+                // get message status
+                setStatus((typeof data === 'object') ? data.message : data);
+                // If status is clear, clear text
+                if (data.clear) {
+                    // textarea.value = '';
+                }
+            });
+            // Emit to server input
+            socket.emit('input', {
+                patientName: patientName,
+                patientEmail: patientEmail,
+                idnumber: rollnumber,
+                medicineName: medicineName,
+                medicineQuantity: medicineQuantity,
+                diseases: diseases,
+                patientType: patientType,
+                id: id,
+                name: compounderName,
+                doctorName: doctorName,
+                phone: response.data.phone
+            });
+            window.location.href = "#allPatient";
+            allPatient();
+            Swal.fire({
+                position: 'top-end',
+                type: 'success',
+                title: 'Your gave medicine to ' + patientName,
+                showConfirmButton: false,
+                timer: 2000
+            })
+        })
+    }
+    document.getElementById('doctorName').value = '';
+    document.getElementById('rollnumber').value = '';
+    document.getElementById('diseases').value = '';
+    document.getElementById("medicineName0").value = '';
+    document.getElementById("medicineQuantity0").value = '';
+    for (var i = 0; i <= count; i++) {
+        document.getElementById("medicineName" + i).value = '';
+        document.getElementById("medicineQuantity" + i).value = '';
+    }
+}
+
+var addemployee = document.getElementById('add-employee');
+addemployee.addEventListener('submit', addEmployee);
+
+function addEmployee(e) {
+    // Prevent actual submit
+    e.preventDefault();
+    var employeeName = document.getElementById('employeeName').value;
+    var pfnumber = document.getElementById('pfnumber').value;
+    var employeediseases = document.getElementById('employeediseases').value;
+    var employeeEmail = document.getElementById('employeeEmail').value;
+    var employeecount = document.getElementById('employeecount').value;
+    var doctorName = document.getElementById('employeedoctorName').value;
+    var phone = document.getElementById('phone').value;
+    var patientType = "Employee";
+    var counter = 0;
+    if (phone.length < 10) {
+        var message = document.getElementById('errorMessages');
+        document.getElementById('errPhone').innerHTML = "Mobile No. should have 10 numbers";
+        errorMessages.style.display = "block";
+    } else {
+        var employeemedicineName = [];
+        var employeemedicineQuantity = [];
+        if (employeecount === undefined) {
+            var medicine = document.getElementById("employeemedicineName0").value;
+            var quantity = document.getElementById("employeemedicineQuantity0").value;
+            employeemedicineName.push(medicine);
+            employeemedicineQuantity.push(quantity);
+        } else {
+            for (var i = 0; i <= employeecount; i++) {
+                var medicine = document.getElementById("employeemedicineName" + i).value;
+                var quantity = document.getElementById("employeemedicineQuantity" + i).value;
+                employeemedicineName.push(medicine);
+                employeemedicineQuantity.push(quantity);
+            }
+        }
+        var sts;
+        // Connect to socket.io
+        try {
+            var socket = io();
+        } catch (err) {
+          
+            console.log(err.message)
+        }
+        // Check for connection
+        if (socket !== undefined) {
+            console.log('Connected to socket...');
+            // Clear Message    
+            var status = document.getElementById('comments');
+            var statusDefault = status.textContent;
+            var setStatus = function(s) {
+                // Set status
+                status.textContent = s;
+                if (s !== statusDefault) {
+                    var delay = setTimeout(function() {
+                        setStatus(statusDefault);
+                    }, 4000);
+                }
+            }
+            socket.on('status', function(data) {
+                // get message status
+                setStatus((typeof data === 'object') ? data.message : data);
+                // If status is clear, clear text
+                if (data.clear) {
+                    // textarea.value = '';
+                }
+            });
+            // Emit to server input
+            socket.emit('input', {
+                patientName: employeeName,
+                idnumber: pfnumber,
+                medicineName: employeemedicineName,
+                medicineQuantity: employeemedicineQuantity,
+                diseases: employeediseases,
+                patientEmail: employeeEmail,
+                patientType: patientType,
+                id: id,
+                name: compounderName,
+                doctorName: doctorName,
+                phone: phone
+            });
+        }
+        allPatient();
+        Swal.fire({
+            position: 'top-end',
+            type: 'success',
+            title: 'Your gave medicine to ' + employeeName,
+            showConfirmButton: false,
+            timer: 2000
+        })
+        document.getElementById('employeeName').value = '';
+        document.getElementById('pfnumber').value = '';
+        document.getElementById('employeediseases').value = '';
+        document.getElementById("employeemedicineName0").value = '';
+        document.getElementById("employeemedicineQuantity0").value = '';
+        document.getElementById('employeeEmail').value = '';
+        document.getElementById('employeedoctorName').value = '';
+        document.getElementById('phone').value = '';
+        for (var i = 0; i <= employeecount; i++) {
+            document.getElementById("employeemedicineName" + i).value = '';
+            document.getElementById("employeemedicineQuantity" + i).value = '';
+        }
+    }
+}
+
+
+var addMedicine = document.getElementById('add-medicine');
+addMedicine.addEventListener('submit', addMedicines);
+
+function addMedicines(e) {
+    // Prevent actual submit
+    e.preventDefault();
+    var medicineName = document.getElementById('amedicineName').value;
+    var medicinePrice = document.getElementById('amedicinePrice').value;
+    var medicineQuantity = document.getElementById('amedicineQuantity').value;
+    var companyName = document.getElementById('companyName').value;
+    axios.post('/compounder/addMedicine/{{compounder._id}}', {
+        medicineName: medicineName,
+        medicineQuantity: medicineQuantity,
+        companyName: companyName,
+        price: medicinePrice
+    }).then(function(response) {
+        Swal.fire({
+            position: 'top-end',
+            type: 'success',
+            title: 'Medicine has been addded',
+            showConfirmButton: false,
+            timer: 2000
+        })
+        allPatient();
+        document.getElementById('amedicineName').value = '';
+        document.getElementById('amedicineQuantity').value = '';
+        document.getElementById('companyName').value = '';
+        document.getElementById('amedicineName').value = '';
+    });
+}
+
+
+function getAllMedicines() {
+    window.location.href = "#compounder/#allMedicines";
+    axios.get('/compounder/allmedicines/').then(function(response) {
+        var codeBlock = '';
+        for (var i = 0; i < response.data.length; i++) {
+            codeBlock += '<div class="col-md-3 col-sm-4 col-xs-6">' +
+                '<div class="box box-primary">' +
+                '<div class="box-body box-profile">' +
+                '<img class="profile-user-img img-responsive img-circle" src="/image/medicine.png" alt="User profile picture"><br>' +
+                '<ul class="list-group list-group-unbordered">' +
+                '<a href="#" class="list-group-item">' +
+                '<b style="color : #566573">Company</b> <div class="pull-right">' + response.data[i].companyName + '</div>' +
+                '</a>' +
+                '<a href="#" class="list-group-item">' +
+                '<b style="color : #566573">Medicine</b> <div class="pull-right">' + response.data[i].medicineName + '</div>' +
+                '</a>' +
+                '<a href="#" class="list-group-item">' +
+                '<b style="color : #566573">Ordered Quantity</b> <div class="pull-right">' + response.data[i].medicineQuantity + '</div>' +
+                '</a>' +
+                '<a href="#" class="list-group-item">' +
+                '<b style="color : #566573">In hand</b> <div class="pull-right">' + response.data[i].quantity + '</div>' +
+                '</a>' +
+                '<a href="#" class="list-group-item">' +
+                '<b style="color : #566573">Price</b> <div class="pull-right">' + response.data[i].price + '</div>' +
+                '</a>' +
+                '</ul>' +
+
+                '</div>' +
+                '</div>' +
+                '</div>'
+        }
+        document.getElementById("wrappers").innerHTML = codeBlock;
+    })
+}
+
+function myProfile() {
+    window.location.href = "#compounder/#profile";
+}
+
+function allPatient() {
+    window.location.href = "#compounder/#allPatient";
+    $("#studentInformation").load(window.location.href + " #studentInformation");
+    $("#employeeInformation").load(window.location.href + " #employeeInformation");
+}
+
+function addPatients() {
+    window.location.href = "#compounder/#addpatient";
+}
+
+function caddMedicine() {
+    window.location.href = "#compounder/#addmedicine";
+}
+
+function showAnalytics() {
+    axios.get('/compounder/allmedicine').then(function(response) {
+        var dataPoints1 = [];
+        var dataPoints2 = [];
+        var dataPoints3 = [];
+        var minimum = response.data[0].medicineName;
+        var len = response.data.length;
+        var maximum = response.data[len - 1].medicineName;
+        for (var i = 0; i < len; i++) {
+            var medicine1 = {};
+            var medicine2 = {};
+            var medicine3 = {};
+            medicine1.label = response.data[i].medicineName;
+            medicine1.label = response.data[i].medicineName;
+            medicine1.y = response.data[i].medicineQuantity;
+            medicine2.y = response.data[i].quantity;
+            medicine3.label = response.data[i].medicineName;
+            medicine3.y = response.data[i].price;
+            dataPoints1.push(medicine1);
+            dataPoints2.push(medicine2);
+            dataPoints3.push(medicine3);
+        }
+
+        var chart = new CanvasJS.Chart("chartContainer", {
+            exportEnabled: true,
+            animationEnabled: true,
+            title: {
+                text: "Ordered and In Stock Medicine"
+            },
+            axisY: {
+                title: "Ordered Quantity - Units",
+                titleFontColor: "#4F81BC",
+                lineColor: "#4F81BC",
+                labelFontColor: "#4F81BC",
+                tickColor: "#4F81BC",
+            },
+            axisY2: {
+                title: "In Stock - Units",
+                titleFontColor: "#C0504E",
+                lineColor: "#C0504E",
+                labelFontColor: "#C0504E",
+                tickColor: "#C0504E"
+            },
+            toolTip: {
+                shared: true
+            },
+            legend: {
+                cursor: "pointer",
+                itemclick: toggleDataSeries
+            },
+            data: [{
+                    type: "column",
+                    name: "Ordered Quantity",
+                    showInLegend: true,
+                    yValueFormatString: "#,##0.# Units",
+                    dataPoints: dataPoints1
+
+                },
+                {
+                    type: "column",
+                    name: "In Stock",
+                    axisYType: "secondary",
+                    showInLegend: true,
+                    yValueFormatString: "#,##0.# Units",
+                    dataPoints: dataPoints2
+                }
+            ]
+        });
+        chart.render();
+
+        function toggleDataSeries(e) {
+            if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+                e.dataSeries.visible = false;
+            } else {
+                e.dataSeries.visible = true;
+            }
+            e.chart.render();
+        }
+        var chart2 = new CanvasJS.Chart("chartContainer2", {
+            animationEnabled: true,
+            exportEnabled: true,
+            title: {
+                text: "Medicines name and its Prices"
+            },
+            data: [{
+                type: "column",
+                dataPoints: dataPoints3
+            }]
+        });
+        chart2.render();
+    });
+    window.location.href = "#compounder/#graphs";
+}
+
+function autocomplete(inp, arrmed, arrquan) {
+    /*the autocomplete function takes two arguments,
+    the text field element and an array of possible autocompleted values:*/
+    var currentFocus;
+    /*execute a function when someone writes in the text field:*/
+    inp.addEventListener("input", function(e) {
+        var a, b, i, val = this.value;
+        /*close any already open lists of autocompleted values*/
+        closeAllLists();
+        if (!val) { return false; }
+        currentFocus = -1;
+        /*create a DIV element that will contain the items (values):*/
+        a = document.createElement("DIV");
+        a.setAttribute("id", this.id + "autocomplete-list");
+        a.setAttribute("class", "autocomplete-items");
+        /*append the DIV element as a child of the autocomplete container:*/
+        this.parentNode.appendChild(a);
+        var count2 = 0;
+        /*for each item in the array...*/
+        for (i = 0; i < arrmed.length; i++) {
+            /*check if the item starts with the same letters as the text field value:*/
+            var str = arrmed[i];
+            var quan = arrquan[i];
+            if (str.substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+                /*create a DIV element for each matching element:*/
+                count2++;
+                b = document.createElement("DIV");
+                /*make the matching letters bold:*/
+                b.innerHTML = "<strong>" + str.substr(0, val.length) + "</strong>";
+                b.innerHTML += str.substr(val.length) + " " + "<div class='pull-right' style='padding-top : 0px'>In hand : " + "<b>" + quan + "</b>" + "</div>";
+                /*insert a input field that will hold the current array item's value:*/
+                b.innerHTML += "<input type='hidden' value='" + str + "'>";
+                /*execute a function when someone clicks on the item value (DIV element):*/
+                b.addEventListener("click", function(e) {
+                    /*insert the value for the autocomplete text field:*/
+                    inp.value = this.getElementsByTagName("input")[0].value;
+                    var ind = arrmed.indexOf(inp.value);
+                    var maxinput = document.getElementById('medicineQuantity0');
+                    maxinput.setAttribute('max', arrquan[ind]);
+                    /*close the list of autocompleted values,
+                    (or any other open lists of autocompleted values:*/
+                    closeAllLists();
+                });
+                a.appendChild(b);
+                var showdisable = document.getElementById('showdisable');
+                var hideSubmit = document.getElementById('show');
+                var employeeshowdisable = document.getElementById('employeeshowdisable');
+                var hideSubmitemployee = document.getElementById('employeeshow');
+                hideSubmit.style.display = "block";
+                showdisable.style.display = "none";
+                hideSubmitemployee.style.display = "block";
+                employeeshowdisable.style.display = "none";
+            }
+
+        }
+        if (count2 === 0) {
+            b = document.createElement("DIV");
+            b.innerHTML = "<strong>No Medicine found with this name</strong>";
+            a.appendChild(b);
+            var showdisable = document.getElementById('showdisable');
+            var hideSubmit = document.getElementById('show');
+            hideSubmit.style.display = "none";
+            showdisable.style.display = "block";
+
+        }
+    });
+    /*execute a function presses a key on the keyboard:*/
+    inp.addEventListener("keydown", function(e) {
+        var x = document.getElementById(this.id + "autocomplete-list");
+        if (x) x = x.getElementsByTagName("div");
+        if (e.keyCode == 40) {
+            /*If the arrow DOWN key is pressed,
+            increase the currentFocus variable:*/
+            currentFocus++;
+            /*and and make the current item more visible:*/
+            addActive(x);
+        } else if (e.keyCode == 38) { //up
+            /*If the arrow UP key is pressed,
+            decrease the currentFocus variable:*/
+            currentFocus--;
+            /*and and make the current item more visible:*/
+            addActive(x);
+        } else if (e.keyCode == 13) {
+            /*If the ENTER key is pressed, prevent the form from being submitted,*/
+            e.preventDefault();
+            if (currentFocus > -1) {
+                /*and simulate a click on the "active" item:*/
+                if (x) x[currentFocus].click();
+            }
+        }
+    });
+
+    function addActive(x) {
+        /*a function to classify an item as "active":*/
+        if (!x) return false;
+        /*start by removing the "active" class on all items:*/
+        removeActive(x);
+        if (currentFocus >= x.length) currentFocus = 0;
+        if (currentFocus < 0) currentFocus = (x.length - 1);
+        /*add class "autocomplete-active":*/
+        x[currentFocus].classList.add("autocomplete-active");
+    }
+
+    function removeActive(x) {
+        /*a function to remove the "active" class from all autocomplete items:*/
+        for (var i = 0; i < x.length; i++) {
+            x[i].classList.remove("autocomplete-active");
+        }
+    }
+
+    function closeAllLists(elmnt) {
+        /*close all autocomplete lists in the document,
+        except the one passed as an argument:*/
+        var x = document.getElementsByClassName("autocomplete-items");
+        for (var i = 0; i < x.length; i++) {
+            if (elmnt != x[i] && elmnt != inp) {
+                x[i].parentNode.removeChild(x[i]);
+            }
+        }
+    }
+    /*execute a function when someone clicks in the document:*/
+    document.addEventListener("click", function(e) {
+        closeAllLists(e.target);
+    });
+}
+
+
+function autocompleteRoll(inp, arrmed) {
+
+    /*the autocomplete function takes two arguments,
+    the text field element and an array of possible autocompleted values:*/
+    var currentFocus;
+    /*execute a function when someone writes in the text field:*/
+    inp.addEventListener("input", function(e) {
+        var a, b, i, val = this.value;
+        /*close any already open lists of autocompleted values*/
+        closeAllLists();
+        if (!val) { return false; }
+        currentFocus = -1;
+        /*create a DIV element that will contain the items (values):*/
+        a = document.createElement("DIV");
+        a.setAttribute("id", this.id + "autocomplete-list");
+        a.setAttribute("class", "autocomplete-items");
+
+        /*append the DIV element as a child of the autocomplete container:*/
+        this.parentNode.appendChild(a);
+        var count2 = 0;
+        /*for each item in the array...*/
+        for (i = 0; i < arrmed.length; i++) {
+            /*check if the item starts with the same letters as the text field value:*/
+            var str = arrmed[i].toString();
+            if (str.substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+                /*create a DIV element for each matching element:*/
+                count2++;
+                b = document.createElement("DIV");
+                /*make the matching letters bold:*/
+                b.innerHTML = "<strong>" + str.substr(0, val.length) + "</strong>";
+                b.innerHTML += str.substr(val.length);
+                /*insert a input field that will hold the current array item's value:*/
+                b.innerHTML += "<input type='hidden' value='" + str + "'>";
+                /*execute a function when someone clicks on the item value (DIV element):*/
+                b.addEventListener("click", function(e) {
+                    /*insert the value for the autocomplete text field:*/
+                    inp.value = this.getElementsByTagName("input")[0].value;
+                    /*close the list of autocompleted values,
+                    (or any other open lists of autocompleted values:*/
+                    closeAllLists();
+                });
+                a.appendChild(b);
+            }
+        }
+
+        if (count2 === 0) {
+            b = document.createElement("DIV");
+            b.innerHTML = "<strong>Roll Number Found</strong>";
+            a.appendChild(b);
+            document.getElementById("rollnumber").value = "";
+        }
+    });
+    /*execute a function presses a key on the keyboard:*/
+    inp.addEventListener("keydown", function(e) {
+        var x = document.getElementById(this.id + "autocomplete-list");
+        if (x) x = x.getElementsByTagName("div");
+        if (e.keyCode == 40) {
+            /*If the arrow DOWN key is pressed,
+            increase the currentFocus variable:*/
+            currentFocus++;
+            /*and and make the current item more visible:*/
+            addActive(x);
+        } else if (e.keyCode == 38) { //up
+            /*If the arrow UP key is pressed,
+            decrease the currentFocus variable:*/
+            currentFocus--;
+            /*and and make the current item more visible:*/
+            addActive(x);
+        } else if (e.keyCode == 13) {
+            /*If the ENTER key is pressed, prevent the form from being submitted,*/
+            e.preventDefault();
+            if (currentFocus > -1) {
+                /*and simulate a click on the "active" item:*/
+                if (x) x[currentFocus].click();
+            }
+        }
+    });
+
+    function addActive(x) {
+        /*a function to classify an item as "active":*/
+        if (!x) return false;
+        /*start by removing the "active" class on all items:*/
+        removeActive(x);
+        if (currentFocus >= x.length) currentFocus = 0;
+        if (currentFocus < 0) currentFocus = (x.length - 1);
+        /*add class "autocomplete-active":*/
+        x[currentFocus].classList.add("autocomplete-active");
+    }
+
+    function removeActive(x) {
+        /*a function to remove the "active" class from all autocomplete items:*/
+        for (var i = 0; i < x.length; i++) {
+            x[i].classList.remove("autocomplete-active");
+        }
+    }
+
+    function closeAllLists(elmnt) {
+        /*close all autocomplete lists in the document,
+        except the one passed as an argument:*/
+        var x = document.getElementsByClassName("autocomplete-items");
+        for (var i = 0; i < x.length; i++) {
+            if (elmnt != x[i] && elmnt != inp) {
+                x[i].parentNode.removeChild(x[i]);
+            }
+        }
+    }
+    /*execute a function when someone clicks in the document:*/
+    document.addEventListener("click", function(e) {
+        closeAllLists(e.target);
+    });
+}
+</script>
