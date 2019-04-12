@@ -5,7 +5,6 @@ var xlsxtojson = require("xlsx-to-json");
 var xlstojson = require("xls-to-json");
 var mongoXlsx = require('mongo-xlsx');
 var Medicine = require('../models/medicine');
-
 // Get Homepage
 router.get('/', ensureAuthenticated, function(req, res) {
     res.redirect('/usertype/')
@@ -76,15 +75,15 @@ router.post('/upload/:id',ensureAuthenticated, function(req, res) {
                         var medicineName = result[i].medicineName;
                         var medicineQuantity = result[i].medicineQuantity;
                         var quantity = result[i].medicineQuantity;
-                        var price = result[i].price;
+			var price = result[i].price;
                         var compounderid = req.params.id;;
                         var medicineAdd = new Medicine({
                             companyName: companyName,
                             medicineName: medicineName,
                             medicineQuantity: medicineQuantity,
                             quantity: quantity,
-                            compounderid: compounderid,
-                            price : price
+			    price : price,	
+                            compounderid: compounderid
                         });
                         medicineAdd.save((err, medicine) => {
                             if (err) return err;

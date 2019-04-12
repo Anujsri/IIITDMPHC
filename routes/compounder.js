@@ -18,7 +18,6 @@ router.post('/completeprofile/:id', ensureAuthenticated, (req, res, next) => {
         var zip = req.body.zip;
         var state = req.body.state;
         var userid = id;
-        var completed = true;
 
 
         var compounderadd = new Compounder({
@@ -30,8 +29,7 @@ router.post('/completeprofile/:id', ensureAuthenticated, (req, res, next) => {
             city: city,
             zip: zip,
             state: state,
-            userid: userid,
-            completed: completed
+            userid: userid
         });
         compounderadd.save((err, compounderadd) => {
             if (err) return err;
@@ -94,6 +92,22 @@ router.put('/editprofile/:id', ensureAuthenticated, (req, res) => {
             res.json(compounder);
         });
     });
+});
+
+router.put('/setstatus/:id', ensureAuthenticated, (req, res) => {
+   var id = req.params.id;
+   var inoffice = req.body.statuspre;
+   console.log("Status in back end : " + inoffice);
+   var newvalues = {
+        $set: {
+            inoffice : inoffice
+        }
+   };
+   Compounder.findByIdAndUpdate(id, newvalues, { new: true }).lean().exec(function(err, compounder) {
+        if (err) throw err;
+        res.json(compounder);
+   });
+
 });
 
 router.get('/compounderDetail/:id', ensureAuthenticated, (req, res, next) => {

@@ -15,9 +15,7 @@ router.post('/completeprofile/:id',ensureAuthenticated,(req,res,next)=>{
         var city = req.body.city;
         var zip = req.body.zip;
         var state = req.body.state;
-        var dob = req.body.dob;
         var userid = id;
-        var completed = true;
         
 
         var lenderadd = new Doctor({
@@ -29,9 +27,7 @@ router.post('/completeprofile/:id',ensureAuthenticated,(req,res,next)=>{
             city : city,
             zip : zip,
             state : state,
-            dob : dob,
-            userid : userid,
-            completed : completed
+            userid : userid
         });
         lenderadd.save((err,lender)=>{
             if(err) return err;

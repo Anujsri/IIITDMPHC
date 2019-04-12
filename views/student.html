@@ -15,7 +15,7 @@
                     <a href="#doctor" data-toggle="pill" onclick="getDoctor();"><i class="fa fa-user-md" aria-hidden="true"></i>Doctors</a>
                 </li>
                 <li>
-                    <a href="#compounder" data-toggle="pill" onclick="getCompounder();"><i class="fa fa-user-md" aria-hidden="true"></i>Compounders</a>
+                    <a href="#compounder" data-toggle="pill" onclick="getCompounder();"><i class="fa fa-user-md" aria-hidden="true"></i>Nursing Assistants</a>
                 </li>
                 <li><a data-toggle="pill" href="#activity" onclick="getActivity();">
                         <i class="fa fa-calendar" aria-hidden="true"></i>Activity</a>
@@ -25,36 +25,47 @@
         <!-- Page Content Holder -->
         <div id="content" style="background-color: #E8EEF3;">
             <div class="tab-content" style="margin-top: 3%">
-                <div id="home" class="tab-pane fade">
-                    <div class="row">
-                    </div>
-                </div>
+                
                 <div id="activity" class="tab-pane fade">
                     <div class="row">
+                       <center><h3><div id="notrecord"></div></h3></center>
                         <div id="record"></div>
+                        
                     </div>
                 </div>
                 <div id="doctor" class="tab-pane fade">
                     <div class="row">
+                        <div class="alert alert-info">
+    <strong>Info!</strong> Emails of doctors are dummy we will provide you new data soon.
+  </div>
+                         {{#if doctor}}
                         {{#each doctor}}
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <!-- Profile Image -->
                             <div class="box box-primary">
                                 <div class="box-body box-profile">
-                                    {{#iff this.name '==' 'Dr. G S Sandhu'}}
-                                    <img class="profile-user-img img-responsive img-circle" src="/image/team/sandhu.jpg" alt="User profile picture">
-                                    {{/iff}}
-                                    {{#iff this.name '==' 'Dr. A N Gupta'}}
-                                    <img class="profile-user-img img-responsive img-circle" src="/image/team/doctor.png" alt="User profile picture">
-                                    {{/iff}}
-                                    {{#iff this.name '==' 'Dr. Jyoti Garg'}}
-                                    <img class="profile-user-img img-responsive img-circle" src="/image/team/doctorfe.png" alt="User profile picture">
-                                    {{/iff}}
-                                    {{#iff this.name '==' 'Dr. Niharika Gupta'}}
-                                    <img class="profile-user-img img-responsive img-circle" src="/image/team/Niharika.png" alt="User profile picture">
-                                    {{/iff}}
-                                    <h3 class="profile-username text-center">{{this.name}}</h3>
-                                    <p class="text-muted text-center">Software Engineer</p>
+                                {{#iff this.name '==' 'Dr. G. S. Sandhu'}}
+                                    <img class="profile-user-img img-responsive img-circle" src="../../image/team/sandhu.jpg" alt="User profile picture">
+                                <h3 class="profile-username text-center">Dr. G. S. Sandhu</h3>
+                                    <p class="text-muted text-center">Diabetes, Cardiology, Asthma</p>
+                                {{/iff}}
+{{#iff this.name '==' 'Dr. A. N. Gupta'}}
+                                    <img class="profile-user-img img-responsive img-circle" src="../../image/team/angupta.jpg" alt="User profile picture">
+                                <h3 class="profile-username text-center">Dr. A. N. Gupta</h3>
+                                    <p class="text-muted text-center">MD, Paed</p>
+                                {{/iff}}
+{{#iff this.name '==' 'Dr. Jyoti Garg'}}
+                                    <img class="profile-user-img img-responsive img-circle" src="../../image/team/Jyoti.jpg" alt="User profile picture">
+                                <h3 class="profile-username text-center">Dr. Jyoti Garg</h3>
+                                    <p class="text-muted text-center">Maternal & Child Care</p>
+                                {{/iff}}
+{{#iff this.name '==' 'Dr. Niharika Gupta'}}
+                                    <img class="profile-user-img img-responsive img-circle" src="../../image/team/Niharika.jpg" alt="User profile picture">
+                                <h3 class="profile-username text-center">Dr. Niharika Gupta</h3>
+                                    <p class="text-muted text-center">Dentist</p>
+                                {{/iff}}
+
+
                                     <ul class="list-group list-group-unbordered">
                                         <li class="list-group-item">
                                             <b style="color: black">Email</b> <a class="pull-right">{{this.email}}</a>
@@ -63,7 +74,7 @@
                                             <b style="color: black">Contact No.</b> <a href="#" class="pull-right">{{this.phone}}</a>
                                         </li>
                                         <li class="list-group-item">
-                                            <center> <b style="color: black">Address</b> </center>
+ <center> <b style="color: black">Address</b> </center>
                                         </li>
                                         <li class="list-group-item">
                                             <center>{{this.address}}</center>
@@ -82,17 +93,26 @@
                                             </div>
                                         </li>
                                     </ul>
-                                </div>
-                                <!-- /.box-body -->
-                            </div>
+                                  </div>
+ </div>
                         </div>
                         {{/each}}
+                        {{else}}
+                        <center>
+                            <h4>No Doctor Found</h4>
+                        </center>
+                        {{/if}}
+
                     </div>
                 </div>
                 <div id="compounder" class="tab-pane fade">
                     <div class="row">
+  <div class="alert alert-info">
+    <strong>Info!</strong> Emails of Nursing Staff are dummy we will provide you new data soon.
+  </div>
+
                         {{#each compounder}}
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <!-- Profile Image -->
                             <div class="box box-primary">
                                 <div class="box-body box-profile">
@@ -105,8 +125,8 @@
                                     {{#iff this.name '==' 'Mr. R B Singh'}}
                                     <img class="profile-user-img img-responsive img-circle" src="/image/team/Singh.jpg" alt="User profile picture">
                                     {{/iff}}
-                                    {{#iff this.name '==' 'Mr. B.L. Gupta'}}
-                                    <img class="profile-user-img img-responsive img-circle" src="/image/team/doctor.png" alt="User profile picture">
+                                    {{#iff this.name '==' 'Mr. B.L. Gupta '}}
+                                    <img class="profile-user-img img-responsive img-circle" src="/image/team/blgupta.jpg" alt="User profile picture">
                                     {{/iff}}
                                     <h3 class="profile-username text-center">{{this.name}}</h3>
                                     <p class="text-muted text-center">Nursing Assistant</p>
@@ -167,6 +187,10 @@
                                             <b style="color:#2C3E50">Mobile No.</b>
                                             <div class="pull-right">{{student.phone}}</div>
                                         </a>
+                                        <a href="#" class="list-group-item">
+                                            <b style="color:#2C3E50">Blood Group</b>
+                                            <div class="pull-right">{{student.bloodg}}</div>
+                                        </a>
                                     </ul>
                                     <a href="#editprofile" data-toggle="tab" class="btn btn-primary btn-block"><b style="color: white"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</b></a>
                                 </div>
@@ -188,7 +212,7 @@
                                             <!-- timeline time label -->
                                             <li class="time-label">
                                                 <span class="bg-red">
-                                                    <div id="batch"></div>
+                                                    Profile
                                                 </span>
                                             </li>
                                             <!-- /.timeline-label -->
@@ -221,29 +245,32 @@
                                             <div class="form-group">
                                                 <label for="inputName" class="col-sm-2 control-label">Name</label>
                                                 <div class="col-sm-10">
-                                                    <input type="text" class="form-control" id="inputName" placeholder="Name" value="{{student.name}}">
+                                                    <input type="text" class="form-control" id="inputName" placeholder="Name" value="{{student.name}}" required>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="inputPhone" class="col-sm-2 control-label">Mobile No.</label>
-                                                <div class="col-sm-10">
-                                                    <input type="number" class="form-control" id="inputPhone" placeholder="Mobile No.">
+                                                 <div class="col-sm-10">
+                                                    <input type="number" class="form-control" id="inputPhone" placeholder="Mobile No." required value="{{student.phone}}" min="1">
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="inputRoll" class="col-sm-2 control-label">Roll No.</label>
                                                 <div class="col-sm-10">
-                                                    <input type="number" class="form-control" id="inputRoll" placeholder="Roll No.">
+                                                    <input type="number" class="form-control" id="inputRoll" placeholder="Roll No." required value="{{student.rollnum}}" min="1">
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="inputRoll" class="col-sm-2 control-label">Program</label>
                                                 <div class="col-sm-10">
                                                     <select class="form-control" id="eprogram">
+							<option>Select Your Program</option>
                                                         <option value="B.Tech.">B.Tech.</option>
                                                         <option value="B.Des.">B. Des.</option>
                                                         <option value="M.Tech">M.Tech</option>
                                                         <option value="M.Des">M.Des</option>
+							<option value="P.hd">P.hd</option>
+							<option value="Mechatronics">Mechatronics</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -251,16 +278,20 @@
                                                 <label for="inputRoll" class="col-sm-2 control-label">Branch</label>
                                                 <div class="col-sm-10">
                                                     <select class="form-control" id="ebranch">
+							<option>Select Your Branch</option>
                                                         <option value="Computer Science & Engineering">CSE</option>
                                                         <option value="Electronics & Communication Engineering">ECE</option>
                                                         <option value="Mechanical Engineering">ME</option>
+							<option value="Design">Design</option>
+							<option value="Mechatronics">Mechatronics</option>
+							<option value="Natural Science">Natural Science</option>
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="inputRoll" class="col-sm-2 control-label">Hall No.</label>
                                                 <div class="col-sm-10">
-                                                    <select class="form-control" id="ehall">
+                                                    <select class="form-control" id="ehall" value="{{student.address.hallno}}">
                                                         <option>Hall 1</option>
                                                         <option>Hall 3</option>
                                                         <option>Hall 4</option>
@@ -271,15 +302,22 @@
                                             <div class="form-group">
                                                 <label for="inputRoll" class="col-sm-2 control-label">Block Name</label>
                                                 <div class="col-sm-10">
-                                                    <input type="text" class="form-control" name="Room No." placeholder="Blcok Name. eg A,B,C  etc.." required maxlength="1" id="eblock">
+                                                    <input type="text" class="form-control" name="Room No." placeholder="Block Name. eg A,B,C  etc.." required maxlength="1" id="eblock" value="{{student.address.block}}">
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="inputRoll" class="col-sm-2 control-label">Room No.</label>
                                                 <div class="col-sm-10">
-                                                    <input type="number" class="form-control" name="Room No." placeholder="Room No. eg 102,302 etc.." required id="eroomNum">
+                                                    <input type="number" class="form-control" name="Room No." placeholder="Room No. eg 102,302 etc.." required id="eroomNum" value="{{student.address.roomNum}}" min="1">
                                                 </div>
                                             </div>
+					    <div class="form-group">
+                                                  <label for="inputBloodGroup" class="col-sm-2 control-label">Blood Group</label>
+                                                  <div class="col-sm-10">
+                                                      <input type="text" class="form-control" placeholder="Blood Group (optional)" style="border-radius: 5px" id="ebloodg" value="{{student.bloodg}}">
+                                                  </div>
+                                             </div>
+
                                             <div class="form-group">
                                                 <div class="col-sm-offset-2 col-sm-10">
                                                     <button type="submit" class="btn btn-danger">Submit</button>
@@ -300,13 +338,13 @@
             <!--  tab end -->
         </div>
         {{else}}
-        <div class="container-fluid" style="background-image: url('/image/about-bg2.png');background-color: lightblue;margin-top:;height: 100%">
-            <div class="row" style="margin-top: 3%">
-                <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3">
+        <div class="" style="background-image: url('/image/about-bg2.png');background-color: lightblue;height : 100%;padding-bottom : 0px">
+            <div class="row">
+                <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2" style="margin-top : 3%">
                     <!-- Profile Image -->
                     <div class="box box-primary" style="padding: 0px;background-color: #56baed;">
                         <div class="row">
-                            <div class="col-md-4 col-sm-6 col-xs-12">
+                            <div class="col-md-4 col-sm-12 col-xs-12">
                                 <div class="single_member" style="padding-left: 5%;margin-top: 45%">
                                     <div class="author">
                                         <img src="/image/users.png" alt="">
@@ -317,14 +355,14 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-8 col-sm-6 col-xs-12" style="background-color: #FDFEFE;border-top-right-radius: 10px;border-bottom-right-radius: 10px;box-shadow: 3px 0px #EAEDED  ;">
+                            <div class="col-md-8 col-sm-12 col-xs-12" style="background-color: #FDFEFE;border-top-right-radius: 10px;border-bottom-right-radius: 10px;box-shadow: 3px 0px #EAEDED  ;">
                                 <div class="container">
                                     <div class="row">
-                                        <div class="col-md-4 col-sm-6 col-xs-12">
+                                        <div class="col-md-4 col-sm-8 col-xs-12">
                                             <form role="form" class="form-horizontal" method="post" id="add-student">
                                                 <div class="single_member">
-                                                    <br>
-                                                    <br>
+                                                <br>    
+                                                 <br>   
                                                     <div class="author_decs">
                                                         <div class="form-group">
                                                             <input type="text" class="form-control" id="name" placeholder="Name" value="{{user.name}}" required style="border-radius: 5px">
@@ -338,10 +376,12 @@
                                                         <div class="form-group">
                                                             <select class="form-control" style="border-radius: 5px" id="program">
                                                                 <option>Program</option>
-                                                                <option>B.Tech.</option>
-                                                                <option>B.Des</option>
-                                                                <option>M.Tech</option>
-                                                                <option>M.Des</option>
+                                                                <option value="B.Tech.">B.Tech.</option>
+                                                                <option value="B.Des.">B. Des.</option>
+                                                                <option value="M.Tech">M.Tech</option>
+                                                                <option value="M.Des">M.Des</option>
+								<option value="P.hd">P.hd</option>
+                                                                <option value="Mechatronics">Mechatronics</option>
                                                             </select>
                                                         </div>
                                                         <div class="form-group">
@@ -350,6 +390,9 @@
                                                                 <option value="Computer Science & Engineering">CSE</option>
                                                                 <option value="Electronics & Communication Engineering">ECE</option>
                                                                 <option value="Mechanical Engineering">ME</option>
+                                                                <option value="Design">Design</option>
+response.data.length                                                                <option value="Mechatronics">Mechatronics</option>
+                                                                <option value="Natural Science">Natural Science</option>
                                                             </select>
                                                         </div>
                                                         <div class="form-group">
@@ -362,11 +405,15 @@
                                                             </select>
                                                         </div>
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control" name="Room No." placeholder="Blcok Name. eg A,B,C  etc.." required style="border-radius: 5px" maxlength="1" id="block">
+                                                            <input type="text" class="form-control" name="Room No." placeholder="Block Name. eg A,B,C  etc.." required style="border-radius: 5px" maxlength="1" id="block">
                                                         </div>
                                                         <div class="form-group">
-                                                            <input type="number" class="form-control" name="Room No." placeholder="Room No. eg 102,302 etc.." required style="border-radius: 5px" id="roomNum">
+                                                            <input type="number" class="form-control" name="Room No." placeholder="Room No. eg 102,302 etc.." required style="border-radius: 5px" id="roomNum" min="1">
                                                         </div>
+							 <div class="form-group">
+                                                            <input type="text" class="form-control" placeholder="Blood Group (optional)" style="border-radius: 5px" id="bloodg">
+                                                        </div>
+
                                                     </div>
                                                 </div>
                                                 <center>
@@ -383,10 +430,9 @@
             </div>
         </div>
         {{/if}}
-        
     </div>
 </div>
-<footer class="footer-area" style="margin-bottom: 0px">
+<footer class="footer-area">
     <div class="footer-bottom" style="background-color: #154360;color:#B3B6B7  ">
         <div class="container">
             <div class="d-flex justify-content-between align-items-center flex-wrap">
@@ -414,11 +460,8 @@
     </div>
 </footer>
 <script>
-    window.location.href = "#student/profile";
+window.location.href = "#student/profile";
 '{{#if student.completed}}'
-var rollNumber = '{{student.rollnum}}';
-var res = rollNumber.substring(0, 4);
-document.getElementById('batch').innerHTML = "Batch " + res;
 var editForm = document.getElementById('edit-student');
 editForm.addEventListener('submit', editStudent);
 
@@ -433,7 +476,9 @@ function editStudent(e) {
     var roomNum = document.getElementById('eroomNum').value;
     var program = document.getElementById('eprogram').value;
     var branch = document.getElementById('ebranch').value;
-    if (phone.length) {
+    var blood = document.getElementById('ebloodg').value;
+    var bloodg;
+    if (phone.length < 10 || phone.length >10) {
         swal.fire({
             title: '{{error}}',
             text: "Mobile No. should have 10 digit",
@@ -442,6 +487,12 @@ function editStudent(e) {
             type: "error"
         });
     } else {
+        if(blood == ""){
+            bloodg = "Not Mentioned";
+         }
+         else{
+            bloodg = blood;
+         }
         axios.put('/student/editprofile/{{student._id}}', {
             name: name,
             phone: phone,
@@ -450,7 +501,8 @@ function editStudent(e) {
             block: block,
             roomNum: roomNum,
             program: program,
-            branch: branch
+            branch: branch,
+            bloodg : bloodg
         }).then(function(response) {
             Swal.fire({
                 position: 'top-end',
@@ -468,7 +520,12 @@ function getActivity() {
     window.location.href = "#student/medicalrecord";
     var rollNumberstu = '{{student.rollnum}}';
     axios.post('/patient/getactivity', { idnumber: rollNumberstu }).then((response) => {
+        console.log("Length of records : " + response.data.length);
         var codeBlock = '';
+        if(response.data.length == 0){
+              document.getElementById('notrecord').innerHTML = "No Medical Record Found";
+              console.log("No record found");
+        }
         for (var i = 0; i < response.data.length; i++) {
             var html1 = '';
             var day;
@@ -491,8 +548,7 @@ function getActivity() {
                 html1 += '<div class="row">' +
                     '<li >' +
                     '<div class="col-sm-7 col-xs-7">' + response.data[i].medicineName[j].name + '</div>' +
-                    '<div class="col-sm-5 col-xs-5"> Qty : ' +
-                    response.data[i].medicineName[j].quantity + '</div>' +
+                    '<div class="col-sm-5 col-xs-5"> Qty : ' + response.data[i].medicineName[j].quantity + '</div>' +
                     '</li>' +
                     '</div>'
             }
@@ -515,7 +571,7 @@ function getActivity() {
                 '<a class="list-group-item">' +
                 '<div class="row">' +
                 '<div class="col-md-6">' +
-                '<b style="color:#2C3E50">Compunder : </b>' + response.data[i].givenbyname +
+                '<b style="color:#2C3E50">Nursing Assistant : </b>' + response.data[i].givenbyname +
                 '</div>' +
                 '<div class="col-md-6">' +
                 '<b style="color:#2C3E50">Doctor : </b>' + response.data[i].doctorName + '</div>' +
@@ -545,7 +601,9 @@ function addStudent(e) {
     var roomNum = document.getElementById('roomNum').value;
     var program = document.getElementById('program').value;
     var branch = document.getElementById('branch').value;
-    if (phone.length<10) {
+    var blood = document.getElementById('bloodg').value;
+    var bloodg;
+    if (phone.length < 10 || phone.length > 10) {
         swal.fire({
             title: '{{error}}',
             text: "Mobile No. should have 10 digit",
@@ -554,6 +612,12 @@ function addStudent(e) {
             type: "error"
         });
     } else {
+         if(blood == ""){
+            bloodg = "Not Mentioned";
+         }
+         else{
+            bloodg = blood;
+         }
         axios.post('/student/completeprofile/{{user._id}}', {
             name: name,
             phone: phone,
@@ -562,7 +626,8 @@ function addStudent(e) {
             block: block,
             roomNum: roomNum,
             program: program,
-            branch: branch
+            branch: branch,
+            bloodg : bloodg
         }).then(function(response) {
             Swal.fire({
                 position: 'top-end',

@@ -10,20 +10,29 @@ var Medicine = require('../models/medicine');
 // Get Homepage
 router.get('/', ensureAuthenticated, function(req, res, next) {
 
-    if (req.user.usertype === "Dean") {
+    if (req.user.usertype === "Dean" || req.user.usertype === "Superintendent") {
         Medicine.find({}).lean().exec((err,medicines)=>{
             if(err) return err;
-            Doctor.find({ $and: [{ completed: true }, { usertype: "Doctor" }] })
+            Doctor.find({usertype: "Doctor"})
             .lean().exec(function(err, doctor) {
                 if (err) return err;
-                Compounder.find({ $and: [{ completed: true }, { usertype: "Compounder" }] })
+                Compounder.find({usertype: "Compounder" })
                 .lean().exec(function(err, compounder) {
                     if (err) return err;
-                    res.render('dean', {
-                        compounder,
-                        doctor,
-                        medicines
-                    });
+                    if(req.user.usertype === "Dean"){
+                        res.render('dean', {
+                            compounder,
+                            doctor,
+                            medicines
+                        });
+                    }
+		     if(req.user.usertype === "Superintendent"){
+                        res.render('superintendent', {
+                            compounder,
+                            doctor,
+                            medicines
+                        });
+                    }
                 });
             });
         })
@@ -82,7 +91,7 @@ router.get('/', ensureAuthenticated, function(req, res, next) {
         } else {
             User.findOneAndRemove({ email: req.user.email }).lean().exec((err, user) => {
                 if (err) return err;
-                req.flash('error', 'Please login with Collage Email');
+                req.flash('error', 'Please login with College Email');
                 res.redirect('/users/login');
             })
             // req.session.destroy();

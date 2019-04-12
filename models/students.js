@@ -48,6 +48,9 @@ var StudentSchema = mongoose.Schema({
 		type:String,
 		required: true
 	}, 
+        bloodg : {
+                type : String
+       }
 });
 
 var Student = module.exports = mongoose.model('Student', StudentSchema);

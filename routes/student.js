@@ -4,8 +4,8 @@ var User = require('../models/user');
 var Student = require('../models/students');
 
 router.post('/completeprofile/:id',ensureAuthenticated,(req,res,next)=>{
-	var id = req.params.id;
-	var name =  req.body.name;
+    var id = req.params.id;
+    var name =  req.body.name;
     var phone = req.body.phone;
     var rollnum = req.body.rollnum;
     var hallno = req.body.hallno;
@@ -13,22 +13,25 @@ router.post('/completeprofile/:id',ensureAuthenticated,(req,res,next)=>{
     var roomNum = req.body.roomNum;
     var program = req.body.program;
     var branch = req.body.branch;
+    var bloodg = req.body.bloodg;
     var userid = id;
+    console.log("Blood group " + bloodg); 
     var email = req.user.email;
     var address = {};
     address.hallno = hallno;
     address.block = block;
     address.roomNum = roomNum;
 	var addStudent = new Student({
-		name : name,
-        email : email,
-        phone : phone,
-        rollnum : rollnum,
-        address : address,
-        program : program,
-        branch : branch,
-        userid : userid,
-        completed : true
+	    name : name,
+            email : email,
+            phone : phone,
+            rollnum : rollnum,
+            address : address,
+            program : program,
+            branch : branch,
+            userid : userid,
+            completed : true,
+            bloodg : bloodg
 	});
 	addStudent.save((err,student) => {
         if (err){
@@ -56,6 +59,8 @@ router.put('/editprofile/:id',ensureAuthenticated,(req,res,next)=>{
     var roomNum = req.body.roomNum;
     var program = req.body.program;
     var branch = req.body.branch;
+    var bloodg = req.body.bloodg;
+    console.log("Blood group : " + bloodg);
     var address = {};
     address.hallno = hallno;
     address.block = block;
@@ -67,7 +72,8 @@ router.put('/editprofile/:id',ensureAuthenticated,(req,res,next)=>{
             rollnum : rollnum,
             address : address,
             program : program,
-            branch : branch
+            branch : branch,
+            bloodg : bloodg
         }
     };
     Student.findByIdAndUpdate(id, newvalues, { new: true }).lean().exec(function(err, student) {

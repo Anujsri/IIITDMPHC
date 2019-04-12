@@ -79,15 +79,19 @@
                                     {{/iff}}
                                     {{#iff user.usertype '==' 'Compounder'}}
                                         {{user.name}} - Nursing Assistant
-                                        <small>Member since Nov. 2012</small>
+                                        
                                     {{/iff}}
                                     {{#iff user.usertype '==' 'Doctor'}}
                                         {{user.name}} - Doctor
-                                        <small>Member since Nov. 2012</small>
+                                        
                                     {{/iff}}
                                     {{#iff user.usertype '==' 'Dean'}}
                                         {{user.name}} - Admin
-                                        <small>Member since Nov. 2012</small>
+                                        
+                                    {{/iff}}
+                                    {{#iff user.usertype '==' 'Superintendent'}}
+                                        {{user.name}} - Superintendent
+
                                     {{/iff}}
                                 </p>
                             </li>
@@ -112,7 +116,7 @@
     {{else}}
     <!--================ Start Header Menu Area =================-->
    <nav class="navbar navbar-fixed-top" style="background-color: #5DADE2;box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);">
-     <a class="navbar-brand" href="/" ><img src="/image/beta1.png" style="margin-top:-15%"></a>
+    
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
@@ -130,7 +134,7 @@
                    
                    <li role="presentation"><a href="/" class="btn btn-primary"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
                    <li role="presentation"><a href="/users/login/" class="btn btn-warning" ><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-                    <li role="presentation"><a href="/users/register" class="btn btn-success"><i class="fa fa-user-plus" aria-hidden="true"></i> Register</a></li>
+                    
                 </ul>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
@@ -155,7 +159,7 @@
     }
      
     var loc = window.location.href;
-    if(loc == "http://localhost:3000/home"){
+    if(loc == "http://phc.iiitdmj.ac.in:8080/home"){
         console.log("web page address is  : ");
         var chanhref2 = document.getElementById('sidebarCollapse');
         chanhref2.style.display = "none";

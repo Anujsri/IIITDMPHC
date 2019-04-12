@@ -24,8 +24,8 @@ var CompounderSchema = mongoose.Schema({
 		required: true
 	},
 	state:{
-        type:String,
-        required: true
+	        type:String,
+        	required: true
 	},
 	zip:{
 		type:Number,
@@ -43,6 +43,10 @@ var CompounderSchema = mongoose.Schema({
 	image_url:{
 		type: String,
 		default: "http://icons.iconarchive.com/icons/icons-land/medical/256/People-Doctor-Male-icon.png"
+	},
+	inoffice : {
+	        type : Boolean,
+		default : false
 	}
 });
 

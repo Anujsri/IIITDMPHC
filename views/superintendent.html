@@ -1,0 +1,1312 @@
+<div class="wrapper">
+    <div id="here">
+        <!-- Sidebar Holder -->
+        <nav id="sidebar" style="background-color: #343E54 ">
+            <div class="sidebar-header" style="background-color: #343E54;">
+                </br>
+                <h3 style="color: white;margin-top: 20px;font-family: 'Poppins', sans-serif;"><i class="fa fa-user-circle-o" aria-hidden="true"></i> Superintendent</h3>
+                <strong><i class="fa fa-user-circle-o" aria-hidden="true"></i></strong>
+            </div>
+            <ul class="list-unstyled components" style="margin-top: -20px">
+                <li class="active">
+                    <a href="#home" data-toggle="pill"><i class="fa fa-home"></i>Home</a>
+                </li>
+                <li>
+                    <a href="#doctor" data-toggle="pill"><i class="fa fa-user-md" aria-hidden="true"></i>Doctors</a>
+                </li>
+                <li>
+                    <a href="#compounder" data-toggle="pill"><i class="fa fa-users" aria-hidden="true"></i>Nursing Staff</a>
+                </li>
+                <li data-toggle="pill">
+                    <a data-toggle="collapse" href="#patients" aria-expanded="false"><i class="fa fa-user" aria-hidden="true"></i>Patients
+                    </a>
+                    <ul class="collapse list-unstyled" id="patients">
+                        <li style="border-bottom: 1px #5499C7 solid">
+                            <a href="#studentinfom" data-toggle="pill" onclick="showStudents();" style="color: black"><i class="fa fa-users" aria-hidden="true"></i>Student</a>
+                        </li>
+                        <li>
+                            <a href="#employeeinfom" data-toggle="pill" onclick="showEmployees();" style="color: black"><i class="fa fa-users" aria-hidden="true"></i>Employee</a>
+                        </li>
+                    </ul>
+                </li>
+                <li><a data-toggle="pill" href="#students" onclick="getAllStudents();"><i class="fa fa-graduation-cap" aria-hidden="true"></i>Students</a></li>
+                <li><a data-toggle="pill" href="#medicines" onclick="getAllMedicines();"><i class="fa fa-medkit" aria-hidden="true"></i>Medicines</a></li>
+                <li><a data-toggle="pill" href="#lessmedicines" onclick="getAllMedicines();"><i class="fa fa-medkit" aria-hidden="true"></i>Need to ordered</a></li>
+ </ul>
+        </nav>
+        <!-- Page Content Holder -->
+        <div id="content" style="background-color: #E8EEF3">
+            <div class="tab-content">
+                <div id="home" class="tab-pane fade in active">
+                    <div class="row">
+                        <div class="col-lg-3 col-xs-6">
+                            <!-- small box -->
+                            <div class="small-box bg-aqua">
+                                <div class="inner">
+                                    <h3 style="color: white" id="totalStudent"></h3>
+                                    <p>Registered Students</p>
+                                </div>
+                                <div class="icon" style="margin-top: 7%">
+                                    <i class="fa fa-users" aria-hidden="true"></i>
+                                </div>
+                                <a href="#" class="small-box-footer">Click on Students for more info<i class="fa fa-arrow-circle-right"></i></a>
+                            </div>
+                        </div>
+                        <!-- ./col -->
+                        <div class="col-lg-3 col-xs-6">
+                            <!-- small box -->
+                            <div class="small-box bg-green">
+                                <div class="inner">
+                                    <h3 style="color: white">4</h3>
+                                    <p>Total Doctors</p>
+                                </div>
+                                <div class="icon" style="margin-top: 7%">
+                                    <i class="fa fa-user-md" aria-hidden="true"></i>
+                                </div>
+                                <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                            </div>
+                        </div>
+                        <!-- ./col -->
+                        <div class="col-lg-3 col-xs-6">
+                            <!-- small box -->
+                            <div class="small-box bg-yellow">
+<div class="inner">
+                                    <h3 style="color: white">
+                                        <div id="allpatients"></div>
+                                    </h3>
+                                    <p>All Patients</p>
+                                </div>
+                                <div class="icon" style="margin-top: 7%">
+                                    <i class="fa fa-heartbeat" aria-hidden="true"></i>
+                                </div>
+                                <a href="#" class="small-box-footer">Click on Patients for more info <i class="fa fa-arrow-circle-right"></i></a>
+                            </div>
+                        </div>
+                        <!-- ./col -->
+                        <div class="col-lg-3 col-xs-6">
+                            <!-- small box -->
+                            <div class="small-box bg-red">
+                                <div class="inner">
+                                    <h3 style="color: white" id="medNumber"></h3>
+                                    <p>Total Medicines</p>
+                                </div>
+                                <div class="icon" style="margin-top: 7%">
+                                    <i class="fa fa-medkit" aria-hidden="true"></i>
+                                </div>
+                                <a data-toggle="pill" href="#medicines" onclick="getAllMedicines();" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                            </div>
+                        </div>
+                        <!-- ./col -->
+                    </div>
+                    <div class="row">
+                        <!-- Left col -->
+                        <section class="col-lg-7 connectedSortable">
+                            <!-- Custom tabs (Charts with tabs)-->
+                            <div class="nav-tabs-custom">
+                                <!-- Tabs within a box -->
+                                <ul class="nav nav-tabs pull-right">
+                                    <li class="active"><a href="#revenue-chart" data-toggle="tab">Medicine Availability</a></li>
+<li class="pull-left header"><i class="fa fa-inbox"></i> Graph</li>
+                                </ul>
+                                <div class="tab-content no-padding">
+                                    <!-- Morris chart - Sales -->
+                                    <div class="chart tab-pane active" id="revenue-chart" style="position: relative; height: 400px;">
+                                        <div id="chartContainer" style="height: 400px; width: 100%;"></div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </section>
+                        <section class="col-lg-5 connectedSortable">
+                            <!-- Map box -->
+                            <div class="box box-solid bg-light-blue-gradient">
+                                <div class="box-header">
+                                    <!-- /. tools -->
+                                    <i class="fa fa-map-marker"></i>
+                                    <h3 class="box-title" style="color: white">Today's Patients</h3>
+                                </div>
+                                <div class="box-body">
+                                    <div id="world-map" style="height: 310px; width: 100%;" class="table-responsive">
+                                        <div class="tab-content">
+                                            <div id="studentsvisit" class="tab-pane fade in active">
+                                                <table class="table table-bordered table-condensed" id="targettable1" style="width: 100%">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Name</th>
+                                                            <th>Roll No.</th>
+                                                            <th>Email</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div id="employeevisit" class="tab-pane fade">
+                                                <table class="table table-bordered table-condensed" id="targettable2" style="width: 100%">
+                                                    <thead>
+ <tr>
+                                                            <th>Name</th>
+                                                            <th>Pf No.</th>
+                                                            <th>Email</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.box-body-->
+                                <div class="box-footer no-border">
+                                    <div class="row">
+                                        <div class="col-xs-6 text-center" style="border-right: 1px solid #f4f4f4">
+                                            <div id="sparkline-1"></div>
+                                            <div class="knob-label">
+                                                <a href="#studentsvisit" data-toggle="pill" class="primary-btn text-uppercase"><i class="fa fa-user" aria-hidden="true"></i> Student</a>
+                                            </div>
+                                        </div>
+                                        <!-- ./col -->
+                                        <div class="col-xs-6 text-center" style="border-right: 1px solid #f4f4f4">
+                                            <div id="sparkline-2"></div>
+                                            <div class="knob-label">
+                                                <a href="#employeevisit" data-toggle="pill" class="primary-btn text-uppercase"><i class="fa fa-user" aria-hidden="true"></i> Employee</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /.row -->
+                                </div>
+                            </div>
+                            <!-- /.box -->
+                        </section>
+ <section class="col-lg-7 connectedSortable">
+                            <div class="box box-info">
+                                <div class="box-header">
+                                    <i class="fa fa-inr" aria-hidden="true"></i>
+                                    <h3 class="box-title">Medicine Price</h3>
+                                    <!-- tools box -->
+                                    <div class="pull-right box-tools">
+                                        <button type="button" class="btn btn-info btn-sm" data-widget="remove" data-toggle="tooltip" title="Remove">
+                                            <i class="fa fa-times"></i></button>
+                                    </div>
+                                </div>
+                                <div class="box-body">
+                                    <div id="chartContainer3" style="height: 350px; width: 100%;"></div>
+                                </div>
+                            </div>
+                        </section>
+                        <section class="col-lg-5 connectedSortable">
+                            <!-- Calendar -->
+                            <div class="box box-solid bg-green-gradient">
+                                <div class="box-header">
+                                    <i class="fa fa-envelope"></i>
+                                    <h3 class="box-title" style="color: white">Presence In Office</h3>
+                                    <!-- tools box -->
+                                </div>
+                                <div class="box-footer text-black">
+                                    <div class="row">
+                                        <div class="col-sm-12 col-xs-12">
+                                           <center>Doctor</center>
+                                           <div id="refreshstatus">
+                                           <div class="list-group">
+                                              {{#each doctor}}
+                                                <a href="#" class="list-group-item"><div class="row">
+                                                   <div class="col-sm-8 col-xs-8">{{this.name}}</div>
+                                                   <div class="col-sm-4 col-xs-4">
+                                                   {{#if inoffice}}
+                                                     Yes
+                                                   {{else}}
+                                                      No
+                                                   {{/if}}
+</div>
+                                                </div></a>
+                                               {{/each}}
+                                           </div>
+                                           <center>Nursing Staff</center>
+                                            <div class="list-group">
+                                              {{#each compounder}}
+                                                <a href="#" class="list-group-item"><div class="row">
+                                                   <div class="col-sm-8 col-xs-8">{{this.name}}</div>
+                                                   <div class="col-sm-4 col-xs-4">
+                                                        {{#if inoffice}}
+                                                            Yes
+                                                        {{else}}
+                                                            No
+                                                       {{/if}}
+                                                   </div>
+                                                </div></a>
+                                               {{/each}}
+                                           </div>
+                                           </div>
+                                        </div>
+                                    </div>
+                                    <!-- /.row -->
+                                </div>
+                            </div>
+                            <!-- /.box -->
+                        </section>
+                        <!-- right col -->
+                    </div>
+                </div>
+                <div id="lessmedicines" class="tab-pane fade">
+                    <div class="row">
+                        <div id="wrappersmedicineless">
+                            {{#each medicines}}
+                             {{#iff this.limit '>' this.quantity}}
+                                <div class="col-md-3 col-sm-4 col-xs-6">
+                                    <div class="box box-primary">
+                                        <div class="box-body box-profile">
+ <img class="profile-user-img img-responsive img-circle" src="/image/medicine.png" alt="User profile picture"><br>
+                                            <ul class="list-group list-group-unbordered">
+                                                <a href="#" class="list-group-item">
+                                                    <b style="color : #566573">Company</b> <div class="pull-right">{{this.companyName}}</div>
+                                                </a>
+                                                <a href="#" class="list-group-item">
+                                                    <b style="color : #566573">Medicine</b> <div class="pull-right">{{this.medicineName}}</div>
+                                                </a><br>
+                                                <a href="#" class="list-group-item">
+                                                    <b style="color : #566573">Ordered Quantity</b> <div class="pull-right"> {{this.medicineQuantity}}</div>
+                                                </a>
+                                                <a href="#" class="list-group-item" style="background-color: #C0392B  ;color: #fff">
+                                                    <b style="color: #fff">In hand</b> <div class="pull-right"> {{this.quantity}}</div>
+                                                </a>
+                                                <a href="#" class="list-group-item">
+                                                    <b style="color : #566573">Price</b> <div class="pull-right">{{this.price}}</div>
+                                                </a>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                {{/iff}}
+                            {{/each}}
+                        </div>
+                    </div>
+                </div>
+                <div id="medicines" class="tab-pane fade">
+                    <div class="row ">
+                            <div class="col-md-6 col-md-offset-3 form-group">
+                                <div class="input-group" style="box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
+                                    </span>
+                                    <input type="text" id="myInputmedean" placeholder="Search Medicine" title="Type something" class="form-control">
+                                </div>
+                            </div>
+ </div>
+                        <br>
+                    <div class="row">
+                        <div id="wrappersmedicine">
+                            {{#each medicines}}
+                                <div class="col-md-3 col-sm-4 col-xs-6">
+                                    <div class="box box-primary">
+                                        <div class="box-body box-profile">
+                                            <img class="profile-user-img img-responsive img-circle" src="/image/medicine.png" alt="User profile picture"><br>
+                                            <ul class="list-group list-group-unbordered">
+                                                <a href="#" class="list-group-item">
+                                                    <b style="color : #566573">Company</b> <div class="pull-right">{{this.companyName}}</div>
+                                                </a>
+                                                <a href="#" class="list-group-item">
+                                                    <b style="color : #566573">Medicine</b> <div class="pull-right">{{this.medicineName}}</div>
+                                                </a><br>
+                                                <a href="#" class="list-group-item">
+                                                    <b style="color : #566573">Ordered Quantity</b> <div class="pull-right"> {{this.medicineQuantity}}</div>
+                                                </a>
+                                                {{#iff this.limit '>' this.quantity}}
+                                                <a href="#" class="list-group-item" style="background-color: #C0392B  ;color: #fff">
+                                                    <b style="color: #fff">In hand</b> <div class="pull-right"> {{this.quantity}}</div>
+                                                </a>
+                                                {{else}}
+                                                     <a href="#" class="list-group-item">
+                                                    <b style="color : #566573">In hand</b> <div class="pull-right"> {{this.quantity}}</div>
+                                                </a>
+                                                {{/iff}}
+                                                <a href="#" class="list-group-item">
+                                                    <b style="color : #566573">Price</b> <div class="pull-right">{{this.price}}</div>
+                                                </a>
+                                                {{#iff this.limit '==' 0}}
+                                                    <a href="#" class="list-group-item">
+ </a>
+                                                    <button class="btn btn-primary btn-block" id="btnadd" data-toggle="modal" data-target="#myModal2" onclick="setLimit('{{this._id}}')"><b style="color : white">Set Limit</b></button>
+                                                {{else}}
+                                                    <a href="#" class="list-group-item">
+                                                        <b style="color : #566573">Limit</b> <div class="pull-right">{{this.limit}}</div>
+                                                    </a>
+                                                    <button class="btn btn-primary btn-block" id="btnadd" data-toggle="modal" data-target="#myModal2" onclick="setLimit('{{this._id}}')"><b style="color : white">Change Limit</b></button>
+                                                {{/iff}}
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            {{/each}}
+                        </div>
+                    </div>
+                </div>
+                <div id="students" class="tab-pane fade">
+                        <div class="row">
+                            <ul class="nav nav-tabs">
+                                <li class="active "><a data-toggle="tab" href="#allStudents">All Students</a></li>
+                                <li><a data-toggle="tab" href="#menu1" onclick="cseStudent('Computer Science & Engineering')">CSE</a></li>
+                                <li><a data-toggle="tab" href="#menu2" onclick="cseStudent('Electronics & Communication Engineering')">ECE</a></li>
+                                <li><a data-toggle="tab" href="#menu3" onclick="cseStudent('Mechanical Engineering')">ME</a></li>
+                                <li><a data-toggle="tab" href="#menu4" onclick="cseStudent('Design')">Design</a></li>
+                                <li><a data-toggle="tab" href="#menu5" onclick="cseStudent('Mechatronics')">Mechatronics</a></li>
+                                <li><a data-toggle="tab" href="#menu6" onclick="cseStudent('Natural Science')">Natural Science</a></li>
+                            </ul>
+                        </div>
+                        <br>
+                        <div class="tab-content">
+                            <div id="allStudents" class="tab-pane fade in active">
+                                <div class="row">
+ <div class="col-lg-6 col-lg-offset-6 col-md-6 col-md-offset-6 col-sm-6 col-sm-offset-6 col-xs-12">
+                                        <div class="row">
+                                            <div class="col-md-5 col-sm-5 col-xs-12">
+                                                <input type="number" class="form-control" placeholder="Roll Number" id="myInput16" style="border-radius: 5px">
+                                            </div>
+                                            <div class="col-md-1 col-sm-1 col-xs-12">
+                                                Or
+                                            </div>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <input type="text" class="form-control" placeholder="Name" id="myInput17" style="border-radius: 5px">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div id="wrappers"></div>
+                                </div>
+                            </div>
+                            <div id="menu1" class="tab-pane fade">
+                                <div class="row">
+                                    <div class="col-lg-6 col-lg-offset-6 col-md-6 col-md-offset-6 col-sm-6 col-sm-offset-6 col-xs-12">
+                                        <div class="row">
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <input type="number" class="form-control" placeholder="Roll Number" id="myInput18" style="border-radius: 5px">
+                                            </div>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <input type="text" class="form-control" placeholder="Name" id="myInput19" style="border-radius: 5px">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                               <div class="row">
+<div id="wrappercse"></div>
+                                </div>
+                            </div>
+                            <div id="menu2" class="tab-pane fade">
+                                <div class="row">
+                                    <div class="col-lg-6 col-lg-offset-6 col-md-6 col-md-offset-6 col-sm-6 col-sm-offset-6 col-xs-12">
+                                        <div class="row">
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <input type="number" class="form-control" placeholder="Roll Number" id="myInput20" style="border-radius: 5px">
+                                            </div>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <input type="text" class="form-control" placeholder="Name" id="myInput21" style="border-radius: 5px">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                               <div class="row">
+                                    <div id="wrapperece"></div>
+                                </div>
+                            </div>
+                            <div id="menu3" class="tab-pane fade">
+                                <div class="row">
+                                    <div class="col-lg-6 col-lg-offset-6 col-md-6 col-md-offset-6 col-sm-6 col-sm-offset-6 col-xs-12">
+                                        <div class="row">
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <input type="number" class="form-control" placeholder="Roll Number" id="myInput22" style="border-radius: 5px">
+                                            </div>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <input type="text" class="form-control" placeholder="Name" id="myInput23" style="border-radius: 5px">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+ <div class="row">
+                                    <div id="wrapperme"></div>
+                                </div>
+                            </div>
+                           <div id="menu4" class="tab-pane fade">
+                                <div class="row">
+                                    <div class="col-lg-6 col-lg-offset-6 col-md-6 col-md-offset-6 col-sm-6 col-sm-offset-6 col-xs-12">
+                                        <div class="row">
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <input type="number" class="form-control" placeholder="Roll Number" id="myInput24" style="border-radius: 5px">
+                                            </div>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <input type="text" class="form-control" placeholder="Name" id="myInput25" style="border-radius: 5px">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                              <div class="row">
+                                    <div id="wrapperdesign"></div>
+                                </div>
+                            </div>
+                            <div id="menu5" class="tab-pane fade">
+                                <div class="row">
+                                    <div class="col-lg-6 col-lg-offset-6 col-md-6 col-md-offset-6 col-sm-6 col-sm-offset-6 col-xs-12">
+                                        <div class="row">
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <input type="number" class="form-control" placeholder="Roll Number" id="myInput26" style="border-radius: 5px">
+                                            </div>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <input type="text" class="form-control" placeholder="Name" id="myInput27" style="border-radius: 5px">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+ <br>
+                              <div class="row">
+                                    <div id="wrappermechatronics"></div>
+                                </div>
+                            </div>
+                            <div id="menu6" class="tab-pane fade">
+                                <div class="row">
+                                    <div class="col-lg-6 col-lg-offset-6 col-md-6 col-md-offset-6 col-sm-6 col-sm-offset-6 col-xs-12">
+                                        <div class="row">
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <input type="number" class="form-control" placeholder="Roll Number" id="myInput28" style="border-radius: 5px">
+                                            </div>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <input type="text" class="form-control" placeholder="Name" id="myInput29" style="border-radius: 5px">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                              <div class="row">
+                                    <div id="wrapperns"></div>
+                                </div>
+                            </div>
+
+                        </div>
+                </div>
+                <div id="doctor" class="tab-pane fade">
+                    <div class="row">
+                        {{#if doctor}}
+                        {{#each doctor}}
+                        <div class="col-md-4">
+                            <!-- Profile Image -->
+                            <div class="box box-primary">
+                                <div class="box-body box-profile">
+                                {{#iff this.name '==' 'Dr. G. S. Sandhu'}}
+                                    <img class="profile-user-img img-responsive img-circle" src="../../image/team/sandhu.jpg" alt="User profile picture">
+                                <h3 class="profile-username text-center">Dr. G. S. Sandhu</h3>
+ <p class="text-muted text-center">Diabetes, Cardiology, Asthma</p>
+                                {{/iff}}
+{{#iff this.name '==' 'Dr. A. N. Gupta'}}
+                                    <img class="profile-user-img img-responsive img-circle" src="../../image/team/angupta.jpg" alt="User profile picture">
+                                <h3 class="profile-username text-center">Dr. A. N. Gupta</h3>
+                                    <p class="text-muted text-center">MD, Paed</p>
+                                {{/iff}}
+{{#iff this.name '==' 'Dr. Jyoti Garg'}}
+                                    <img class="profile-user-img img-responsive img-circle" src="../../image/team/Jyoti.jpg" alt="User profile picture">
+                                <h3 class="profile-username text-center">Dr. Jyoti Garg</h3>
+                                    <p class="text-muted text-center">Maternal & Child Care</p>
+                                {{/iff}}
+{{#iff this.name '==' 'Dr. Niharika Gupta'}}
+                                    <img class="profile-user-img img-responsive img-circle" src="../../image/team/Niharika.jpg" alt="User profile picture">
+                                <h3 class="profile-username text-center">Dr. Niharika Gupta</h3>
+                                    <p class="text-muted text-center">Dentist</p>
+                                {{/iff}}
+
+
+                                    <ul class="list-group list-group-unbordered">
+                                        <li class="list-group-item">
+                                            <b style="color: black">Email</b> <a class="pull-right">{{this.email}}</a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b style="color: black">Contact No.</b> <a href="#" class="pull-right">{{this.phone}}</a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <center> <b style="color: black">Address</b> </center>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <center>{{this.address}}</center>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <b>City : </b>{{this.city}}
+ </div>
+                                                <div class="col-md-4">
+                                                    <b>State : </b>{{this.state}}
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <b>Zip : </b>{{this.zip}}
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                   
+                                </div>
+                                <!-- /.box-body -->
+                            </div>
+                        </div>
+                        {{/each}}
+                        {{else}}
+                        <center>
+                            <h4>No Doctor requested yet to add</h4>
+                        </center>
+                        {{/if}}
+                    </div>
+                </div>
+                <div id="compounder" class="tab-pane fade">
+                    <div class="row">
+                        {{#if compounder}}
+                        {{#each compounder}}
+                        <div class="col-md-6">
+                            <!-- Profile Image -->
+                            <div class="box box-primary">
+                                <div class="box-body box-profile">
+                                 {{#iff this.name '==' 'Mr. B.L. Gupta '}}
+                                    <img class="profile-user-img img-responsive img-circle" src="../../image/team/blgupta.jpg" alt="User profile picture">
+                                <h3 class="profile-username text-center">Mr. B.L. Gupta</h3>
+                                    <p class="text-muted text-center">Nursing Assistant</p>
+                                {{/iff}}
+ {{#iff this.name '==' 'Mr. Dharam Deo'}}
+                                    <img class="profile-user-img img-responsive img-circle" src="../../image/team/Dharam.jpg" alt="User profile picture">
+                                <h3 class="profile-username text-center">Mr. Dharam Deo</h3>
+                                    <p class="text-muted text-center">Nursing Assistant</p>
+                                {{/iff}}
+                                {{#iff this.name '==' 'Mr. K S Bagri'}}
+                                    <img class="profile-user-img img-responsive img-circle" src="../../image/team/Bagri.jpg" alt="User profile picture">
+                                <h3 class="profile-username text-center">Mr. K S Bagri</h3>
+                                    <p class="text-muted text-center">Nursing Assistant</p>
+                                {{/iff}}
+                                {{#iff this.name '==' 'Mr. R B Singh'}}
+                                    <img class="profile-user-img img-responsive img-circle" src="../../image/team/Singh.jpg" alt="User profile picture">
+                                <h3 class="profile-username text-center">Mr. R B Singh</h3>
+                                    <p class="text-muted text-center">Nursing Assistant</p>
+                                {{/iff}}
+
+                                    <ul class="list-group list-group-unbordered">
+                                        <a class="list-group-item">
+                                            <b style="color:#2C3E50">Email</b>
+                                            <div class="pull-right">{{this.email}}</div>
+                                        </a>
+                                        <a class="list-group-item">
+                                            <b style="color:#2C3E50">Contact No.</b>
+                                            <div class="pull-right">{{this.phone}}</div>
+                                        </a>
+                                        <a class="list-group-item">
+                                            <center> <b style="color:#2C3E50">Address</b> </center>
+                                        </a>
+                                        <a class="list-group-item">
+                                            <center>{{this.address}}</center>
+                                        </a>
+                                        <a class="list-group-item">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <b style="color:#2C3E50">City : </b>{{this.city}}
+ </div>
+                                                <div class="col-md-4">
+                                                    <b style="color:#2C3E50">State : </b>{{this.state}}
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <b style="color:#2C3E50">Zip : </b>{{this.zip}}
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </ul>
+                              
+                                </div>
+                                <!-- /.box-body -->
+                            </div>
+                        </div>
+                           {{/each}}
+                        {{else}}
+                        <center>
+                            <h4>No Compounder requested yet to add</h4>
+                        </center>
+                        {{/if}}
+                    </div>
+                </div>
+                <div id="profile" class="tab-pane fade">
+                    <div class="row">
+                        <div class="col-md-10 col-md-offset-1">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    <center>
+                                        <h3 class="panel-title"><i class="fa fa-address-card" aria-hidden="true"></i> My Profile</h3>
+                                    </center>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-md-3 col-lg-3 " align="center"> <img alt="User Pic" src="/image/prashant.jpg" class="img-circle img-responsive" width="250px" height="250px">
+                                        </div>
+                                        <div class=" col-md-9 col-lg-9 ">
+ <table class="table table-user-information">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Name : </td>
+                                                        <td>{{user.name}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Email : </td>
+                                                        <td>{{user.email}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Username : </td>
+                                                        <td>{{user.username}}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel-footer clearfix">
+                                    <span class="pull-left">
+                                        <a href="#changePasswordbox" type="button" class="btn btn-md btn-danger" onclick="changePassword()"><i class="glyphicon glyphicon-edit"></i> Change Password</a>
+                                    </span>
+
+                                </div>
+                            </div>
+                            <div id="changePasswordbox">
+                                <div class="panel panel-danger">
+                                    <div class="panel-heading">
+                                        <center>
+                                            <h3 class="panel-title">Change Password</h3>
+                                        </center>
+                                    </div>
+                                    <form role="form" class="form-horizontal" method="put" id="change-Passworddean">
+                                        <div class="panel-body">
+                                            <div class="row">
+                                                <div class="col-md-3 col-lg-3 " align="center">
+                                                    <img alt="User Pic" src="/image/password.png" class="img-circle img-responsive">
+</div>
+                                                <div class=" col-md-9 col-lg-9 ">
+                                                    <table class="table table-user-information">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>Password : </td>
+                                                                <td><input type="password" id="changePassd" class="form-control" placeholder="password" required></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Confirm Password : </td>
+                                                                <td><input type="password" id="changeConPassd" class="form-control" placeholder="Confirm Password" required></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="panel-footer clearfix">
+                                            <span class="pull-right">
+                                                <button type="submit" class="btn btn-md btn-success"><i class="glyphicon glyphicon-ok"></i> Submit</button>
+                                            </span>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="studentinfom" class="tab-pane fade">
+                    <div class="row">
+                        <div class="col-md-10 col-md-offset-1">
+                            <div class="panel panel-primary filterable">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Search</h3>
+                                    <div class="pull-right">
+                                        <button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-filter"></span> Filter</button>
+ </div>
+                                </div>
+                                <table class="table">
+                                    <thead>
+                                        <tr class="filters">
+                                            <th><input type="number" class="form-control" placeholder="Roll Number" id="myInput8"></th>
+                                            <th><input type="text" class="form-control" placeholder="Name" id="myInput9"></th>
+                                            <th><input type="date" class="form-control" placeholder="enter date" id="myInput10"></th>
+                                            <th><input type="text" class="form-control" placeholder="Doctor Name" id="myInput11"></th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div id="printStudent"></div>
+                    </div>
+                </div>
+                <div id="employeeinfom" class="tab-pane fade">
+                    <br>
+                    <div class="row">
+                        <div class="col-md-10 col-md-offset-1">
+                            <div class="panel panel-primary filterableemp">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Search</h3>
+                                    <div class="pull-right">
+                                        <button class="btn btn-default btn-xs" style="margin-top: -35px"><span class="glyphicon glyphicon-filter"></span> Filter</button>
+                                    </div>
+                                </div>
+                                <table class="table">
+                                    <thead>
+                                        <tr class="filtersemp">
+                                            <th><input type="number" class="form-control" placeholder="Roll Number" id="myInput12"></th>
+                                            <th><input type="text" class="form-control" placeholder="Name" id="myInput13"></th>
+                                            <th><input type="date" class="form-control" placeholder="enter date" id="myInput14"></th>
+                                            <th><input type="text" class="form-control" placeholder="Doctor Name" id="myInput15"></th>
+                                        </tr>
+ </thead>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div id="employeeInformation"></div>
+                    </div>
+                </div>
+            </div>
+            <!--  tab end -->
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Modal Header</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-10 col-lg-offset-1 col-md-12 col-sm-12 col-xs-12">
+                        <form>
+                            <div class="form-group">
+                                <textarea class="form-control" placeholder="enter your todo..." id="todoInsert"></textarea>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="myModal2" role="dialog">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+ <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Set Limit</h4>
+            </div>
+            <div class="modal-body">
+                <input type="text" id="medicineId" hidden>
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12">
+                        <form role="form" class="form-horizontal" method="put" id="set-Limit">
+                            <div class="form-group">
+                                <label>Enter Limit</label>
+                                <input type="number" id="limit" class="form-control">
+                            </div>
+                            <center><button class="btn btn-md btn-success" id="limitbut"><i class="fa fa-paper-plane" aria-hidden="true"></i> Submit</button></center>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+ 
+<footer class="footer-area" style="margin-bottom: 0px">
+    <div class="footer-bottom" style="background-color: #154360;color:#B3B6B7  ">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center flex-wrap">
+                <div class="footer-social d-flex  ">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <center>
+                                Copyright &copy;<script>
+                                document.write(new Date().getFullYear());
+ </script> IIITDM JABALPUR
+                            </center>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <center>
+                                <i class="fa fa-user"></i> Anuj Srivastava
+                                <a href="https://www.facebook.com/anuj.srivastava.71404" target="blank"><i class="fa fa-facebook"></i></a>
+                                <a href="https://github.com/Anujsri" target="blank" ><i class="fa fa-github"></i></a>
+                                <a  href="https://www.linkedin.com/in/anuj-srivastava-5ba457137/" target="blank"><i class="fa fa-linkedin"></i></a>
+                            </center>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
+<script >
+    window.location.href = "#admin"  
+function showStudent(rollnumber) {
+    axios.post('/student/studentinfo', { rollnum: rollnumber }).then(function(response) {
+        Swal.fire({
+            title: '<strong>Student Record</strong>',
+            type: 'info',
+            html: '<ul class="list-group">' +
+                '<li class="list-group-item">Name : ' + response.data.name + ' </li>' +
+                '<li class="list-group-item">Roll No. : ' + response.data.rollnum + ' </li>' +
+                '<li class="list-group-item">Email : ' + response.data.email + '</li>' +
+                '<li class="list-group-item">Mobile No. : ' + response.data.phone + ' </li>' +
+                '<li class="list-group-item">Program : ' + response.data.program + ' </li>' +
+                '<li class="list-group-item">Branch : ' + response.data.branch + ' </li>' +
+                '<li class="list-group-item"><center></center><b> Address</b></li>' +
+                '<li class="list-group-item"> Room No. ' + response.data.address.block + '-' + response.data.address.roomNum + '   Hall Of Residence ' + response.data.address.hallno + '</li>' +
+                '</ul>',
+            showConfirmButton: true,
+        })
+ })
+}
+
+var changepassworddean = document.getElementById('change-Passworddean');
+changepassworddean.addEventListener('submit', changePassDean);
+
+function changePassDean(e) {
+    e.preventDefault();
+    var id = '{{user_id}}';
+    var password = document.getElementById('changePassd').value;
+    var changeConPass = document.getElementById('changeConPassd').value;
+    if (password != changeConPass) {
+        Swal.fire({
+            type: 'error',
+            title: 'Error',
+            text: 'Password and Confirm Password should be same!',
+        })
+    } else {
+        axios.put('/users/changePassword/{{user._id}}', {
+            password: password
+        }).then(function(response) {
+            Swal.fire({
+                position: 'top-end',
+                type: 'success',
+                title: 'Your password has been updated',
+                showConfirmButton: false,
+                timer: 2000
+            })
+            var d = document.getElementById('changePasswordbox');
+            d.style.display = "none";
+            document.getElementById('changePassd').value = "";
+            document.getElementById('changeConPassd').value = "";
+
+        });
+    }
+}
+function changePassword() {
+    var d = document.getElementById('changePasswordbox');
+    d.style.display = "block";
+}
+
+function getAllStudents(branch) {
+    window.location.href = "#admin/#allStudents";
+    axios.get('/student/allstudents/').then(function(response) {
+        var codeBlock = '';
+        var lenstu = response.data.length;
+        console.log("total Students : " + lenstu);
+        document.getElementById("totalStudent").innerHTML = lenstu;
+        for (var i = 0; i < response.data.length; i++) {
+            codeBlock += '<div class="filstudent"><div class="col-md-4 col-sm-6">' +
+                '<div class="box box-primary">' +
+                '<div class="box-body box-profile">' +
+                '<img class="profile-user-img img-responsive img-circle" src="/image/student.png" alt="User profile picture">' +
+                '<h3 class="profile-username text-center"><a href="#studentinformation">' + response.data[i].name + '</a></h3>' +
+                '<p class="text-muted text-center">' + response.data[i].rollnum + '</p>' +
+                '<ul class="list-group list-group-unbordered">' +
+                '<a class="list-group-item">' +
+                '<b style="color:#2C3E50">Email</b> <div class="pull-right">' + response.data[i].email + '</div>' +
+                '</a>' +
+                '<a class="list-group-item">' +
+                '<b style="color:#2C3E50">Contact No.</b> <div class="pull-right">' + response.data[i].phone + '</div>' +
+                '</a>' +
+                '<a class="list-group-item">' +
+                '<div class="row">' +
+                '<div class="col-md-6 col-sm-6 col-xs-6">' +
+                '<b style="color:#2C3E50">Program : </b>' + response.data[i].program +
+                '</div>' +
+                '<div class="col-md-6 col-sm-6 col-xs-6">' +
+                '<b style="color:#2C3E50">Branch : </b>' + response.data[i].branch + '</div>' +
+                '</div>' +
+                '</a>' +
+                '<a class="list-group-item">' +
+                '<center> <b style="color:#2C3E50">Address</b> </center>' +
+                '</a>' +
+                '<a class="list-group-item">' +
+                'Room No. ' + response.data[i].address.block + '-' + response.data[i].address.roomNum + ' Hall of Residence ' + response.data[i].address.hallno + '</a>' +
+                '</ul>' +
+                '</div>' +
+                '</div>' +
+                '</div></div>'
+ }
+        document.getElementById("wrappers").innerHTML = codeBlock;
+        var filter = {};
+        if(branch!= undefined){
+            filter.branch= branch;
+            students = response.data.filter(function(item) {
+                for (var key in filter) {
+                    if (item[key] === undefined || item[key] != filter[key])
+                        return false;
+                }
+                return true;
+            });
+            var codeBlock = '';
+            for (var i = 0; i < students.length; i++) {
+                codeBlock += '<div class="filstudent"><div class="col-md-4 col-sm-6">' +
+                    '<div class="box box-primary">' +
+                    '<div class="box-body box-profile">' +
+                    '<img class="profile-user-img img-responsive img-circle" src="/image/student.png" alt="User profile picture">' +
+                    '<h3 class="profile-username text-center"><a href="#studentinformation">' + students[i].name + '</a></h3>' +
+                    '<p class="text-muted text-center">' + students[i].rollnum + '</p>' +
+                    '<ul class="list-group list-group-unbordered">' +
+                    '<a class="list-group-item">' +
+                    '<b style="color:#2C3E50">Email</b> <div class="pull-right">' + students[i].email + '</div>' +
+                    '</a>' +
+                    '<a class="list-group-item">' +
+                    '<b style="color:#2C3E50">Contact No.</b> <div class="pull-right">' + students[i].phone + '</div>' +
+                    '</a>' +
+                    '<a class="list-group-item">' +
+                    '<div class="row">' +
+                    '<div class="col-md-6 col-sm-6 col-xs-6">' +
+                    '<b style="color:#2C3E50">Program : </b>' + students[i].program +
+                    '</div>' +
+                    '<div class="col-md-6 col-sm-6 col-xs-6">' +
+                    '<b style="color:#2C3E50">Branch : </b>' + students[i].branch + '</div>' +
+                    '</div>' +
+                    '</a>' +
+                    '<a class="list-group-item">' +
+                    '<center> <b style="color:#2C3E50">Address</b> </center>' +
+                    '</a>' +
+                    '<a class="list-group-item">' +
+ 'Room No. ' + students[i].address.block + '-' + students[i].address.roomNum + ' Hall of Residence ' + students[i].address.hallno + '</a>' +
+                    '</ul>' +
+                    '</div>' +
+                    '</div>' +
+                    '</div></div>'
+            }
+            document.getElementById("wrappercse").innerHTML = codeBlock;
+            document.getElementById("wrapperece").innerHTML = codeBlock;
+            document.getElementById("wrapperme").innerHTML = codeBlock;
+            document.getElementById("wrapperdesign").innerHTML = codeBlock;
+            document.getElementById("wrappermechatronics").innerHTML = codeBlock;
+            document.getElementById("wrapperns").innerHTML = codeBlock;
+        }
+    })
+}
+function cseStudent(branch){
+    console.log("Branch is : " + branch);
+    getAllStudents(branch);
+}
+
+function getAllMedicines(){
+    window.location.href = "#admin/#allMedicines";
+}
+
+function setLimit(id,medicineQuantity){
+    document.getElementById('medicineId').value = id;
+}
+
+var setlimit = document.getElementById('set-Limit');
+setlimit.addEventListener('submit', setLimitMedi);
+
+function setLimitMedi(e) {
+    e.preventDefault();
+    var id = document.getElementById('medicineId').value;
+    var limit = document.getElementById('limit').value;
+    axios.put('/compounder/setlimit/' + id, {
+        limit : limit
+    }).then(function(response) {
+        Swal.fire({
+            position: 'top-end',
+            type: 'success',
+            title: 'Limit has been set',
+            showConfirmButton: false,
+            timer: 2000
+        })
+        window.location.href= "/usertype";        
+    });  
+}
+function showStudents() {
+    axios.get('/patient/studentInformation/').then(function(response) {
+        var html = '';
+        for (var i = 0; i < response.data.length; i++) {
+            var html1 = '';
+            for (var j = 0; j < response.data[i].medicineName.length; j++) {
+                html1 += '<div class="row">' +
+                    '<li>' + 
+                    '<div class="col-sm-6">' + response.data[i].medicineName[j].name + '</div>' +
+                    '<div class="col-sm-6"> Qty : ' +
+                    response.data[i].medicineName[j].quantity + '</div>' +
+                    '</li>' +
+                    '</div>'
+            }
+            html += '<div class="filstudent"><div class="col-md-4">' +
+                '<div class="box box-primary">' +
+                '<div class="box-body box-profile">' +
+                '<img class="profile-user-img img-responsive img-circle" src="/image/patient.png" alt="User profile picture">' +
+                '<h3 class="profile-username text-center"><a href="#studentinformation" onclick="showStudent(' + response.data[i].idnumber + ');">' + response.data[i].patientName + '</a></h3>' +
+                '<p class="text-muted text-center">' + response.data[i].idnumber + '</p>' +
+                '<ul class="list-group list-group-unbordered">' +
+                '<a class="list-group-item">' +
+                '<b style="color:#2C3E50">Email</b> <div class="pull-right">'+ response.data[i].patientEmail +'</div>' +
+                '</a>' +
+                '<a class="list-group-item">' +
+                '<b style="color:#2C3E50">Diseases Name</b> <div class="pull-right">' + response.data[i].diseases + '</div>' +
+                '</a>' +
+                '<a class="list-group-item">' +
+                '<center> <b style="color:#2C3E50">Medicine Information</b> </center>' +
+                '</a>' +
+                '<a class="list-group-item"><ol>' + html1 +
+                '</ol></a>' +
+                '<a class="list-group-item">' +
+                '<b style="color:#2C3E50">Date</b> <div class="pull-right">' + response.data[i].dateFormat.datenum+ '/'+response.data[i].dateFormat.month +'/'+response.data[i].dateFormat.year+'  '+response.data[i].dateFormat.dayName + '</div>' +
+                '</a>' +
+                '<a class="list-group-item">' +
+                '<div class="row">' +
+                '<div class="col-md-6">' +
+'<b style="color:#2C3E50">Compunder : </b>' + response.data[i].givenbyname +
+                '</div>' +
+                '<div class="col-md-6">' +
+                '<b style="color:#2C3E50">Doctor : </b>' + response.data[i].doctorName +
+                '</div>' +
+                '</div>' +
+                '</a>' +
+                '</ul>' +
+                '</div>' +
+                '</div>' +
+                '</div></div>'
+        }
+        document.getElementById('printStudent').innerHTML = html;
+    });
+}
+
+function showEmployees() {
+    axios.get('/patient/employeeInformation/').then(function(response) {
+        var html = '';
+        for (var i = 0; i < response.data.length; i++) {
+            var html1 = '';
+            for (var j = 0; j < response.data[i].medicineName.length; j++) {
+                html1 += '<div class="row">' +
+                    '<li>' +
+                    '<div class="col-sm-6"> Name : ' + response.data[i].medicineName[j].name + '</div>' +
+                    '<div class="col-sm-6"> Quantity : ' +
+                    response.data[i].medicineName[j].quantity + '</div>' +
+                    '</li>' +
+                    '</div>'
+            }
+            html += '<div class="filstudent"><div class="col-md-4">' +
+                '<div class="box box-primary">' +
+                '<div class="box-body box-profile">' +
+                '<img class="profile-user-img img-responsive img-circle" src="/image/patient.png" alt="User profile picture">' +
+                '<h3 class="profile-username text-center">' + response.data[i].patientName + ' </h3>' +
+                '<p class="text-muted text-center">' + response.data[i].idnumber + '</p>' +
+                '<ul class="list-group list-group-unbordered">' +
+                '<a class="list-group-item">' +
+                '<b style="color:#2C3E50">Email</b> <div class="pull-right">'+ response.data[i].patientEmail + '</div>' +
+ '</a>' +
+                '<a class="list-group-item">' +
+                '<b style="color:#2C3E50">Diseases Name</b> <a href="#" class="pull-right">' + response.data[i].diseases   + '</a>' +
+                '</a>' +
+                '<a class="list-group-item">' +
+                '<center> <b style="color:#2C3E50">Medicine Information</b> </center>' +
+                '</a>' +
+                '<a class="list-group-item"><ol>' + html1 +
+                '</ol></a>' +
+                '<a class="list-group-item">' +
+                '<b style="color:#2C3E50">Date</b> <div class="pull-right">' + response.data[i].date + '</div>' +
+                '</a>' +
+                '<a class="list-group-item">' +
+                '<div class="row">' +
+                '<div class="col-md-6">' +
+                '<b style="color:#2C3E50">Compunder : </b>' + response.data[i].givenbyname +
+                '</div>' +
+                '<div class="col-md-6">' +
+                '<b style="color:#2C3E50">Doctor : </b>' + response.data[i].doctorName +
+                '</div>' +
+                '</div>' +
+                '</a>' +
+                '</ul>' +
+                '</div>' +
+                '</div>' +
+                '</div></div><hr>'
+        }
+        document.getElementById('employeeInformation').innerHTML = html;
+    });
+}
+window.onload = function() {
+    getAllStudents();
+    axios.get('/compounder/allmedicine').then(function(response) {
+        var dataPoints1 = [];
+        var dataPoints2 = [];
+        var dataPoints3 = [];
+        var maximum;
+        var max = [];
+        var minimum = response.data[0].medicineName;
+        var len = response.data.length;
+        document.getElementById('medNumber').innerHTML = len;
+        
+        for (var i = 0; i < len; i++) {
+            var medicine1 = {};
+            var medicine2 = {};
+            var medicine3 = {};
+            medicine1.label = response.data[i].medicineName;
+            medicine3.label = response.data[i].medicineName;
+            medicine3.y = response.data[i].price;
+            medicine1.y = response.data[i].medicineQuantity;
+            medicine2.y = response.data[i].quantity;
+            dataPoints1.push(medicine1);
+            dataPoints2.push(medicine2);
+            dataPoints3.push(medicine3);
+            max.push(response.data[i].medicineQuantity);
+        }
+        maximum = max[0];
+        var chart = new CanvasJS.Chart("chartContainer", {
+            exportEnabled: true,
+            animationEnabled: true,
+            title: {
+                text: "Ordered and In Stock Medicine"
+            },
+            axisY: {
+                title: "Ordered Quantity - Units",
+                titleFontColor: "#4F81BC",
+                lineColor: "#4F81BC",
+                labelFontColor: "#4F81BC",
+                tickColor: "#4F81BC",
+                maximum : maximum
+ },
+            axisY2: {
+                title: "In Stock - Units",
+                titleFontColor: "#C0504E",
+                lineColor: "#C0504E",
+                labelFontColor: "#C0504E",
+                tickColor: "#C0504E",
+                maximum : maximum
+            },
+            toolTip: {
+                shared: true
+            },
+            legend: {
+                cursor: "pointer",
+                itemclick: toggleDataSeries
+            },
+            data: [{
+                    type: "column",
+                    name: "Ordered Quantity",
+                    showInLegend: true,
+                    yValueFormatString: "#,##0.# Units",
+                    dataPoints: dataPoints1
+
+                },
+                {
+                    type: "column",
+                    name: "In Stock",
+                    axisYType: "secondary",
+                    showInLegend: true,
+                    yValueFormatString: "#,##0.# Units",
+                    dataPoints: dataPoints2
+                }
+            ]
+        });
+        chart.render();
+
+        function toggleDataSeries(e) {
+            if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+                e.dataSeries.visible = false;
+ } else {
+                e.dataSeries.visible = true;
+            }
+            e.chart.render();
+        }
+
+        var chart2 = new CanvasJS.Chart("chartContainer3", {
+            animationEnabled: true,
+            exportEnabled: true,
+            title: {
+                text: "Medicines name and its Prices"
+            },
+            data: [{
+                type: "column",
+                dataPoints: dataPoints3
+            }]
+        });
+        chart2.render();
+    });
+}
+
+function showGraph() {
+}
+
+(function() {
+    // Connect to socket.io
+    var socket = io();
+    // Check for connection
+    if (socket !== undefined) {
+        console.log('Connected to socket...');
+        var table = document.getElementById("targettable1");
+        var table1 = document.getElementById("targettable2");
+        var allPatients = document.getElementById("allpatients");
+        var row;
+        var cell1;
+        var cell2;
+        var cell3;
+        // Handle Output
+        socket.on('output', function(data) {
+            if (data.length) {
+                for (var x = 0; x < data.length; x++) {
+                    console.log("name : " + data[x].patientName)
+                    if (data[x].patientType == "Student") {
+                        
+                        row = table.insertRow(1);
+                        cell1 = row.insertCell(0);
+                        cell2 = row.insertCell(1);
+                        cell3 = row.insertCell(2);
+                        cell1.innerHTML = data[x].patientName;
+                        cell2.innerHTML = data[x].idnumber;
+                        cell3.innerHTML = data[x].patientEmail;
+                    } else {
+                        row = table1.insertRow(1);
+                        cell1 = row.insertCell(0);
+                        cell2 = row.insertCell(1);
+                        cell3 = row.insertCell(2);
+                        cell1.innerHTML = data[x].patientName;
+                        cell2.innerHTML = data[x].idnumber;
+                        cell3.innerHTML = data[x].patientEmail;
+                    }
+                }
+            } //if end
+        });
+socket.on('output1', function(data) {
+            
+            if (data.length) {
+                allPatients.innerHTML = data.length;
+            } //if end
+        });
+        var textarea = document.getElementById('todoInsert');
+        textarea.addEventListener('keydown', function(event) {
+            if (event.which === 13 && event.shiftKey == false) {
+                // Emit to server input
+                var todo = textarea.value;
+                socket.emit('todoInput', {
+                    todo: todo
+                });
+                event.preventDefault();
+            }
+        });
+
+        socket.on('todoOutput', function(data) {
+            var todoList = document.getElementById('todoList');
+            if (data.length) {
+                var html = '';
+                for (var x = 0; x < data.length; x++) {
+                    console.log("added item is : " + data[x].todo);
+                }
+            } //if end
+        });
+    }
+})();
+</script>
+
+

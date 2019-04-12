@@ -1,7 +1,7 @@
-var express = require('express'); 
+var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser'); 
+var bodyParser = require('body-parser');
 var exphbs = require('express-handlebars');
 var expressValidator = require('express-validator');
 var flash = require('connect-flash');
@@ -55,7 +55,7 @@ Handlebars.registerHelper('iff', function(a, operator, b, opts) {
     }
 });
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://anujsom:anuj123@ds245661.mlab.com:45661/talentgo', { useNewUrlParser: true }, function(err, db) {
+mongoose.connect('mongodb://localhost:27017/phc', { useNewUrlParser: true }, function(err, db) {
     if (err) {
         throw err;
     }
@@ -109,13 +109,13 @@ mongoose.connect('mongodb://anujsom:anuj123@ds245661.mlab.com:45661/talentgo', {
         });
         // Handle input events
         socket.on('input', function(data) {
-            var idnumber = data.idnumber;
+            var idnumber;
             var patientName = data.patientName;
-            var patientEmail = data.patientEmail
+            var patientEmail;
             var phone = data.phone;
             var medicine = data.medicineName;
             var mquantity = data.medicineQuantity;
-            var diseases = data.diseases;
+            var diseases;
             var patientType = data.patientType;
             var givenbyname = data.name;
             var givenbyid = data.id;
@@ -139,10 +139,23 @@ mongoose.connect('mongodb://anujsom:anuj123@ds245661.mlab.com:45661/talentgo', {
             dateFormat.datenum = datenum;
             dateFormat.year = year;
             dateFormat.dayName = dayName;
-            if (data.doctorName == "")
+            if (data.diseases == "")
+                diseases = "Not Mentioned";
+            else
+                diseases = data.diseases;
+	    if (data.doctorName == "")
                 doctorName = "N/A";
             else
                 doctorName = data.doctorName;
+	    if (data.idnumber == "")
+                 idnumber = 0;
+            else
+                idnumber = data.idnumber;
+            if (data.patientEmail == "")
+                patientEmail = "N/A";
+            else
+                patientEmail = data.patientEmail;
+
             var medicineName = [];
             var html1 = '';
             for (var i = 0; i < medicine.length; i++) {
@@ -153,7 +166,7 @@ mongoose.connect('mongodb://anujsom:anuj123@ds245661.mlab.com:45661/talentgo', {
                 reduceMedicine(medicine[i], mquantity[i])
                 html1 += '<li><div style="box-sizing: border-box;float: left;width: 50%;  "><b>Name : </b>' + medicine[i] + '</div>' +
                     '<div style="box-sizing: border-box;float: right;width: 50%; "><b>Quantity : </b>' + mquantity[i] + '</div></li>'
-            }
+             }
             console.log("adding patients");
             var patientAdd = new Patient({
                 patientName: patientName,
@@ -184,8 +197,8 @@ mongoose.connect('mongodb://anujsom:anuj123@ds245661.mlab.com:45661/talentgo', {
                         var transporter = nodemailer.createTransport({
                             service: 'gmail',
                             auth: {
-                                user: 'anuj96sri@gmail.com', // generated ethereal user
-                                pass: 'anujmam@123' // generated ethereal password
+                                user: 'phc@iiitdmj.ac.in', // generated ethereal user
+                                pass: 'phc@2016' // generated ethereal password
                             }
                         });
 
@@ -199,8 +212,8 @@ mongoose.connect('mongodb://anujsom:anuj123@ds245661.mlab.com:45661/talentgo', {
                                 '<div style="position:relative;min-height:1px;padding-right:15px;padding-left:15px;@media (min-width:992px){float:left};width:66.66666667%;margin-left:16.66666667%;margin-right:16.66666667%;" >' +
                                 '<div  style="padding-left:0;margin-bottom:20px">' +
                                 '<li style="position:relative;display:block;padding:10px 15px;margin-bottom:-1px;background-color:#5499C7;color : white;font-size: 20px;"><center><b>Your PHC Visit Report</b></center></li>' +
-                                '<li style="position:relative;display:block;padding:10px 15px;margin-bottom:-1px;background-color:#fff;border:1px solid #AEB6BF"><b>Student Name : </b>' + patientName + '</li>' +
-                                '<li style="position:relative;display:block;padding:10px 15px;margin-bottom:-1px;background-color:#fff;border:1px solid #AEB6BF"><b>Roll No. :  </b>' + idnumber + '</li>' +
+                                '<li style="position:relative;display:block;padding:10px 15px;margin-bottom:-1px;background-color:#fff;border:1px solid #AEB6BF"><b>Name : </b>' + patientName + '</li>' +
+                                '<li style="position:relative;display:block;padding:10px 15px;margin-bottom:-1px;background-color:#fff;border:1px solid #AEB6BF"><b>Pf No./Roll No. :  </b>' + idnumber + '</li>' +
                                 '<li style="position:relative;display:block;padding:10px 15px;margin-bottom:-1px;background-color:#fff;border:1px solid #AEB6BF"><b>Diseases Name. :  </b>' + diseases + '</li>' +
                                 '<li style="position:relative;display:block;padding:10px 15px;margin-bottom:-1px;background-color:#fff;border:1px solid #AEB6BF;color : black"><b><center>Medicine Information</center></b></li>' +
                                 '<li style="position:relative;display:block;padding:10px 15px;margin-bottom:-1px;background-color:#fff;border:1px solid #AEB6BF"><ol>' + html1 + '</ol></li>' +

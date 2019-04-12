@@ -15,25 +15,7 @@ var DoctorSchema = mongoose.Schema({
 		type: Number,
 		required: true
 	},
-	officeAddress : {
 		address: {
-			type: String,
-			required: true
-		},
-		city: {
-			type: String,
-			required: true
-		},
-		state:{
-	        type:String,
-	        required: true
-		},
-		zip:{
-			type:Number,
-			required: true
-		}
-	},
-	address: {
 		type: String,
 		required: true
 	},
@@ -42,8 +24,8 @@ var DoctorSchema = mongoose.Schema({
 		required: true
 	},
 	state:{
-        type:String,
-        required: true
+	        type:String,
+        	required: true
 	},
 	zip:{
 		type:Number,
@@ -61,7 +43,12 @@ var DoctorSchema = mongoose.Schema({
 	image_url:{
 		type: String,
 		default: "http://icons.iconarchive.com/icons/icons-land/medical/256/People-Doctor-Male-icon.png"
-	} 
+	},
+        inoffice : {
+                type : Boolean,
+                default : false
+        }
+	
 });
 
 var Doctor = module.exports = mongoose.model('Doctor', DoctorSchema);

@@ -4,10 +4,12 @@
         <nav id="sidebar" style="background-color: #343E54">
             <div class="sidebar-header" style="background-color: #343E54;">
                 </br>
-                <h3 style="color: white;margin-top: 20px;font-family: 'Poppins', sans-serif;"><i class="fa fa-user-circle-o" aria-hidden="true"></i> COMPOUNDER</h3>
+                <h3 style="color: white;margin-top: 20px;font-family: 'Poppins', sans-serif;"><i class="fa fa-user-circle-o" aria-hidden="true"></i>Nursing Staff</h3>
                 <strong><i class="fa fa-user-circle-o" aria-hidden="true"></i></strong>
             </div>
             <ul class="list-unstyled components" style="margin-top: -20px">
+
+
                 <li>
                     <a data-toggle="pill" href="#profile" onclick="myProfile();"><i class="fa fa-address-card" aria-hidden="true"></i>My Profile</a>
                 </li>
@@ -35,6 +37,23 @@
                 <li>
                     <a data-toggle="pill" href="#addmedicine" onclick="caddMedicine();"><i class="fa fa-medkit" aria-hidden="true"></i>Add Medicine</a>
                 </li>
+	       <li>
+                    <form role="form" method="put" id="change-status">
+                        <div class="form-group">
+		           <div class="col-sm-6 col-xs-6">
+    	   	               <label for="status" class="control-label">I am In Office</label>
+		           </div>
+    	                   <div class="col-sm-6 col-xs-6">
+    		               <select class="form-control" id="presence">
+                                    <option value="Y">Yes</option>
+                                    <option value="N">No</option>
+                               </select> 
+    	                   </div>
+    	               </div><br><br>
+	               <center><button type="submit"  class="btn btn-primary"><i class="glyphicon glyphicon-ok"></i> Submit</button></center>
+                   </form>
+                </li>
+
             </ul>
         </nav>
         <!-- Page Content Holder -->
@@ -60,7 +79,7 @@
                 {{#each errors}}
                 <div class="alert alert-danger alert-dismissible fade in" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">×</span>
+tatuspre                       <span aria-hidden="true">×</span>
                     </button>
                     <center>{{msg}}</center>
                 </div>
@@ -76,7 +95,8 @@
                 {{/if}}
             </div>
             <div class="tab-content" style="margin-top: 3%">
-                <div id="profile" class="tab-pane fade">
+                          
+                          <div id="profile" class="tab-pane fade">
                     <div class="row">
                         <div class="col-md-1"></div>
                         <div class="col-md-10">
@@ -192,7 +212,7 @@
                                         <div id="chartContainer" style="height: 400px; width: 100%;"></div>
                                     </div>
                                     <div class="tab-pane" id="sales-chart" style="position: relative; height: 400px;">
-                                        <div id="chartContainer2" style="height: 400px; width: 100%;padding: 0px"></div>
+                                        <div id="chartContainer2" style="height: 400px; width: 100%;"></div>
                                     </div>
                                 </div>
                             </div>
@@ -327,7 +347,7 @@
                                                                     <input type="number" class="form-control" id="rollnumber" placeholder="Roll Number" min="1" required style="border-radius: 5px">
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <input type="text" class="form-control" id="diseases" placeholder="Disease Name" min="1" required style="border-radius: 5px">
+                                                                    <input type="text" class="form-control" id="diseases" placeholder="Disease Name(Optional)" style="border-radius: 5px">
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <select class="form-control" id="doctorName" style="border-radius: 5px">
@@ -376,13 +396,13 @@
                                                             <br>
                                                             <div class="author_decs">
                                                                 <div class="form-group">
-                                                                    <input type="number" class="form-control" id="pfnumber" placeholder="Pf Number" required style="border-radius: 5px" min="1">
+                                                                    <input type="number" class="form-control" id="pfnumber" placeholder="Pf Number" style="border-radius: 5px" min="1">
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <input type="text" class="form-control" id="employeeName" placeholder="Employee name" required style="border-radius: 5px">
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <input type="email" class="form-control" id="employeeEmail" placeholder="Email id" required style="border-radius: 5px">
+                                                                    <input type="email" class="form-control" id="employeeEmail" placeholder="Email id" style="border-radius: 5px">
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <input type="number" class="form-control" id="phone" placeholder="Mobile No." required style="border-radius: 5px" min="1">
@@ -399,7 +419,7 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <input type="text" class="form-control" id="employeediseases" placeholder="Disease Name" required style="border-radius: 5px">
+                                                                    <input type="text" class="form-control" id="employeediseases" placeholder="Disease Name(Optional)" style="border-radius: 5px">
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <select class="form-control" id="employeedoctorName">
@@ -729,6 +749,7 @@
     </div>
 </footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
+<script src="../js/compounder.js"></script>
 <script>
 '{{#if success_msg}}'
     Swal.fire({
@@ -737,16 +758,11 @@
         title: '{{success_msg}}',
         showConfirmButton: false,
         timer: 2000
-    })
+     })
 '{{/if}}'
 </script>
 <script>
-    window.location.href = "#compounder/#addPatients"
- 
-window.onload = function() {
-
-}
-
+    window.location.href = "#compounder/#addPatients";
 function changePassword() {
     var d = document.getElementById('changePasswordbox');
     d.style.display = "block";
@@ -934,7 +950,7 @@ function addEmployee(e) {
     var employeecount = document.getElementById('employeecount').value;
     var doctorName = document.getElementById('employeedoctorName').value;
     var phone = document.getElementById('phone').value;
-    var patientType = "Employee";
+    var patientType = "Employee";    
     var counter = 0;
     if (phone.length < 10) {
         var message = document.getElementById('errorMessages');
@@ -1073,7 +1089,7 @@ function getAllMedicines() {
                 '</a>' +
                 '<a href="#" class="list-group-item">' +
                 '<b style="color : #566573">Medicine</b> <div class="pull-right">' + response.data[i].medicineName + '</div>' +
-                '</a>' +
+                '</a><br>' +
                 '<a href="#" class="list-group-item">' +
                 '<b style="color : #566573">Ordered Quantity</b> <div class="pull-right">' + response.data[i].medicineQuantity + '</div>' +
                 '</a>' +
@@ -1111,29 +1127,32 @@ function caddMedicine() {
     window.location.href = "#compounder/#addmedicine";
 }
 
-function showAnalytics() {
+window.onload = function() {
     axios.get('/compounder/allmedicine').then(function(response) {
         var dataPoints1 = [];
         var dataPoints2 = [];
         var dataPoints3 = [];
-        var minimum = response.data[0].medicineName;
+        var maximum;
+	var max = [];
+	var minimum = response.data[0].medicineName;
         var len = response.data.length;
-        var maximum = response.data[len - 1].medicineName;
+
+
         for (var i = 0; i < len; i++) {
             var medicine1 = {};
             var medicine2 = {};
             var medicine3 = {};
             medicine1.label = response.data[i].medicineName;
-            medicine1.label = response.data[i].medicineName;
-            medicine1.y = response.data[i].medicineQuantity;
-            medicine2.y = response.data[i].quantity;
             medicine3.label = response.data[i].medicineName;
             medicine3.y = response.data[i].price;
+            medicine1.y = response.data[i].medicineQuantity;
+            medicine2.y = response.data[i].quantity;
             dataPoints1.push(medicine1);
             dataPoints2.push(medicine2);
             dataPoints3.push(medicine3);
+            max.push(response.data[i].medicineQuantity);
         }
-
+	maximum = max[0];
         var chart = new CanvasJS.Chart("chartContainer", {
             exportEnabled: true,
             animationEnabled: true,
@@ -1146,13 +1165,15 @@ function showAnalytics() {
                 lineColor: "#4F81BC",
                 labelFontColor: "#4F81BC",
                 tickColor: "#4F81BC",
+		maximum : maximum
             },
             axisY2: {
                 title: "In Stock - Units",
                 titleFontColor: "#C0504E",
                 lineColor: "#C0504E",
                 labelFontColor: "#C0504E",
-                tickColor: "#C0504E"
+                tickColor: "#C0504E",
+		maximum : maximum
             },
             toolTip: {
                 shared: true
@@ -1204,6 +1225,38 @@ function showAnalytics() {
     });
     window.location.href = "#compounder/#graphs";
 }
+
+
+var addstatus = document.getElementById('change-status');
+addstatus.addEventListener('submit', addStatus);
+
+function addStatus(e){
+    e.preventDefault();
+    var res = document.getElementById('presence').value;
+    var  statuspre;
+    if(res == "N"){
+        statuspre = false;
+    }
+    if(res == "Y"){
+       statuspre = true;
+    }
+    console.log("Status is  : " + statuspre);
+     console.log("result is  : " + res);
+
+    axios.put('/compounder/setstatus/{{compounder._id}}', {
+       statuspre : statuspre
+    }).then(function(response) {
+          Swal.fire({
+            position: 'top-end',
+            type: 'success',
+            title: 'Your Status is saved',
+            showConfirmButton: false,
+            timer: 2000
+          })  
+     });
+}
+
+
 
 function autocomplete(inp, arrmed, arrquan) {
     /*the autocomplete function takes two arguments,
