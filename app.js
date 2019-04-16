@@ -198,7 +198,7 @@ mongoose.connect('mongodb://localhost:27017/phc', { useNewUrlParser: true }, fun
                             service: 'gmail',
                             auth: {
                                 user: 'phc@iiitdmj.ac.in', // generated ethereal user
-                                pass: 'phc@2016' // generated ethereal password
+                                pass: '******' // generated ethereal password
                             }
                         });
 
