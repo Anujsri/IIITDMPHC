@@ -16,7 +16,6 @@ module.exports = function(passport) {
             const newUser = {
                 name: profile.displayName,
                 email: profile.emails[0].value,
-                usertype : "Student"
             }
             console.log("Name : " + profile.displayName);
             // Check for existing user

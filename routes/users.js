@@ -151,13 +151,16 @@ router.get('/logout',ensureAuthenticated, function (req, res) {
 	res.redirect('/users/login');
 });
 
-router.post('/usertypes/',ensureAuthenticated,(req,res,next)=>{
-	var email = req.body.email;
-    User.findOneAndUpdate({ email: email }, { $set: { usertype: req.body.usertype } }, { new: true }, (err, user) => {
+router.post('/chooseusertype/:id',ensureAuthenticated,(req,res,next)=>{
+	var id = req.params.id;
+	var usertype = req.body.usertype;
+    User.findByIdAndUpdate(id, { $set: { usertype: usertype } }, { new: true }, (err, user) => {
 		if (err) throw err;
 		res.redirect('/usertype/');
 	})   
 })
+
+
 //Check whether user is authenticted or not
 function ensureAuthenticated(req, res, next){
 	if(req.isAuthenticated()){

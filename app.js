@@ -55,7 +55,7 @@ Handlebars.registerHelper('iff', function(a, operator, b, opts) {
     }
 });
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost:27017/phc', { useNewUrlParser: true }, function(err, db) {
+mongoose.connect('mongodb://anujsom:anuj123@ds245661.mlab.com:45661/talentgo', { useNewUrlParser: true }, function(err, db) {
     if (err) {
         throw err;
     }
@@ -79,7 +79,7 @@ mongoose.connect('mongodb://localhost:27017/phc', { useNewUrlParser: true }, fun
         var dayName = days[d.getDay()];
         var day = d.getDay();
         dateFormat.monthName = monthName;
-        dateFormat.month = month;
+        dateFormat.month = month+1;
         dateFormat.datenum = datenum;
         dateFormat.year = year;
         dateFormat.dayName = dayName;
@@ -135,7 +135,7 @@ mongoose.connect('mongodb://localhost:27017/phc', { useNewUrlParser: true }, fun
             var dayName = days[d.getDay()];
             var day = d.getDay();
             dateFormat.monthName = monthName;
-            dateFormat.month = month;
+            dateFormat.month = month + 1;
             dateFormat.datenum = datenum;
             dateFormat.year = year;
             dateFormat.dayName = dayName;
@@ -204,7 +204,7 @@ mongoose.connect('mongodb://localhost:27017/phc', { useNewUrlParser: true }, fun
 
                         // setup email data with unicode symbols
                         var mailOptions = {
-                            from: ' "Anuj" <anuj96sri@gmail.com>', // sender address
+                            from: ' "PHC" <phc@iiitdmj.ac.in>', // sender address
                             to: patientEmail, // list of receivers
                             subject: 'Your Medicines', // Subject line
                             // text: 'Hello world?', // plain text body
@@ -278,6 +278,7 @@ var doctor = require('./routes/doctor');
 var compounder = require('./routes/compounder');
 var patient = require('./routes/patient');
 var student = require('./routes/student');
+var faculty = require('./routes/faculty');
 // Init App
 
 // View Engine
@@ -341,7 +342,8 @@ app.use('/doctor/', doctor);
 app.use('/compounder/', compounder);
 app.use('/patient/', patient);
 app.use('/student/', student);
+app.use('/faculty/', faculty);
 // Set Port
-server.listen(process.env.PORT || 3000, function() {
+server.listen(8080,'192.168.42.35', function() {
     console.log("Port is listening!");
 });

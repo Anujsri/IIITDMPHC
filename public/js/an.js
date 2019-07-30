@@ -249,10 +249,12 @@ $(document).ready(function() {
     var count = 1;
     var count1 = 1;
     $("#btn2").click(function() {
+        console.log("clicked on add more button");
         $("#more").append('</br> <div class="row"><div class="col-md-8 col-sm-8 col-xs-12"><input type="text" list="datalist"  class="form-control"  placeholder="Medicine Name"   required id="medicineName' + count + '"></div><div class="col-md-4 col-sm-4 col-xs-12"><input type="number"  class="form-control"  placeholder="Medicine quantity"   required id="medicineQuantity' + count + '"></div></div>');
         document.getElementById('count').value = count;
         var automedicinename = [];
         var automediciquan = [];
+        console.log("Valuew of count : "+ count);
         axios.get('/compounder/allmedicine/').then(function(response) {
             for (var i = 0; i < response.data.length; i++) {
                 if (response.data[i].quantity > 0) {
@@ -263,6 +265,16 @@ $(document).ready(function() {
         });
         autocomplete(document.getElementById("medicineName" + count), document.getElementById("medicineQuantity" + count), automedicinename, automediciquan);
         count++;
+    });
+
+    $("#btnremove").click(function() {
+        $("#medicineName"+count).remove();
+        $("#medicineQuantity"+count).remove();
+        // $("#more").remove();
+        document.getElementById('count').value = count;
+        if(count!==1){
+            count--;
+        }
     });
 
     $("#btn3").click(function() {
@@ -280,6 +292,13 @@ $(document).ready(function() {
         });
         autocomplete(document.getElementById("employeemedicineName" + count1), document.getElementById("employeemedicineQuantity" + count1), automedicinename, automediciquan);
         count1++;
+    });
+
+    $("#btnremove1").click(function() {
+        $("#more").remove();
+        document.getElementById('count').value = count1;
+        count1--;
+        console.log("Valuew of count : "+ count1);
     });
 
     function autocomplete(inp, medquan, arrmed, arrquan) {
@@ -338,10 +357,11 @@ $(document).ready(function() {
                 b = document.createElement("DIV");
                 b.innerHTML = "<strong>No Medicine found with this name</strong>";
                 a.appendChild(b);
-                var showdisable = document.getElementById('showdisable');
-                var hideSubmit = document.getElementById('show');
-                hideSubmit.style.display = "none";
-                showdisable.style.display = "block";
+                // var showdisable = document.getElementById('showdisable');
+                // var hideSubmit = document.getElementById('show');
+                // hideSubmit.style.display = "none";
+                // showdisable.style.display = "block";
+                inp.value = "";
             }
         });
         /*execute a function presses a key on the keyboard:*/
@@ -402,9 +422,7 @@ $(document).ready(function() {
         document.addEventListener("click", function(e) {
             closeAllLists(e.target);
         });
-    }
-
-   
+    }   
     
 });
 

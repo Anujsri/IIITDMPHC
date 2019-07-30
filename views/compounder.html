@@ -8,8 +8,6 @@
                 <strong><i class="fa fa-user-circle-o" aria-hidden="true"></i></strong>
             </div>
             <ul class="list-unstyled components" style="margin-top: -20px">
-
-
                 <li>
                     <a data-toggle="pill" href="#profile" onclick="myProfile();"><i class="fa fa-address-card" aria-hidden="true"></i>My Profile</a>
                 </li>
@@ -37,28 +35,27 @@
                 <li>
                     <a data-toggle="pill" href="#addmedicine" onclick="caddMedicine();"><i class="fa fa-medkit" aria-hidden="true"></i>Add Medicine</a>
                 </li>
-	       <li>
+                <li>
                     <form role="form" method="put" id="change-status">
                         <div class="form-group">
-		           <div class="col-sm-6 col-xs-6">
-    	   	               <label for="status" class="control-label">I am In Office</label>
-		           </div>
-    	                   <div class="col-sm-6 col-xs-6">
-    		               <select class="form-control" id="presence">
+                            <div class="col-sm-6 col-xs-6">
+                                <label for="status" class="control-label">I am In Office</label>
+                            </div>
+                            <div class="col-sm-6 col-xs-6">
+                                <select class="form-control" id="presence">
                                     <option value="Y">Yes</option>
                                     <option value="N">No</option>
-                               </select> 
-    	                   </div>
-    	               </div><br><br>
-	               <center><button type="submit"  class="btn btn-primary"><i class="glyphicon glyphicon-ok"></i> Submit</button></center>
-                   </form>
+                                </select>
+                            </div>
+                        </div><br><br>
+                        <center><button type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-ok"></i> Submit</button></center>
+                    </form>
                 </li>
-
             </ul>
         </nav>
         <!-- Page Content Holder -->
         <div id="content" style="background-image: url('/image/about-bg2.png');background-color: lightblue;height:auto">
-            <div  id="flashMessages">
+            <div id="flashMessages">
                 {{#if error_msg}}
                 <div class="alert alert-danger alert-dismissible fade in" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -79,7 +76,7 @@
                 {{#each errors}}
                 <div class="alert alert-danger alert-dismissible fade in" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-tatuspre                       <span aria-hidden="true">×</span>
+                        tatuspre <span aria-hidden="true">×</span>
                     </button>
                     <center>{{msg}}</center>
                 </div>
@@ -95,8 +92,7 @@ tatuspre                       <span aria-hidden="true">×</span>
                 {{/if}}
             </div>
             <div class="tab-content" style="margin-top: 3%">
-                          
-                          <div id="profile" class="tab-pane fade">
+                <div id="profile" class="tab-pane fade">
                     <div class="row">
                         <div class="col-md-1"></div>
                         <div class="col-md-10">
@@ -151,7 +147,7 @@ tatuspre                       <span aria-hidden="true">×</span>
                                         <a href="#changePasswordbox" type="button" class="btn btn-md btn-danger" onclick="changePassword()"><i class="glyphicon glyphicon-edit"></i> Change Password</a>
                                     </span>
                                     <span class="pull-right">
-                <a data-toggle="pill" href="#editprofile" type="button" class="btn btn-md btn-warning"><i class="glyphicon glyphicon-edit"></i> Edit</a>
+                                        <a data-toggle="pill" href="#editprofile" type="button" class="btn btn-md btn-warning"><i class="glyphicon glyphicon-edit"></i> Edit</a>
                                     </span>
                                 </div>
                             </div>
@@ -360,18 +356,18 @@ tatuspre                       <span aria-hidden="true">×</span>
                                                                     </select>
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <div id="more">
-                                                                        <div class="row">
-                                                                            <div class="col-md-9 col-sm- col-xs-12">
-                                                                                <input type="text" class="form-control" placeholder="Medicine Name" required id="medicineName0" style="border-radius: 5px">
-                                                                            </div>
-                                                                            <div class="col-md-3 col-sm- col-xs-12">
-                                                                                <input type="number" class="form-control" placeholder="quantity" required id="medicineQuantity0" style="border-radius: 5px" min="1">
-                                                                            </div>
+                                                                    <div class="row">
+                                                                        <div class="col-md-9 col-sm- col-xs-12">
+                                                                            <input type="text" class="form-control" placeholder="Medicine Name" required id="medicineName0" style="border-radius: 5px">
+                                                                        </div>
+                                                                        <div class="col-md-3 col-sm- col-xs-12">
+                                                                            <input type="number" class="form-control" placeholder="quantity" required id="medicineQuantity0" style="border-radius: 5px" min="1">
                                                                         </div>
                                                                     </div>
+                                                                    <div id="more"></div>
                                                                     <br>
                                                                     <a class="btn btn-primary pull-right" id="btn2"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add More</a>
+                                                                    <a class="btn btn-primary pull-right" id="btnremove"><i class="fa fa-trash" aria-hidden="true"></i> Remove</a>
                                                                     <div id="count"></div>
                                                                 </div>
                                                             </div>
@@ -444,6 +440,7 @@ tatuspre                       <span aria-hidden="true">×</span>
                                                                     </div>
                                                                     <br>
                                                                     <a class="btn btn-primary pull-right" id="btn3"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add More</a>
+                                                                    <a class="btn btn-primary pull-right" id="btnremove1"><i class="fa fa-trash" aria-hidden="true"></i> Remove</a>
                                                                     <div id="employeecount"></div>
                                                                 </div>
                                                             </div>
@@ -738,8 +735,8 @@ tatuspre                       <span aria-hidden="true">×</span>
                             <center>
                                 <i class="fa fa-user"></i> Anuj Srivastava
                                 <a href="https://www.facebook.com/anuj.srivastava.71404" target="blank"><i class="fa fa-facebook"></i></a>
-                                <a href="https://github.com/Anujsri" target="blank" ><i class="fa fa-github"></i></a>
-                                <a  href="https://www.linkedin.com/in/anuj-srivastava-5ba457137/" target="blank"><i class="fa fa-linkedin"></i></a>
+                                <a href="https://github.com/Anujsri" target="blank"><i class="fa fa-github"></i></a>
+                                <a href="https://www.linkedin.com/in/anuj-srivastava-5ba457137/" target="blank"><i class="fa fa-linkedin"></i></a>
                             </center>
                         </div>
                     </div>
@@ -752,17 +749,18 @@ tatuspre                       <span aria-hidden="true">×</span>
 <script src="../js/compounder.js"></script>
 <script>
 '{{#if success_msg}}'
-    Swal.fire({
-        position: 'top-end',
-        type: 'success',
-        title: '{{success_msg}}',
-        showConfirmButton: false,
-        timer: 2000
-     })
+Swal.fire({
+    position: 'top-end',
+    type: 'success',
+    title: '{{success_msg}}',
+    showConfirmButton: false,
+    timer: 2000
+})
 '{{/if}}'
 </script>
 <script>
-    window.location.href = "#compounder/#addPatients";
+window.location.href = "#compounder/#addPatients";
+
 function changePassword() {
     var d = document.getElementById('changePasswordbox');
     d.style.display = "block";
@@ -950,7 +948,7 @@ function addEmployee(e) {
     var employeecount = document.getElementById('employeecount').value;
     var doctorName = document.getElementById('employeedoctorName').value;
     var phone = document.getElementById('phone').value;
-    var patientType = "Employee";    
+    var patientType = "Employee";
     var counter = 0;
     if (phone.length < 10) {
         var message = document.getElementById('errorMessages');
@@ -977,7 +975,7 @@ function addEmployee(e) {
         try {
             var socket = io();
         } catch (err) {
-          
+
             console.log(err.message)
         }
         // Check for connection
@@ -1133,8 +1131,8 @@ window.onload = function() {
         var dataPoints2 = [];
         var dataPoints3 = [];
         var maximum;
-	var max = [];
-	var minimum = response.data[0].medicineName;
+        var max = [];
+        var minimum = response.data[0].medicineName;
         var len = response.data.length;
 
 
@@ -1152,7 +1150,7 @@ window.onload = function() {
             dataPoints3.push(medicine3);
             max.push(response.data[i].medicineQuantity);
         }
-	maximum = max[0];
+        maximum = max[0];
         var chart = new CanvasJS.Chart("chartContainer", {
             exportEnabled: true,
             animationEnabled: true,
@@ -1165,7 +1163,7 @@ window.onload = function() {
                 lineColor: "#4F81BC",
                 labelFontColor: "#4F81BC",
                 tickColor: "#4F81BC",
-		maximum : maximum
+                maximum: maximum
             },
             axisY2: {
                 title: "In Stock - Units",
@@ -1173,7 +1171,7 @@ window.onload = function() {
                 lineColor: "#C0504E",
                 labelFontColor: "#C0504E",
                 tickColor: "#C0504E",
-		maximum : maximum
+                maximum: maximum
             },
             toolTip: {
                 shared: true
@@ -1230,30 +1228,30 @@ window.onload = function() {
 var addstatus = document.getElementById('change-status');
 addstatus.addEventListener('submit', addStatus);
 
-function addStatus(e){
+function addStatus(e) {
     e.preventDefault();
     var res = document.getElementById('presence').value;
-    var  statuspre;
-    if(res == "N"){
+    var statuspre;
+    if (res == "N") {
         statuspre = false;
     }
-    if(res == "Y"){
-       statuspre = true;
+    if (res == "Y") {
+        statuspre = true;
     }
     console.log("Status is  : " + statuspre);
-     console.log("result is  : " + res);
+    console.log("result is  : " + res);
 
     axios.put('/compounder/setstatus/{{compounder._id}}', {
-       statuspre : statuspre
+        statuspre: statuspre
     }).then(function(response) {
-          Swal.fire({
+        Swal.fire({
             position: 'top-end',
             type: 'success',
             title: 'Your Status is saved',
             showConfirmButton: false,
             timer: 2000
-          })  
-     });
+        })
+    });
 }
 
 
@@ -1302,26 +1300,15 @@ function autocomplete(inp, arrmed, arrquan) {
                     closeAllLists();
                 });
                 a.appendChild(b);
-                var showdisable = document.getElementById('showdisable');
-                var hideSubmit = document.getElementById('show');
-                var employeeshowdisable = document.getElementById('employeeshowdisable');
-                var hideSubmitemployee = document.getElementById('employeeshow');
-                hideSubmit.style.display = "block";
-                showdisable.style.display = "none";
-                hideSubmitemployee.style.display = "block";
-                employeeshowdisable.style.display = "none";
             }
 
         }
         if (count2 === 0) {
             b = document.createElement("DIV");
-            b.innerHTML = "<strong>No Medicine found with this name</strong>";
+            b.innerHTML = "<strong>Medicine Not Found</strong>";
             a.appendChild(b);
-            var showdisable = document.getElementById('showdisable');
-            var hideSubmit = document.getElementById('show');
-            hideSubmit.style.display = "none";
-            showdisable.style.display = "block";
-
+            document.getElementById("medicineName0").value = "";
+            document.getElementById('employeemedicineName0').value = "";
         }
     });
     /*execute a function presses a key on the keyboard:*/
@@ -1432,7 +1419,7 @@ function autocompleteRoll(inp, arrmed) {
 
         if (count2 === 0) {
             b = document.createElement("DIV");
-            b.innerHTML = "<strong>Roll Number Found</strong>";
+            b.innerHTML = "<strong>Roll Number Not Found</strong>";
             a.appendChild(b);
             document.getElementById("rollnumber").value = "";
         }

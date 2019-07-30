@@ -5,14 +5,19 @@ var xlsxtojson = require("xlsx-to-json");
 var xlstojson = require("xls-to-json");
 var mongoXlsx = require('mongo-xlsx');
 var Medicine = require('../models/medicine');
+var unirest = require('unirest');
 // Get Homepage
 router.get('/', ensureAuthenticated, function(req, res) {
     res.redirect('/usertype/')
 });
 
 router.get('/home', function(req, res) {
+
+
     res.render('home');
 });
+
+
 
 var storage = multer.diskStorage({ //multers disk storage settings
     destination: function(req, file, cb) {
@@ -35,7 +40,7 @@ var upload = multer({ //multer settings
 }).single('file');
 
 /** API path that will upload the files */
-router.post('/upload/:id',ensureAuthenticated, function(req, res) {
+router.post('/upload/:id', ensureAuthenticated, function(req, res) {
     console.log("File handling code is running");
     var exceltojson;
     upload(req, res, function(err) {
@@ -75,28 +80,62 @@ router.post('/upload/:id',ensureAuthenticated, function(req, res) {
                         var medicineName = result[i].medicineName;
                         var medicineQuantity = result[i].medicineQuantity;
                         var quantity = result[i].medicineQuantity;
-			var price = result[i].price;
-                        var compounderid = req.params.id;;
+                        var price = result[i].price;
+                        var compounderid = req.params.id;
                         var medicineAdd = new Medicine({
                             companyName: companyName,
                             medicineName: medicineName,
                             medicineQuantity: medicineQuantity,
                             quantity: quantity,
-			    price : price,	
+                            price: price,
                             compounderid: compounderid
                         });
-                        medicineAdd.save((err, medicine) => {
-                            if (err) return err;
-                            console.log("Added");
-                        });
+                        var quan;
+                        Medicine.findOne({ $and: [{ companyName: companyName }, { medicineName: medicineName }] }).lean().exec(function(err, medicines) {
+                            if (medicines) {
+                                console.log("found " + medicines.medicineName);
+
+                                quan = Number(medicines.quantity) + Number(medicineQuantity);
+                                // medicines.quantity=Number(medicines.quantity)+Number(medicineQuantity);
+                                // console.log("quantity : " + quan);
+                                // medicines.save((err,medicines)=>{
+                                //     if (err) return err;
+                                //     console.log("updated");
+                                // })
+                                updateMedicine(medicines._id, quan)
+                            } else {
+                                medicineAdd.save((err, medicine) => {
+                                    if (err) return err;
+                                    console.log("Added");
+                                });
+
+                            }
+
+                        })
+                        var count = 0;
+
+                        function updateMedicine(id, quan) {
+
+                            console.log("Anuj" + id)
+                            var newvalues = {
+                                $set: {
+                                    quantity : quan
+                                }
+                            };
+                            Medicine.findByIdAndUpdate(id,newvalues, { new: true }, (err, med) => {
+                                console.log("Anuj1")
+                                console.log("name " + med.medicineName + "new quantity " + med.quantity);
+                            })
+                        }
+
                     }
 
                 }
-                req.flash('success_msg','File has been uploaded');
+                req.flash('success_msg', 'File has been uploaded');
                 res.redirect('/usertype/');
             });
         } catch (e) {
-            req.flash('error_msg','Some Internal Error');
+            req.flash('error_msg', 'Some Internal Error');
             res.redirect('/usertype/');
         }
     })

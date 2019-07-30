@@ -1,0 +1,567 @@
+<div class="wrapper">
+    <div id="here1">
+        {{#if faculty.completed}}
+        <!-- Sidebar Holder -->
+        <nav id="sidebar" style="background-color: #343E54 ">
+            <div class="sidebar-header" style="background-color: #343E54;">
+                <h3 style="color: white; ;font-family: 'Poppins', sans-serif;"><i class="fa fa-user-circle-o" aria-hidden="true"></i> FACULTY</h3>
+                <strong><i class="fa fa-user-circle-o" aria-hidden="true"></i></strong>
+            </div>
+            <ul class="list-unstyled components" style="margin-top: -12%">
+                <li class="active">
+                    <a href="#profile" data-toggle="pill"><i class="fa fa-address-card-o" aria-hidden="true"></i>Profile</a>
+                </li>
+                <li>
+                    <a href="#doctor" data-toggle="pill" onclick="getDoctor();"><i class="fa fa-user-md" aria-hidden="true"></i>Doctors</a>
+                </li>
+                <li>
+                    <a href="#compounder" data-toggle="pill" onclick="getCompounder();"><i class="fa fa-user-md" aria-hidden="true"></i>Nursing Assistants</a>
+                </li>
+                <li><a data-toggle="pill" href="#activity" onclick="getActivity();">
+                        <i class="fa fa-calendar" aria-hidden="true"></i>Activity</a>
+                </li>
+            </ul>
+        </nav>
+        <!-- Page Content Holder -->
+        <div id="content" style="background-color: #E8EEF3;">
+            <div class="tab-content" style="margin-top: 3%">
+                <div id="activity" class="tab-pane fade">
+                    <div class="row">
+                        <center>
+                            <h3>
+                                <div id="notrecord"></div>
+                            </h3>
+                        </center>
+                        <div id="record"></div>
+                    </div>
+                </div>
+                <div id="doctor" class="tab-pane fade">
+                    <div class="row">
+                        <div class="alert alert-info">
+                            <strong>Info!</strong> Emails of doctors are dummy we will provide you new data soon.
+                        </div>
+                        {{#if doctor}}
+                        {{#each doctor}}
+                        <div class="col-md-4">
+                            <!-- Profile Image -->
+                            <div class="box box-primary">
+                                <div class="box-body box-profile">
+                                    {{#iff this.name '==' 'Dr. G. S. Sandhu'}}
+                                    <img class="profile-user-img img-responsive img-circle" src="../../image/team/sandhu.jpg" alt="User profile picture">
+                                    <h3 class="profile-username text-center">Dr. G. S. Sandhu</h3>
+                                    <p class="text-muted text-center">Diabetes, Cardiology, Asthma</p>
+                                    {{/iff}}
+                                    {{#iff this.name '==' 'Dr. A. N. Gupta'}}
+                                    <img class="profile-user-img img-responsive img-circle" src="../../image/team/angupta.jpg" alt="User profile picture">
+                                    <h3 class="profile-username text-center">Dr. A. N. Gupta</h3>
+                                    <p class="text-muted text-center">MD, Paed</p>
+                                    {{/iff}}
+                                    {{#iff this.name '==' 'Dr. Jyoti Garg'}}
+                                    <img class="profile-user-img img-responsive img-circle" src="../../image/team/Jyoti.jpg" alt="User profile picture">
+                                    <h3 class="profile-username text-center">Dr. Jyoti Garg</h3>
+                                    <p class="text-muted text-center">Maternal & Child Care</p>
+                                    {{/iff}}
+                                    {{#iff this.name '==' 'Dr. Niharika Gupta'}}
+                                    <img class="profile-user-img img-responsive img-circle" src="../../image/team/Niharika.jpg" alt="User profile picture">
+                                    <h3 class="profile-username text-center">Dr. Niharika Gupta</h3>
+                                    <p class="text-muted text-center">Dentist</p>
+                                    {{/iff}}
+                                    <ul class="list-group list-group-unbordered">
+                                        <li class="list-group-item">
+                                            <b style="color: black">Email</b> <a class="pull-right">{{this.email}}</a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b style="color: black">Contact No.</b> <a href="#" class="pull-right">{{this.phone}}</a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <center> <b style="color: black">Address</b> </center>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <center>{{this.address}}</center>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <b>City : </b>{{this.city}}
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <b>State : </b>{{this.state}}
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <b>Zip : </b>{{this.zip}}
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        {{/each}}
+                        {{else}}
+                        <center>
+                            <h4>No Doctor Found</h4>
+                        </center>
+                        {{/if}}
+                    </div>
+                </div>
+                <div id="compounder" class="tab-pane fade">
+                    <div class="row">
+                        <div class="alert alert-info">
+                            <strong>Info!</strong> Emails of Nursing Staff are dummy we will provide you new data soon.
+                        </div>
+                        {{#each compounder}}
+                        <div class="col-md-6">
+                            <!-- Profile Image -->
+                            <div class="box box-primary">
+                                <div class="box-body box-profile">
+                                    {{#iff this.name '==' 'Mr. Dharam Deo'}}
+                                    <img class="profile-user-img img-responsive img-circle" src="/image/team/Dharam.jpg" alt="User profile picture">
+                                    {{/iff}}
+                                    {{#iff this.name '==' 'Mr. K S Bagri'}}
+                                    <img class="profile-user-img img-responsive img-circle" src="/image/team/Bagri.jpg" alt="User profile picture">
+                                    {{/iff}}
+                                    {{#iff this.name '==' 'Mr. R B Singh'}}
+                                    <img class="profile-user-img img-responsive img-circle" src="/image/team/Singh.jpg" alt="User profile picture">
+                                    {{/iff}}
+                                    {{#iff this.name '==' 'Mr. B.L. Gupta '}}
+                                    <img class="profile-user-img img-responsive img-circle" src="/image/team/blgupta.jpg" alt="User profile picture">
+                                    {{/iff}}
+                                    <h3 class="profile-username text-center">{{this.name}}</h3>
+                                    <p class="text-muted text-center">Nursing Assistant</p>
+                                    <ul class="list-group list-group-unbordered">
+                                        <a class="list-group-item">
+                                            <b style="color:#2C3E50">Email</b>
+                                            <div class="pull-right">{{this.email}}</div>
+                                        </a>
+                                        <a class="list-group-item">
+                                            <b style="color:#2C3E50">Contact No.</b>
+                                            <div class="pull-right">{{this.phone}}</div>
+                                        </a>
+                                        <a class="list-group-item">
+                                            <center> <b style="color:#2C3E50">Address</b> </center>
+                                        </a>
+                                        <a class="list-group-item">
+                                            <center>{{this.address}}</center>
+                                        </a>
+                                        <a class="list-group-item">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <b style="color:#2C3E50">City : </b>{{this.city}}
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <b style="color:#2C3E50">State : </b>{{this.state}}
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <b style="color:#2C3E50">Zip : </b>{{this.zip}}
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </ul>
+                                </div>
+                                <!-- /.box-body -->
+                            </div>
+                        </div>
+                        {{/each}}
+                    </div>
+                </div>
+                <div id="profile" class="tab-pane fade in active">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <!-- Profile Image -->
+                            <div class="box box-primary">
+                                <div class="box-body box-profile">
+                                    <img class="profile-user-img img-responsive img-circle" src="/image/student.png" alt="User profile picture">
+                                    <h3 class="profile-username text-center">{{faculty.name}}</h3>
+                                    <p class="text-muted text-center">{{faculty.branch}}</p>
+                                    <ul class="list-group list-group-unbordered">
+                                        <a href="#" class="list-group-item">
+                                            <b style="color:#2C3E50">Roll No.</b>
+                                            <div class="pull-right">{{faculty.rollnum}}</div>
+                                        </a>
+                                        <a href="#" class="list-group-item">
+                                            <b> </b> {{faculty.email}}
+                                        </a>
+                                        <a href="#" class="list-group-item">
+                                            <b style="color:#2C3E50">Mobile No.</b>
+                                            <div class="pull-right">{{faculty.phone}}</div>
+                                        </a>
+                                        <a href="#" class="list-group-item">
+                                            <b style="color:#2C3E50">Blood Group</b>
+                                            <div class="pull-right">{{faculty.bloodg}}</div>
+                                        </a>
+                                    </ul>
+                                    <a href="#editprofile" data-toggle="tab" class="btn btn-primary btn-block"><b style="color: white"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</b></a>
+                                </div>
+                                <!-- /.box-body -->
+                            </div>
+                            <!-- /.box -->
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-md-9">
+                            <div class="nav-tabs-custom">
+                                <ul class="nav nav-tabs">
+                                    <li><a href="#editprofile" data-toggle="tab">Edit Profile</a></li>
+                                    <li class="active"><a href="#about" data-toggle="tab">About Me</a></li>
+                                </ul>
+                                <div class="tab-content">
+                                    <!-- /.tab-pane -->
+                                    <div class="active tab-pane" id="about">
+                                        <ul class="timeline timeline-inverse">
+                                            <!-- timeline time label -->
+                                            <li class="time-label">
+                                                <span class="bg-red">
+                                                    Profile
+                                                </span>
+                                            </li>
+                                            <!-- /.timeline-label -->
+                                            <!-- timeline item -->
+                                            <li>
+                                                <i class="fa fa-book bg-blue"></i>
+                                                <div class="timeline-item">
+                                                    <h3 class="timeline-header">Education</h3>
+                                                    <div class="timeline-body">
+                                                        {{faculty.program}} in {{faculty.branch}} from PDPM Indian Institute Of Information Technology Design & Manufacturing Jabalpur M.P. India
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <!-- END timeline item -->
+                                            <!-- timeline item -->
+                                            <li>
+                                                <i class="fa fa-map-marker bg-aqua"></i>
+                                                <div class="timeline-item">
+                                                    <h3 class="timeline-header">Address</h3>
+                                                    <div class="timeline-body">
+                                                        Room Number {{student.address.roomNum}}, {{student.address.block}} Block, Hall Of Residence {{student.address.hallno}}, PDPM IIITDM Dumna Road Jabalpur M.P. India 482005.
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <!-- END timeline item -->
+                                        </ul>
+                                    </div>
+                                    <div class="tab-pane" id="editprofile">
+                                        <form role="form" class="form-horizontal" method="put" id="edit-faculty">
+                                            <div class="form-group">
+                                                <label for="inputName" class="col-sm-2 control-label">Name</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" id="inputName" placeholder="Name" value="{{faculty.name}}" required>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="inputPhone" class="col-sm-2 control-label">Mobile No.</label>
+                                                <div class="col-sm-10">
+                                                    <input type="number" class="form-control" id="inputPhone" placeholder="Mobile No." required value="{{faculty.phone}}" min="1">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="inputRoll" class="col-sm-2 control-label">PF. No.</label>
+                                                <div class="col-sm-10">
+                                                    <input type="number" class="form-control" id="inputPfnum" placeholder="Roll No." required value="{{faculty.pfnumber}}" min="1">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="Branch" class="col-sm-2 control-label">Branch</label>
+                                                <div class="col-sm-10">
+                                                    <select class="form-control" id="ebranch">
+                                                        <option>Select Your Field</option>
+                                                        <option value="Computer Science & Engineering">CSE</option>
+                                                        <option value="Electronics & Communication Engineering">ECE</option>
+                                                        <option value="Mechanical Engineering">ME</option>
+                                                        <option value="Design">Design</option>
+                                                        <option value="Mechatronics">Mechatronics</option>
+                                                        <option value="Natural Science">Natural Science</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="inputBloodGroup" class="col-sm-2 control-label">Blood Group</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" placeholder="Blood Group (optional)" style="border-radius: 5px" id="ebloodg" value="{{faculty.bloodg}}">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-sm-offset-2 col-sm-10">
+                                                    <button type="submit" class="btn btn-danger">Submit</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <!-- /.tab-pane -->
+                                </div>
+                                <!-- /.tab-content -->
+                            </div>
+                            <!-- /.nav-tabs-custom -->
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                </div>
+            </div>
+            <!--  tab end -->
+        </div>
+        {{else}}
+        <div class="" style="background-image: url('/image/about-bg2.png');background-color: lightblue;height : 100%;padding-bottom : 0px">
+            <div class="row">
+                <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2" style="margin-top : 3%">
+                    <!-- Profile Image -->
+                    <div class="box box-primary" style="padding: 0px;background-color: #56baed;">
+                        <div class="row">
+                            <div class="col-md-4 col-sm-12 col-xs-12">
+                                <div class="single_member" style="padding-left: 5%;margin-top: 45%">
+                                    <div class="author">
+                                        <img src="/image/users.png" alt="">
+                                    </div>
+                                    <div class="author_decs">
+                                        <h4>Complete Your Profile</h4>
+                                        <hr>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-8 col-sm-12 col-xs-12" style="background-color: #FDFEFE;border-top-right-radius: 10px;border-bottom-right-radius: 10px;box-shadow: 3px 0px #EAEDED  ;">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-md-4 col-sm-8 col-xs-12">
+                                            <form role="form" class="form-horizontal" method="post" id="add-faculty">
+                                                <div class="single_member">
+                                                    <br>
+                                                    <br>
+                                                    <div class="author_decs">
+                                                        <div class="form-group">
+                                                            <input type="text" class="form-control" id="name" placeholder="Name" value="{{user.name}}" required style="border-radius: 5px">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <input type="number" class="form-control" id="pfnumber" placeholder="Roll Number" min="1" required style="border-radius: 5px">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <input type="number" class="form-control" id="phone" placeholder="Mobile Number" min="1" required style="border-radius: 5px">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <select class="form-control" style="border-radius: 5px" id="branch">
+                                                                <option value="">Branch</option>
+                                                                <option value="Computer Science & Engineering">CSE</option>
+                                                                <option value="Electronics & Communication Engineering">ECE</option>
+                                                                <option value="Mechanical Engineering">ME</option>
+                                                                <option value="Design">Design</option>
+                                                                <option value="Mechatronics">Mechatronics</option>
+                                                                <option value="Natural Science">Natural Science</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <input type="text" class="form-control" placeholder="Blood Group (optional)" style="border-radius: 5px" id="bloodg">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <center>
+                                                    <button class="primary-btn text-uppercase" type="submit"><i class="fa fa-paper-plane" aria-hidden="true"></i> Submit</button>
+                                                </center>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{/if}}
+    </div>
+</div>
+<footer class="footer-area">
+    <div class="footer-bottom" style="background-color: #154360;color:#B3B6B7  ">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center flex-wrap">
+                <div class="footer-social d-flex  ">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <center>
+                                Copyright &copy;<script>
+                                document.write(new Date().getFullYear());
+                                </script> IIITDM JABALPUR
+                            </center>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <center>
+                                <i class="fa fa-user"></i> Anuj Srivastava
+                                <a href="https://www.facebook.com/anuj.srivastava.71404" target="blank"><i class="fa fa-facebook"></i></a>
+                                <a href="https://github.com/Anujsri" target="blank"><i class="fa fa-github"></i></a>
+                                <a href="https://www.linkedin.com/in/anuj-srivastava-5ba457137/" target="blank"><i class="fa fa-linkedin"></i></a>
+                            </center>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<script>
+window.location.href = "#faculty/profile";
+'{{#if faculty.completed}}'
+var editForm = document.getElementById('edit-faculty');
+editForm.addEventListener('submit', editFaculty);
+
+function editFaculty(e) {
+    // Prevent actual submit
+    e.preventDefault();
+    var name = document.getElementById('inputName').value;
+    var phone = document.getElementById('inputPhone').value;
+    var pfnumber = document.getElementById('inputPfnum').value;
+    var branch = document.getElementById('ebranch').value;
+    var blood = document.getElementById('ebloodg').value;
+    var bloodg;
+    if (phone.length < 10 || phone.length > 10) {
+        swal.fire({
+            title: '{{error}}',
+            text: "Mobile No. should have 10 digit",
+            showConfirmButton: false,
+            timer: 2000,
+            type: "error"
+        });
+    } else {
+        if (blood == "") {
+            bloodg = "Not Mentioned";
+        } else {
+            bloodg = blood;
+        }
+        axios.put('/faculty/editprofile/{{faculty._id}}', {
+            name: name,
+            phone: phone,
+            pfnumber : pfnumber,
+            branch: branch,
+            bloodg: bloodg
+        }).then(function(response) {
+            Swal.fire({
+                position: 'top-end',
+                type: 'success',
+                title: 'Your profile has been changed',
+                showConfirmButton: false,
+                timer: 2000
+            })
+            $("#here1").load(window.location.href + " #here1");
+        });
+    }
+}
+
+function getActivity() {
+    window.location.href = "#faculty/medicalrecord";
+    var pfnumber = '{{faculty.pfnumber}}';
+    axios.post('/patient/getactivity', { idnumber: pfnumber }).then((response) => {
+        console.log("Length of records : " + response.data.length);
+        var codeBlock = '';
+        if (response.data.length == 0) {
+            document.getElementById('notrecord').innerHTML = "No Medical Record Found";
+            console.log("No record found");
+        }
+        for (var i = 0; i < response.data.length; i++) {
+            var html1 = '';
+            var day;
+            var monthnum;
+            if (response.data[i].dateFormat.datenum < 10) {
+
+                day = "0" + response.data[i].dateFormat.datenum;
+
+            } else {
+                day = response.data[i].dateFormat.datenum;
+            }
+            if (response.data[i].dateFormat.month < 10) {
+                monthnum = "0" + response.data[i].dateFormat.month;
+
+            } else {
+                monthnum = response.data[i].dateFormat.month;
+            }
+
+            for (var j = 0; j < response.data[i].medicineName.length; j++) {
+                html1 += '<div class="row">' +
+                    '<li >' +
+                    '<div class="col-sm-7 col-xs-7">' + response.data[i].medicineName[j].name + '</div>' +
+                    '<div class="col-sm-5 col-xs-5"> Qty : ' + response.data[i].medicineName[j].quantity + '</div>' +
+                    '</li>' +
+                    '</div>'
+            }
+            codeBlock += '<div class="col-md-4 col-sm-6 col-xs-12">' +
+                '<div class="box box-primary">' +
+                '<div class="box-body box-profile">' +
+                '<img class="profile-user-img img-responsive img-circle" src="/image/medicine.png" alt="User profile picture"><br>' +
+                '<ul class="list-group list-group-unbordered">' +
+                '<a class="list-group-item">' +
+                '<b style="color:#2C3E50">Diseases Name</b> <div class="pull-right">' + response.data[i].diseases + '</div>' +
+                '</a>' +
+                '<a class="list-group-item">' +
+                '<center> <b style="color:#2C3E50">Medicine Information</b> </center>' +
+                '</a>' +
+                '<a class="list-group-item"><ol>' + html1 +
+                '</ol></a>' +
+                '<a class="list-group-item">' +
+                '<b style="color:#2C3E50">Date</b> <div class="pull-right">' + day + '/' + monthnum + '/' + response.data[i].dateFormat.year + '  ' + response.data[i].dateFormat.dayName + '</div>' +
+                '</a>' +
+                '<a class="list-group-item">' +
+                '<div class="row">' +
+                '<div class="col-md-6">' +
+                '<b style="color:#2C3E50">Nursing Assistant : </b>' + response.data[i].givenbyname +
+                '</div>' +
+                '<div class="col-md-6">' +
+                '<b style="color:#2C3E50">Doctor : </b>' + response.data[i].doctorName + '</div>' +
+                '</div>' +
+                '</a>' +
+                '</ul>' +
+                '</div>' +
+                '</div>' +
+                '</div>'
+        }
+        document.getElementById('record').innerHTML = codeBlock;
+    })
+}
+
+'{{else}}'
+var addForm = document.getElementById('add-faculty');
+addForm.addEventListener('submit', addFaculty);
+
+function addFaculty(e) {
+    // Prevent actual submit
+    e.preventDefault();
+    var name = document.getElementById('name').value;
+    var phone = document.getElementById('phone').value;
+    var pfnumber = document.getElementById('pfnumber').value;
+    var branch = document.getElementById('branch').value;
+    var blood = document.getElementById('bloodg').value;
+    var bloodg;
+    if (phone.length < 10 || phone.length > 10) {
+        swal.fire({
+            title: '{{error}}',
+            text: "Mobile No. should have 10 digit",
+            showConfirmButton: false,
+            timer: 2000,
+            type: "error"
+        });
+    } else {
+        if (blood == "") {
+            bloodg = "Not Mentioned";
+        } else {
+            bloodg = blood;
+        }
+        axios.post('/faculty/completeprofile/{{user._id}}', {
+            name: name,
+            phone: phone,
+            pfnumber: pfnumber,
+            branch: branch,
+            bloodg: bloodg
+        }).then(function(response) {
+            Swal.fire({
+                position: 'top-end',
+                type: 'success',
+                title: 'Your profile has been saved',
+                showConfirmButton: false,
+                timer: 2000
+            })
+            $("#here1").load(window.location.href + " #here1");
+        });
+    }
+}
+'{{/if}}'
+
+function getDoctor() {
+    window.location.href = '#pfnumber/doctors';
+}
+
+function getCompounder() {
+    window.location.href = '#pfnumber/nursingstaff';
+}
+</script>

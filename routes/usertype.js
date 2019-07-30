@@ -6,35 +6,36 @@ var Compounder = require('../models/compounder');
 var Patient = require('../models/patient');
 var Student = require('../models/students');
 var Medicine = require('../models/medicine');
+var Faculty = require('../models/faculty');
 
 // Get Homepage
 router.get('/', ensureAuthenticated, function(req, res, next) {
 
     if (req.user.usertype === "Dean" || req.user.usertype === "Superintendent") {
-        Medicine.find({}).lean().exec((err,medicines)=>{
-            if(err) return err;
-            Doctor.find({usertype: "Doctor"})
-            .lean().exec(function(err, doctor) {
-                if (err) return err;
-                Compounder.find({usertype: "Compounder" })
-                .lean().exec(function(err, compounder) {
+        Medicine.find({}).lean().exec((err, medicines) => {
+            if (err) return err;
+            Doctor.find({ usertype: "Doctor" })
+                .lean().exec(function(err, doctor) {
                     if (err) return err;
-                    if(req.user.usertype === "Dean"){
-                        res.render('dean', {
-                            compounder,
-                            doctor,
-                            medicines
+                    Compounder.find({ usertype: "Compounder" })
+                        .lean().exec(function(err, compounder) {
+                            if (err) return err;
+                            if (req.user.usertype === "Dean") {
+                                res.render('dean', {
+                                    compounder,
+                                    doctor,
+                                    medicines
+                                });
+                            }
+                            if (req.user.usertype === "Superintendent") {
+                                res.render('superintendent', {
+                                    compounder,
+                                    doctor,
+                                    medicines
+                                });
+                            }
                         });
-                    }
-		     if(req.user.usertype === "Superintendent"){
-                        res.render('superintendent', {
-                            compounder,
-                            doctor,
-                            medicines
-                        });
-                    }
                 });
-            });
         })
     }
     if (req.user.usertype === "Doctor") {
@@ -45,9 +46,9 @@ router.get('/', ensureAuthenticated, function(req, res, next) {
                     doctor,
                 });
             } else {
-                Patient.find({ doctorName : req.user.name }, (err, patients) => {
+                Patient.find({ doctorName: req.user.name }, (err, patients) => {
                     if (err) return err;
-                    res.render('doctor', {doctor,patients});  
+                    res.render('doctor', { doctor, patients });
                 });
             }
         });
@@ -75,29 +76,46 @@ router.get('/', ensureAuthenticated, function(req, res, next) {
     }
 
     if (req.user.usertype === "Student") {
+        Student.findOne({ email: req.user.email }, (err, student) => {
+            if (err) return err;
+            Compounder.find({}).lean().exec((err, compounder) => {
+                if (err) return err;
+                Doctor.find({}).lean().exec((err, doctor) => {
+                    if (err) return err;
+                    res.render('student', { student, doctor, compounder });
+                })
+            })
+        });
+
+    }
+    if (req.user.usertype === "Faculty") {
+        Faculty.findOne({ email: req.user.email }, (err, faculty) => {
+            if (err) return err;
+            Compounder.find({}).lean().exec((err, compounder) => {
+                if (err) return err;
+                Doctor.find({}).lean().exec((err, doctor) => {
+                    if (err) return err;
+                    res.render('faculty', { faculty, doctor, compounder });
+                })
+            })
+        });
+
+    }
+    if ((req.user.usertype !== "Faculty") && (req.user.usertype !== "Student") && (req.user.usertype !== "Compounder") && (req.user.usertype !== "Doctor") && (req.user.usertype !== "Dean") && (req.user.usertype !== "Superintendent")) {
         var str = req.user.email;
         var patt = /@iiitdmj.ac.in/i;
         if (str.match(patt)) {
-            Student.findOne({ email: req.user.email }, (err, student) => {
-                if(err) return err;
-                Compounder.find({}).lean().exec((err,compounder)=>{
-                    if(err) return err;
-                    Doctor.find({}).lean().exec((err,doctor)=>{
-                        if(err) return err;
-                        res.render('student', { student,doctor,compounder});
-                    })
-                })
-            });
+            res.render('selectusertype');
         } else {
             User.findOneAndRemove({ email: req.user.email }).lean().exec((err, user) => {
                 if (err) return err;
                 req.flash('error', 'Please login with College Email');
                 res.redirect('/users/login');
             })
-            // req.session.destroy();
         }
     }
 });
+
 
 //Check whether user is authenticted or not
 function ensureAuthenticated(req, res, next) {
