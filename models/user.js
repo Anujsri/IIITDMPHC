@@ -1,25 +1,45 @@
 var mongoose = require('mongoose');
 var bcrypt = require('bcryptjs');
 
+//6607d825-7971-4336-9d28-04acd5104cae call pending
 // User Schema
 var UserSchema = mongoose.Schema({
-	username: {
-		type: String,
-		index:true
-	},
 	password: {
-		type: String
-	},
-	email: {
 		type: String,
-		unique:true
+		required: true,
 	},
 	name: {
 		type: String,
-		index:true,
+		required: true,
+	}, 
+	email: {
+		type: String,
+		required: true,	
+		index:true 
 	},
-	usertype : {
-		type : String
+	phone: {
+		type: Number,
+		required: true
+	},
+	address : {
+		city: {
+			type: String
+		},
+		state: {
+			type: String
+		},
+		pincode:{
+	        type:Number
+		},
+		country: {
+			type: String
+		},
+		address: {
+			type: String
+		}
+	},
+	profile_overview: {
+		type: String
 	}
 });
 
@@ -34,8 +54,8 @@ module.exports.createUser = function(newUser, callback){
 	});
 }
 
-module.exports.getUserByUsername = function(username, callback){
-	var query = {username: username};
+module.exports.getUserByEmail = function(email, callback){
+	var query = {email: email};
 	User.findOne(query, callback);
 }
 

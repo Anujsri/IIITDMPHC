@@ -1,0 +1,84 @@
+<div class="" style="background-image: url('/image/about-bg2.png');background-color: lightblue;">
+    <div class="row">
+        <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2" style="margin-top : 3%">
+            <!-- Profile Image -->
+            {{#if error_msg}}
+            <div class="alert alert-danger alert-dismissible fade in" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <center>{{error_msg}}</center>
+            </div>
+            {{/if}}
+            {{#if success_msg}}
+            <div class="alert alert-danger alert-dismissible fade in" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <center>{{success_msg}}</center>
+            </div>
+            {{/if}}
+            {{#if errors}}
+            <center>{{errors}}</center>
+            {{#each errors}}
+            <div class="alert alert-danger alert-dismissible fade in" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <center>{{this}}</center>
+            </div>
+            {{/each}}
+            {{/if}}
+            <div class="box box-primary" style="padding: 0px;background-color: #56baed;">
+                <div class="row">
+                    <div class="col-md-4 col-sm-12 col-xs-12">
+                        <div class="single_member" style="padding-left: 5%;margin-top: 45%">
+                            <div class="author">
+                                <img src="/image/users.png" alt="">
+                            </div>
+                            <div class="author_decs">
+                                <h4>Complete Your Profile</h4>
+                                <hr>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-8 col-sm-12 col-xs-12" style="background-color: #FDFEFE;border-top-right-radius: 10px;border-bottom-right-radius: 10px;box-shadow: 3px 0px #EAEDED  ;">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-4 col-sm-8 col-xs-12">
+                                    <form role="form" class="form-horizontal" method="post" action="/users/register">
+                                        <div class="single_member">
+                                            <br>
+                                            <br>
+                                            <div class="author_decs">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" name="name" placeholder="Name" required style="border-radius: 5px">
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" name="email" placeholder="email" required style="border-radius: 5px">
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="password" class="form-control" name="password" placeholder="password" required style="border-radius: 5px">
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="password" class="form-control" name="password2" placeholder="confirm password" required style="border-radius: 5px">
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="number" class="form-control" name="phone" placeholder="Mobile Number" min="1" required style="border-radius: 5px">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <center>
+                                            <button class="primary-btn text-uppercase" type="submit"><i class="fa fa-paper-plane" aria-hidden="true"></i> Submit</button>
+                                        </center>
+                                        <br>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

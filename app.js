@@ -3,7 +3,6 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var exphbs = require('express-handlebars');
-var expressValidator = require('express-validator');
 var flash = require('connect-flash');
 var session = require('express-session');
 var passport = require('passport');
@@ -55,7 +54,7 @@ Handlebars.registerHelper('iff', function(a, operator, b, opts) {
     }
 });
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost:27017/phc', { useNewUrlParser: true }, function(err, db) {
+mongoose.connect('mongodb://anujsri:anuj123@ds113003.mlab.com:13003/assignment', { useNewUrlParser: true }, function(err, db) {
     if (err) {
         throw err;
     }
@@ -295,32 +294,13 @@ app.use(session({
     secret: 'secret',
     saveUninitialized: true,
     resave: false
-    // secret: 'secret',
-    // saveUninitialized: true,
-    // resave: true,
     // store: new MongoStore({ mongooseConnection: mongoose.connection }),
     // cookie: { maxAge: 720 * 60 * 1000 }
 }));
 // Passport init
 app.use(passport.initialize());
 app.use(passport.session());
-// Express Validator
-app.use(expressValidator({
-    errorFormatter: function(param, msg, value) {
-        var namespace = param.split('.'),
-            root = namespace.shift(),
-            formParam = root;
 
-        while (namespace.length) {
-            formParam += '[' + namespace.shift() + ']';
-        }
-        return {
-            param: formParam,
-            msg: msg,
-            value: value
-        };
-    }
-}));
 // Connect Flash
 app.use(flash());
 // Global Vars
@@ -332,7 +312,6 @@ app.use(function(req, res, next) {
     res.locals.session = req.session;
     next();
 });
-
 app.use('/auth', auth);
 app.use('/', routes);
 app.use('/users/', users);
@@ -341,6 +320,7 @@ app.use('/doctor/', doctor);
 app.use('/compounder/', compounder);
 app.use('/patient/', patient);
 app.use('/student/', student);
+
 // Set Port
 server.listen(process.env.PORT || 3000, function() {
     console.log("Port is listening!");

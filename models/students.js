@@ -2,55 +2,52 @@ var mongoose = require('mongoose');
 
 // Manufacture Schema
 var StudentSchema = mongoose.Schema({
+	username: {
+		type: String,
+		required: true,
+	}, 
+	password: {
+		type: String,
+		required: true,
+	},
 	name: {
 		type: String,
-		index:true
+		required: true,
 	}, 
 	email: {
 		type: String,
-		required: true,	 
+		required: true,	
+		index:true 
 	},
 	phone: {
 		type: Number,
 		required: true
 	},
-	rollnum : {
-		type : String,
-		required : true
-	},
 	address : {
-		hallno: {
+		city: {
 			type: String,
 			required: true
 		},
-		block: {
+		state: {
 			type: String,
 			required: true
 		},
-		roomNum:{
+		pincode:{
 	        type:Number,
 	        required: true
-		} 
+		},
+		country: {
+			type: String,
+			required: true
+		},
+		address: {
+			type: String,
+			required: true
+		}
 	},
-	program : {
-		type : String,
-		required : true
-	},
-	branch : {
-		type : String,
-		required : true
-	},
-	completed : {
-		type : Boolean,
-		default : false
-	},
-	userid:{
-		type:String,
-		required: true
-	}, 
-        bloodg : {
-                type : String
-       }
+	profile_overview: {
+		type: String
+	}
 });
 
 var Student = module.exports = mongoose.model('Student', StudentSchema);

@@ -4,13 +4,14 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var User = require('../models/user');
 var bcrypt = require('bcryptjs');
+var { check, validationResult } = require('express-validator');
 
 // Get Register Page
 router.get('/register',  function (req, res) {
 	if(req.isAuthenticated()){
-		res.redirect('/usertype/');
-	}
-	else{
+		res.render('dean');
+	} else {
+		//req.flash('error_msg','You are not logged in');
 		res.render('register');
 	}
 });
@@ -18,9 +19,9 @@ router.get('/register',  function (req, res) {
 // Get Login Page
 router.get('/login', function (req, res) {
 	if(req.isAuthenticated()){
-		res.redirect('/usertype/');
-	}
-	else{
+		res.render('dean');
+	} else {
+		//req.flash('error_msg','You are not logged in');
 		res.render('login');
 	}
 });
@@ -41,60 +42,63 @@ router.put('/changePassword/:id',ensureAuthenticated,(req,res,next)=>{
 })
 // Register User
 router.post('/register', function (req, res) {
+	console.log("Yha aa gya")
 	var name = req.body.name;
 	var email = req.body.email;
-	var username = req.body.username;
 	var password = req.body.password;
 	var password2 = req.body.password2;
-	var usertype = req.body.usertype;
+	var phone = req.body.phone;
 	 
 
 	// Validation
-	req.checkBody('name', 'Name is required').notEmpty();
-	req.checkBody('email', 'Email is required').notEmpty();
-	req.checkBody('email', 'Email is not valid').isEmail();
-	req.checkBody('username', 'Username is required').notEmpty();
-	req.checkBody('password', 'Password is required').notEmpty();
-	req.checkBody('password2', 'Passwords do not match').equals(req.body.password);
+	check('name', 'Name is required').notEmpty();
+	check('email', 'Email is required').notEmpty();
+	check('email', 'Email is not valid').isEmail();
+	check('phone', 'Mobile No. is required').notEmpty();
+	check('password', 'Password is required').notEmpty();
+	check('password2', 'Passwords do not match').equals(req.body.password);
 
-	var errors = req.validationErrors();
+	var errors = validationResult(req);
 
-	if (errors) {
+	if (!errors.isEmpty()) {
+		console.log(errors.array())
 		res.render('register', {
-			errors: errors
+			errors: errors.array()
 		});
 	}
 	else {
 		//checking for email and username are already taken
-		User.findOne({ username: username}, function (err, user) {
+		User.findOne({ email: email}, function (err, user) {
 			if(err){
-				console.log("Error yha hai");
-                req.flash('error_msg','Email is already in use');
+				console.log("errors.array 1")
+                req.flash('error_msg','Some error occured 1');
             	res.redirect('/users/register');
             }
             if(user){
-            	req.flash('error_msg','Username is already in use');
+            	console.log("errors.array 2")
+            	req.flash('error_msg','Email is already in use');
             	res.redirect('/users/register');
             }
 			else {
+				console.log(errors.array())
 				var newUser = new User({
 					name     : name,
 					email    : email,
-					username : username,
 					password : password,
-					usertype : usertype
+					phone : phone
 
 				});
 				User.createUser(newUser, function (err, user) {
 					if (err) {
-						req.flash('error','Email is already in use');
+						console.log(err)
+						req.flash('error_msg','Some error occured');
 						res.redirect('/users/register');
 					}
 					else{
+						console.log("errors.array 4")
 					    req.flash('success_msg','You are registered now you can login')
 					    res.redirect('/users/login');	
 					}
-					
 				});
 			}
 			
@@ -102,11 +106,23 @@ router.post('/register', function (req, res) {
 	}
 });
 
+router.get('/profile',ensureAuthenticated,(req,res)=>{
+	User.findOne({email : req.user.email},(err,user)=>{
+		if (err){
+			req.flash('error_msg','Some error occured');
+			res.render('dean')
+		}
+		else{
+			console.log(user)
+			res.render('dean',{user : user})
+		}
+	})
+})
  
 
 passport.use(new LocalStrategy(
-	function (username, password, done) {
-		User.getUserByUsername(username, function (err, user) {
+	function (email, password, done) {
+		User.getUserByEmail(email, function (err, user) {
 			if (err) throw err;
 			if (!user) {
 				return done(null, false, { message: 'Unknown User' });
@@ -136,7 +152,7 @@ passport.deserializeUser(function (id, done) {
 
 // Login User
 router.post('/login',passport.authenticate('local', {
-	successRedirect: '/usertype/', 
+	successRedirect: '/users/profile', 
 	failureRedirect: '/users/login', 
 	failureFlash: true }),function (req, res) {
 		res.redirect('/');
