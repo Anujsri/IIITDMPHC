@@ -32,7 +32,7 @@
     "passport-http": "*",
     "passport-local": "*",
     "pm2": "^3.3.1",
-    "socket.io": "^2.2.0",
+    "socket.io": "^2.4.0",
     "xls-to-json": "^0.4.0",
     "xls-to-json-lc": "^0.3.4",
     "xlsx-to-json": "^0.3.0",
